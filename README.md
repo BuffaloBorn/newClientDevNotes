@@ -1,6 +1,6 @@
-Notes
-
-Clients Gem Repo
+# Notes
+----
+## Clients Gem Repo
 
 | Name                        | Version | Comments                    |
 |-----------------------------|---------|-----------------------------|
@@ -41,9 +41,8 @@ Clients Gem Repo
 | ruby-graphviz               | 1.2.2   |                             |
 | workflow                    |         |                             |
 | pry-debugger                | 0.2.3   |                             |
-| Name                        | Version | Comments                    |
 | ruby-debug-ide19            | 0.4.12  |                             |
-| Friendly\_id                | 5.0.4   |                             |
+| friendly\_id                | 5.0.4   |                             |
 | dry-logic                   | ?       |                             |
 | rbx-require-relative        | 0.05?   | Only works with ruby 1..8.7 |
 | configatron                 | 2.9.1   |                             |
