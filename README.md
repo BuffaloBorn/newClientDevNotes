@@ -1,14 +1,12 @@
-# Notes
-----
-## Clients Gem Repo
+## Avaiable Gems in internal repository 
 
 | Name                        | Version | Comments                    |
 |-----------------------------|---------|-----------------------------|
-| Angular-rails               | 1.2.22  |                             |
-| D3-rails                    | 3.3.9   |                             |
+| angular-rails               | 1.2.22  |                             |
+| d3-rails                    | 3.3.9   |                             |
 | twitter-bootstrap-rails     | 2.2.5   |                             |
 | googlecharts                | 1.6.8   |                             |
-| Swagger-ui-rails            | 0.1.3   |                             |
+| swagger-ui-rails            | 0.1.3   |                             |
 | bootstrap-growl-rails       |         |                             |
 | ruby-growl.gem              | 4.0     |                             |
 | jasmine                     | 2.0.2   |                             |
@@ -39,141 +37,145 @@
 | metric-fu                   | 4.11.4  |                             |
 | fnoddmetric                 | 1.2.7   |                             |
 | ruby-graphviz               | 1.2.2   |                             |
-| workflow                    |         |                             |
 | pry-debugger                | 0.2.3   |                             |
 | ruby-debug-ide19            | 0.4.12  |                             |
 | friendly\_id                | 5.0.4   |                             |
 | dry-logic                   | ?       |                             |
-| rbx-require-relative        | 0.05?   | Only works with ruby 1..8.7 |
+| rbx-require-relative        | 0.05?   | Only works with ruby 1.8.7  |
 | configatron                 | 2.9.1   |                             |
 | configuration               | 1.3.4   |                             |
 | ruport                      |         |                             |
 | rubyzip                     |         |                             |
-| Capybara-webkit             |         |                             |
+| capybara-webkit             |         |                             |
 | byebug                      |         |                             |
 | figaro                      |         |                             |
 | rawk\_log                   |         |                             |
 | databaseclear               |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
-|                             |         |                             |
+| sidekiq                     | 2.17.0  |                             |
+| cancan                      | 1.8.0   |                             |
+| cancancan                   | 1.6.10  |                             |
+| assm                        | 4.110   |                             |
+| activejob                   | 0.7.2   |                             |
+| act_as_versioned            | 0.6.0   |                             | 
+| act_as_tree                 | 1.2.0   |                             |
+| authlogic                   | 3.1.3   |                             |
+| act_as_commentable          | 4.0.0   |                             | 
+| workflow                    | 1.0.0   |                             |
+| authlogic                   | 3.1.3   |                             |
+| statemachine                | 2.2.0   |                             | 
+| statemachine_audit_trail    | 0.1.3   |                             |
+| nifty-generator             | 0.4.6   |                             |
+| progressbar                 | 1.0.5   |                             | 
+| webrat                      | 0.7.3   |                             |
+| shoulda                     | 3.5.0   |                             |
+| should_matchers             | 2.7.0   |                             | 
+| seed-fu                     | 2.3.3   |                             |
+| cucumber                    | 2.1.0   |                             |
+| cucumber-rails              | 1.4.2   |                             | 
+| css-parse                   | 1.2.5   |                             |
+| bootstrap-sass              | 2.1.0.0 |                             |
+| bootstrap-sass-rails        | 2.3.0.0 |                             |
+| bootstrap-sass-rails        | 2.3.0.0 |                             |
+| autoprefixer-rails          | 2.3.0.0 |                             |
+| execjs                      | ?       |                             |
+| autoprefixer                | ?       |   issue w/ on client version|
 
-IDE and plugins
+
+## Railscast Episodes (to look at)
+
+|  #   | Title                              | Comments                    |
+|------|------------------------------------|-----------------------------|
+|  275 | How I Test                         |           non               |
+|  391 | Testing JavaScript with PhantomJS  |           none              |
+|  257 | Request Specs and Capybara         |           none              |
+|  186 | Pickle with Cucumber               |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+|      |                                    |           none              |
+
+
+## IDE and plugins
 
 1.  Angular-eclipse-plugin -1.1.0
-
 2.  AngularIDE – angular-ide-2012
-
-3.  Aptana Studio 3 - &gt; 3.6.1
-
+3.  Aptana Studio 3 - > 3.6.1
 4.  Google.gdt.eclipse
-
 5.  JSonEdit-repository – 0.9.7
-
 6.  Edu.umd.cs.findbugs.plugin
+7.  Brackets (not used onsite)
 
-AWS features
+# AWS features
 
-Cloudtail
+1. Cloudtail
 
-Cloudtracker
+2. Cloudtracker
 
-CloudWatch – currently watching the video at client site and see how
+3. CloudWatch – currently watching the video at client site and see how
 they use
 
-CI tools
+4. CI tools
 
-Jenkins
+5. Jenkins
 
-GitHub
+6. GitHub
 
-GitLabe
+7. GitLab
 
-Environment setup
+# Environment setup
 
-\# .bash\_profile
-
-\# Get the aliases and functions
-
+```bash
+# .bash\_profile
+# Get the aliases and functions
 if \[ -f ~/.bashrc \]; then
-
-. ~/.bashrc
-
+    . ~/.bashrc
 fi
 
-\# User specific environment and startup programs
-
+# User specific environment and startup programs
 PATH=$HOME/bin:$PATH
-
 GEM\_HOME=$HOME/gems
-
 GEM\_PATH=$HOME/gems
 
 export LD\_LIBRARY\_PATH=$HOME/lib
-
 export USERNAME BASH\_ENV PATH GEM\_HOME GEM\_PATH
-
 wget http://www.sqlite.org/sqlite-autoconf-3070701.tar.gz
-
 tar -zxvf sqlite-autoconf-3070701.tar.gz
-
 cd sqlite-autoconf-3070701
-
 ./configure --prefix=$HOME
-
 make && make install
-
 cd $RAILS\_APP\_DIR
+```
+```bash 
+$ vi Gemfile```
 
-vi Gemfile
+```bash 
+$ bundle config build.sqlite3 --with-sqlite3-include=$HOME/include 
+--with-sqlite3-lib=$HOME/lib --with-sqlite3-dir=$HOME/bin```
+```bash 
+$ bundle install --path vendor/bundle```
 
-bundle config build.sqlite3 --with-sqlite3-include=$HOME/include
---with-sqlite3-lib=$HOME/lib --with-sqlite3-dir=$HOME/bin
+# Error installing sqlite3
+```bash 
+$ yum install sqlite sqlite-devel```
 
-bundle install --path vendor/bundle
+```bash 
+$ gem install sqlite3```
 
-Error installing sqlite3
-
-yum install sqlite sqlite-devel
-
-gem install sqlite3
-
-Install a gem from a downloaded tar or zip
-
-gem 'rails', :require =&gt; 'rails', :path =&gt; "/path\_to/rails"
+# Install a gem from downloaded tar or zip
+```bash
+gem 'rails', :require => 'rails', :path => "/path\_to/rails"```
 
 **From: http://guides.rubygems.org/make-your-own-gem/\#introduction**
-
-% tree
+```bash 
+$ tree```
 
 .
 
@@ -183,51 +185,37 @@ gem 'rails', :require =&gt; 'rails', :path =&gt; "/path\_to/rails"
 
 └── hola.rb
 
-% cat lib/hola.rb
+```bash 
+$ cat lib/hola.rb ```
 
+```ruby
 class Hola
-
-def self.hi
-
-puts "Hello world!"
-
+    def self.hi
+        puts "Hello world!"
+    end
 end
+```
+```bash
+cat hola.gemspec```
 
-end
-
-cat hola.gemspec
-
+```ruby
 Gem::Specification.new do |s|
-
-s.name = 'hola'
-
-s.version = '0.0.0'
-
-s.date = '2010-04-28'
-
-s.summary = "Hola!"
-
-s.description = "A simple hello world gem"
-
-s.authors = \["Nick Quaranto"\]
-
-s.email = 'nick@quaran.to'
-
-s.files = \["lib/hola.rb"\]
-
-\#or
-
-\#s.files = \["lib/hola.rb", "lib/hola/translator.rb"\]
-
-s.homepage =
-
-'http://rubygems.org/gems/hola'
-
-s.license = 'MIT'
-
+    s.name = 'hola'
+    s.version = '0.0.0'
+    s.date = '2010-04-28'
+    s.summary = "Hola!"
+    s.description = "A simple hello world gem"
+    s.authors = \["Nick Quaranto"\]
+    s.email = 'nick@quaran.to'
+    s.files = \["lib/hola.rb"\]
+    #or
+    #s.files = \["lib/hola.rb", "lib/hola/translator.rb"\]
+    s.homepage = 'http://rubygems.org/gems/hola'
+    s.license = 'MIT'
 end
-
-gem build hola.gemspec
+```
+```bash 
+$ gem build hola.gemspec```
 
 Successfully built RubyGem
 
@@ -237,23 +225,24 @@ Version: 0.0.0
 
 File: hola-0.0.0.gem
 
-% gem install ./hola-0.0.0.gem
+```bash 
+$ gem install ./hola-0.0.0.gem```
 
 Successfully installed hola-0.0.0
 
 1 gem installed
 
-% irb
+```ruby 
+$ irb
 
-&gt;&gt; require 'hola'
+>> require 'hola'
+=> true
 
-=&gt; true
-
-&gt;&gt; Hola.hi
+>> Hola.hi
 
 Hello world!
-
-Useful GEM commands
+```
+# Useful GEM commands
 
 | Command             | Short Describe                                       | Interesting options |
 |---------------------|------------------------------------------------------|---------------------|
@@ -263,8 +252,10 @@ Useful GEM commands
 | gem help            | Provide help on the ‘gem’ command                    |                     |
 | gem contents        | Display the contents of the installed gems           |                     |
 
-Can't connect to local MySQL server through socket
-'/var/run/mysqld/mysqld.sock'
+## Common errors during setup up a server for the in client environment
+
+
+### Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
 
 If your file my.cnf (usually in the */etc/mysql/* folder) is correctly
 configured with
@@ -273,12 +264,14 @@ socket=/var/lib/mysql/mysql.sock
 
 you can check if mysql is running with the following command:
 
-mysqladmin -u root -p status
+```bash 
+$ mysqladmin -u root -p status```
 
 try changing your permission to mysql folder. If you are working
 locally, you can try:
 
-sudo chmod -R 755 /var/lib/mysql/
+```bash
+sudo chmod -R 755 /var/lib/mysql/```
 
 that solved it for me
 
@@ -287,50 +280,49 @@ are you sure you installed mysql as well as mysql server..
 -   For example to install mySql server I'll use yum or apt to install
     both mysql command line tool and the server:
 
+```bash
 yum -y install mysql mysql-server (or apt-get install mysql
 mysql-server)
-
+```
 Enable the MySQL service:
 
-/sbin/chkconfig mysqld on
+```bash
+$ /sbin/chkconfig mysqld on```
 
 Start the MySQL server:
-
-/sbin/service mysqld start
+```bash
+/sbin/service mysqld start```
 
 afterwards set the MySQL root password:
-
+```bash
 mysqladmin -u root password 'new-password' (with the quotes)
-
+```
 I hope it helps.
 
--   **Re: Can't connect to local MySQL server through socket
+**Re: Can't connect to local MySQL server through socket
     '/var/run/mysqld/mysqld.sock' (2) \[SOLVED\]**
 
-1.  /etc/init.d/mysql stop.
-
-2.  mysqld\_safe --skip-grant-tables &
-
-3.  mysql -u root.
-
-4.  use mysql;
-
-5.  update user set password=PASSWORD("NEW-ROOT-PASSWORD") where
+    1.  /etc/init.d/mysql stop.
+    2.  mysqld\_safe --skip-grant-tables &
+    3.  mysql -u root.
+    4.  use mysql;  
+    5.  update user set password=PASSWORD("NEW-ROOT-PASSWORD") where
     User='root';
+    6.  flush privileges;
+    7.  quit.
 
-6.  flush privileges;
-
-7.  quit.
-
-Integration Research
+# Integration Research topics
 
 Checkout how apache layout and hooks into rails
+#### Remove Linux folder
+```bash 
+rm -rf mydir```
 
-Remove Linux folder: rm -rf mydir
+#### Renaming an existing file 
+```bash
+mv /home/user/oldname /home/user/newname (maybe \[-T\]) ```
 
-Rename: mv /home/user/oldname /home/user/newname (maybe \[-T\])
-
-Figure out what .rz stands for
+#### Figure out what .rz stands for
 
 The .rz extension files are compressed with the inflate algorithm. The
 Marshal version number comes from ruby’s Marshal::MAJOR\_VERSION and
@@ -344,17 +336,17 @@ When done, it will generate a set of files like this:
 gems/\*.gem \# .gem files you want to
 
 \# index
+specs.<version>.gz 
+\# specs index
 
-specs.&lt;version&gt;.gz \# specs index
+latest\_specs.<version>.gz \# latest specs index
 
-latest\_specs.&lt;version&gt;.gz \# latest specs index
+prerelease\_specs.<version>.gz \# prerelease specs index
 
-prerelease\_specs.&lt;version&gt;.gz \# prerelease specs index
-
-quick/Marshal.&lt;version&gt;/&lt;gemname&gt;.gemspec.rz \# Marshal
+quick/Marshal.<version>/<gemname>.gemspec.rz \# Marshal
 quick index file
 
-Current project GEM list (GEMFILE entries)
+## Active project GEMFILE entries
 
 | Name                  | Version | Comments |
 |-----------------------|---------|----------|
@@ -376,11 +368,11 @@ Current project GEM list (GEMFILE entries)
 | Unicorn               |         |          |
 | Capistrano-rails      |         |          |
 | Byebug                |         |          |
-| Web-console -&gt; 3.0 |         |          |
+| Web-console -> 3.0 |         |          |
 | Spring                |         |          |
 | request-log-analyzer  |         |          |
 
-JavaScript Frameworks
+## Active project JavaScript Frameworks
 
 | Name                         | Version | Comments |
 |------------------------------|---------|----------|
@@ -398,69 +390,51 @@ JavaScript Frameworks
 | Yui                          |         |          |
 | Parley-js-master             |         |          |
 
-Installing rails and supporting tools
-
+### Installing rails and supporting tools
+```bash
 -   bundle –v
-
 -   gem install rails --no-ri –no-rdoc
-
 -   which bundle
-
 -   rbenv rehash
-
 -   rails –v
-
 -   mysql –version
-
 -   which mysql
-
 -   install mysql
-
 -   mysql –u root
-
 -   mysqladmin –u root password
-
 -   gem install mysql2
-
 -   rails new simple\_cms –d mysql
-
 -   rails server
-
 -   stop server (control z)
-
 -   rails g controller demo index
-
-Rails 5 gems that caused issue in deploy
+```
+### Rails 5 gems that caused issue in deploy
 
 | Name              | Available Version | Needed Version | Comments |
 |-------------------|-------------------|----------------|----------|
-| In nio4r          | 1.0.1             | ~&gt; 1.2      |          |
-| websocket-driver  | 0.3.0             | ~&gt; 0.6.1    |          |
-| rails-dom-testing | 1.0.7             | ~&gt; 2.0      |          |
-| rack              | 1.6.4             | ~&gt;2.0       |          |
-| arel              | 6.0.3             | ~&gt; 7.0      |          |
+| In nio4r          | 1.0.1             | ~> 1.2      |          |
+| websocket-driver  | 0.3.0             | ~> 0.6.1    |          |
+| rails-dom-testing | 1.0.7             | ~> 2.0      |          |
+| rack              | 1.6.4             | ~>2.0       |          |
+| arel              | 6.0.3             | ~> 7.0      |          |
 
 Provide Configuartion options nokogiri\_1.6.7.2
 
-1.  yum gcc ruby\_devel zlib-devel mysqldevel
+```bash
+$ yum gcc ruby\_devel zlib-devel mysqldevel
+$ sudo yum install –y rubygem-nokogiri```
 
-2.  3.  4.  Sudo yum install –y rubygem-nokogiri
-
-Yum command is responding with the following
+##### yum command is responding with the following
 
 Another app is currently holding the yum.lock
 
 Run the following commands:
-
--   ps aux | grep yum
-
--   kill \[pid\]
-
--   cd /var/run/
-
--   rm –f yum.pid
-
--   yum update
+```bash
+  $ps aux | grep yum
+  $ kill \[pid\]
+  $ cd /var/run/
+  $ rm –f yum.pid
+  $ yum update```
 
 Serving Multiple Rails Apps under One Virtual Host with Phusion
 Passenger
@@ -470,54 +444,40 @@ Two Rails apps, both of which needed to be hosted under a single domain
 ideal setup:
 
 -   app1 deployed to /apps/app1/current at mydomain.com
-
 -   app2 deployed to /apps/app2/current at mydomain.com/app2
 
 This is easily accomplished with Passenger, but took some tinkering to
 figure out. Here’s how two ended up with:
 
-&lt;VirtualHost \*:80&gt;
+```bash
+<VirtualHost \*:80>
+    ServerName mydomain.com
+    DocumentRoot "/apps/app1/current/public"
+    RailsEnv production
 
-ServerName mydomain.com
+ <Directory "/apps/app1/current/public">
+    Options Indexes FollowSymLinks -MultiViews
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+ </Directory>
 
-DocumentRoot "/apps/app1/current/public"
-
-RailsEnv production
-
-&lt;Directory "/apps/app1/current/public"&gt;
-
-Options Indexes FollowSymLinks -MultiViews
-
-AllowOverride All
-
-Order allow,deny
-
-Allow from all
-
-&lt;/Directory&gt;
-
-&lt;Directory /apps/app1/current/public/app2&gt;
-
-Options Indexes FollowSymLinks -MultiViews
-
-AllowOverride All
-
-Order allow,deny
-
-Allow from all
-
-&lt;/Directory&gt;
-
-RackBaseURI /app2
-
-&lt;/VirtualHost&gt;
+  <Directory /apps/app1/current/public/app2>
+    Options Indexes FollowSymLinks -MultiViews
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+            RackBaseURI /app2
+</VirtualHost>```
 
 Apache is now properly configured. All that remains is a little setup in
 the apps themselves. Since the Apache config expects a Rack/Rails app at
 /apps/app1/current/public/app2, you just need to create a symlink in
 /apps/app1/current/public to app2:
 
-ln -s /apps/app2/current/public app2
+```bash
+ln -s /apps/app2/current/public app2```
 
 Depending upon your deployment strategy, you may need to create the
 symlink each time you deploy. I setup a symlink as part of the
@@ -533,96 +493,67 @@ You can also deploy an app to a sub-URI instead of the root URI. For
 example, suppose that you already have a virtual host for the
 application /websites/phusion:
 
-&lt;VirtualHost \*:80&gt;
-
-ServerName www.phusion.nl
-
-DocumentRoot /websites/phusion/public
-
-&lt;Directory /websites/phusion&gt;
-
-Allow from all
-
-Options -MultiViews
-
-\# Uncomment this if you're on Apache &gt;= 2.4:
-
-\#Require all granted
-
-&lt;/Directory&gt;
-
-&lt;/VirtualHost&gt;
+```bash
+<VirtualHost \*:80>
+    ServerName www.phusion.nl
+    DocumentRoot /websites/phusion/public
+    <Directory /websites/phusion>
+        Allow from all
+        Options -MultiViews
+        # Uncomment this if you're on Apache >= 2.4:
+        #Require all granted
+    </Directory>
+</VirtualHost>```
 
 And you want your application, located in /websites/secondapp, to be
 accessible from the URL http://www.phusion.nl/subpath. To do this, you
 need to perform the following:
 
 -   Set Alias {SUBURI} {PATH TO YOUR APPLICATION'S PUBLIC DIRECTORY}.
-
--   Create a &lt;Location /{SUBURI}&gt; block.
-
+-   Create a <Location /{SUBURI}> block.
 -   Inside the Location block, set PassengerBaseURI /{SUBURI}.
-
 -   Inside the Location block, set PassengerAppRoot {PATH TO YOUR
     APPLICATION ROOT}.
-
--   Create a &lt;Directory {PATH TO YOUR APPLICATION PUBLIC
-    SUBDIRECTORY}&gt; block.
-
+-   Create a <Directory {PATH TO YOUR APPLICATION PUBLIC
+    SUBDIRECTORY}> block.
 -   Inside the Directory block, set Allow from all, and (if you’re on
-    Apache &gt;= 2.4) Require all granted.
-
+    Apache >= 2.4) Require all granted.
 -   Inside the Directory block, disable MultiViews.
 
 Here is an example:
 
-&lt;VirtualHost \*:80&gt;
+```bash
+<VirtualHost \*:80>
+    ServerName www.phusion.nl
+    DocumentRoot /websites/phusion/public
 
-ServerName www.phusion.nl
+    <Directory /websites/phusion>
+        Allow from all
+        Options -MultiViews
+        # Uncomment this if you're on Apache >= 2.4:
+        #Require all granted
+    </Directory>
 
-DocumentRoot /websites/phusion/public
+    # These have been added:
+    Alias /subapp /websites/secondapp/public
 
-&lt;Directory /websites/phusion&gt;
+    <Location /subapp>
+        PassengerBaseURI /subapp
+        PassengerAppRoot /websites/secondapp
+    </Location>
 
-Allow from all
-
-Options -MultiViews
-
-\# Uncomment this if you're on Apache &gt;= 2.4:
-
-\#Require all granted
-
-&lt;/Directory&gt;
-
-\# These have been added:
-
-Alias /subapp /websites/secondapp/public
-
-&lt;Location /subapp&gt;
-
-PassengerBaseURI /subapp
-
-PassengerAppRoot /websites/secondapp
-
-&lt;/Location&gt;
-
-&lt;Directory /websites/secondapp/public&gt;
-
-Allow from all
-
-Options -MultiViews
-
-\# Uncomment this if you're on Apache &gt;= 2.4:
-
-\#Require all granted
-
-&lt;/Directory&gt;
-
-&lt;/VirtualHost&gt;
+    <Directory /websites/secondapp/public>
+        Allow from all
+        Options -MultiViews
+        # Uncomment this if you're on Apache >= 2.4:
+        # Require all granted
+        </Directory>
+</VirtualHost>```
 
 When you are done, restart Apache:
 
-sudo apachectl restart
+```bash
+sudo apachectl restart```
 
 (Depending on your operating system, the right command may be apache2ctl
 instead of apachectl.)
@@ -634,7 +565,7 @@ guide](https://www.phusionpassenger.com/library/admin/apache/troubleshooting/).
 [Configure in Apache two Ruby on Rails apps in the same Server with same IP](https://serverfault.com/questions/370594/configure-in-apache-two-ruby-on-rails-apps-in-the-same-server-with-same-ip)
 =================================================================================================================================================================================================
 
-&lt;VirtualHost \*:80&gt;
+<VirtualHost \*:80>
 
 \#ServerAdmin @dummy-host.example.com
 
@@ -642,21 +573,21 @@ DocumentRoot /webserver/myapp/public
 
 ServerName myapp-Development
 
-&lt;Directory /webserver/myapp/public&gt;
+<Directory /webserver/myapp/public>
 
 AllowOverride all
 
 Options -MultiViews
 
-&lt;/Directory&gt;
+</Directory>
 
 ErrorLog logs/k2-error\_log
 
 CustomLog logs/k2-access\_log common
 
-&lt;/VirtualHost&gt;
+</VirtualHost>
 
-&lt;VirtualHost \*:3000&gt;
+<VirtualHost \*:3000>
 
 \#ServerAdmin @dummy-host.example.com
 
@@ -664,32 +595,29 @@ DocumentRoot /webserver/myapp2-admin/public
 
 ServerName myapp2-admin
 
-&lt;Directory /webserver/myapp2-admin/public&gt;
+<Directory /webserver/myapp2-admin/public>
 
 AllowOverride all
 
 Options -MultiViews
 
-&lt;/Directory&gt;
+</Directory>
 
 \#ErrorLog logs/k2-error\_log
 
 \#CustomLog logs/k2-access\_log common
 
-&lt;/VirtualHost&gt;
+</VirtualHost>
 
 | check my answer [here](https://serverfault.com/a/410351) to a similar question about serving multiple rails applications from sub-url's.  
                                                                                                                                             
  If you want to server your two rails apps from two different ports, apart from the virtual host, you have to also add to your apache conf  
                                                                                                                                             
- Listen 80                                                                                                                                  
-                                                                                                                                            
- Listen 3000                                                                                                                                
-                                                                                                                                            
- NameVirtualHost \*:80                                                                                                                      
-                                                                                                                                            
- NameVirtualHost \*:3000                                                                                                                    |
-|-------------------------------------------------------------------------------------------------------------------------------------------|
+ ```bash
+ Listen 80                                                                                                                                                                                                                                                                            
+ Listen 3000                                                                                                                                                                                                                                                            
+ NameVirtualHost \*:80                                                                                                                                                                                                                                                
+ NameVirtualHost \*:3000                                                                                                           ```
 
 **Dealing with Included configuration files within the httpd.conf file**
 
@@ -704,7 +632,8 @@ Workbench to connect remotely**
 Create a batch file and place the following putty command and augments
 inside:
 
-../putty –L \[localPort\]:\[remoteservername\]:\[remotePort\] unser
+```bash 
+../putty –L \[localPort\]:\[remoteservername\]:\[remotePort\] unser```
 
 [How to have multiple versions of Ruby AND Rails, and their combinations on Windows?](http://stackoverflow.com/questions/3648744/how-to-have-multiple-versions-of-ruby-and-rails-and-their-combinations-on-windo)
 =================================================================================================================================================================================================================
@@ -714,18 +643,13 @@ Refer to this page:
 
 Make that this create and used:
 
+```bat
 echo 3 - Ruby 2.0.0 (64 bit)
-
 choice /C 123 /M "Which Ruby? "
-
 if errorlevel 255 goto confused
-
 if errorlevel 3 goto 3
-
 if errorlevel 2 goto 2
-
 if errorlevel 1 goto 1
-
 if errorlevel 0 goto 0
 
 goto confused
@@ -733,46 +657,32 @@ goto confused
 :1
 
 if exist c:\\ruby rmdir c:\\ruby
-
 if exist c:\\devkit rmdir c:\\devkit
-
 mklink /j c:\\ruby c:\\ruby193
-
 mklink /j c:\\devkit c:\\devkit-4.5.2
-
 goto end
 
 :2
 
 if exist c:\\ruby rmdir c:\\ruby
-
 if exist c:\\devkit rmdir c:\\devkit
-
 mklink /j c:\\ruby c:\\ruby2-x86
-
 mklink /j c:\\devkit c:\\devkit-x64
-
 goto end
 
 :3
 
 if exist c:\\ruby rmdir c:\\ruby
-
 if exist c:\\devkit rmdir c:\\devkit
-
 mklink /j c:\\ruby c:\\ruby2-x64
-
 mklink /j c:\\devkit c:\\devkit-x64
-
 goto end
 
 :confused
-
 echo I'm confused ...
-
 :end
 
-ruby -v
+ruby -v ```
 
 **Updating ruby gems with internet access in window but organization has
 an internal gem repository **
@@ -780,38 +690,37 @@ an internal gem repository **
 Remember to check the current set gem source with the version of ruby
 that is being used. For example run the following command:
 
-$ gem sources
+```bash
+$ gem sources```
 
 Next, remove all the default sources and replace with the known
 organization repository with the following commands:
 
+```bash
 $ gem source -r https://rubygems.org/
-
 $ gem source -u
-
 $ gem source –a https://\[ organization url\]
-
-$ gem source -u
+$ gem source -u```
 
 **Rails environment configuration management**
 
 Received code that used the following syntax:
 
-Config::CONFIG\[‘target\_os’\]
+```ruby
+Config::CONFIG\[‘target\_os’\]```
 
 And it was not execute as expected in rails 4.2.4. After some web
 searching, I discovered that I need to reference rbconfig library as the
-following
+following:
 
-require ‘rbconfig’
-
-Config :: CONFIG\[‘some\_rails\_env\_propetry’\]
+```ruby
+require 'rbconfig'
+Config :: CONFIG\[‘some\_rails\_env\_propetry’\] ```
 
 and located the following gems that may provide the same functionality
 but different syntax:
 
 -   Configatron
-
 -   Configutation
 
 [Inline-CSS-Extractor](https://github.com/peterlazzarino/Inline-CSS-Extractor) 
