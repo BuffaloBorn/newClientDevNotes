@@ -81,7 +81,37 @@
 | autoprefixer                | ?       |   issue w/ on client version|
 
 
-## Railscast Episodes (to look at)
+## Requested Gems from Dev Ops 
+
+| Name                        | Version | Comments                    |
+|-----------------------------|---------|-----------------------------|
+| capybara-angular            | 0.2.5   |                             |
+| poltergeist                 | 1.15.0  |                             |
+| teaspoon-jasmine            | 2.3.4   |                             |
+| teaspoon                    | 1.15    |                             |
+| jasmine-core                | 2.6.0   |                             |
+| jasmine-selenium-runner     | 2.6.0   |                             |
+| childprocess                | 0.2.0   |                             |
+| ffi                         | 1.9.8   |                             |
+| rake-compiler               | 1.0.4   |                             |
+| rake-compiler-dock          | 0.6.1   |                             |
+| sauce-connect               | 3.6.3   |                             |
+| scenic                      | 1.4.0   |                             |
+| scenic-mysql                | 0.1.0   |                             |
+| cancancan                   | 2.0.0   |                             |
+| capybara-webkit             | 1.14.0  |                             |
+| delayed-job                 | 4.1.3   |                             |
+| selenium-webdriver          | 3.4.2   |                             |
+| sidekiq                     | 5.0.2   |                             |
+| redis                       | 3.3.3   |                             |
+| connection-pool             | 2.2.1   |                             |
+| concurrent-ruby             | 1.0.5   |                             |
+| rake protection             | 2.0.0   |   n                         |
+
+
+
+
+## Railscast Episodes (viewed)
 
 |  #   | Title                              | Comments                    |
 |------|------------------------------------|-----------------------------|
@@ -89,7 +119,7 @@
 |  391 | Testing JavaScript with PhantomJS  |           none              |
 |  257 | Request Specs and Capybara         |           none              |
 |  186 | Pickle with Cucumber               |           none              |
-|      |                                    |           none              |
+|  392 | A Tour of State Machines           |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
@@ -162,14 +192,14 @@ $ bundle config build.sqlite3 --with-sqlite3-include=$HOME/include
 ```bash 
 $ bundle install --path vendor/bundle```
 
-# Error installing sqlite3
+# Error while installing sqlite3
 ```bash 
 $ yum install sqlite sqlite-devel```
 
 ```bash 
 $ gem install sqlite3```
 
-# Install a gem from downloaded tar or zip
+# Install a gem from local tar/zip
 ```bash
 gem 'rails', :require => 'rails', :path => "/path\_to/rails"```
 
@@ -177,14 +207,14 @@ gem 'rails', :require => 'rails', :path => "/path\_to/rails"```
 ```bash 
 $ tree```
 
+
+
+```bat
 .
-
 ├── hola.gemspec
-
 └── lib
-
 └── hola.rb
-
+```
 ```bash 
 $ cat lib/hola.rb ```
 
@@ -242,7 +272,7 @@ $ irb
 
 Hello world!
 ```
-# Useful GEM commands
+# Useful Ruby Gem commands
 
 | Command             | Short Describe                                       | Interesting options |
 |---------------------|------------------------------------------------------|---------------------|
@@ -252,16 +282,17 @@ Hello world!
 | gem help            | Provide help on the ‘gem’ command                    |                     |
 | gem contents        | Display the contents of the installed gems           |                     |
 
-## Common errors during setup up a server for the in client environment
+### Errors encountered while setup up a server 
 
 
-### Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
+#### Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
 
 If your file my.cnf (usually in the */etc/mysql/* folder) is correctly
 configured with
 
+```apache
 socket=/var/lib/mysql/mysql.sock
-
+```
 you can check if mysql is running with the following command:
 
 ```bash 
@@ -346,7 +377,7 @@ prerelease\_specs.<version>.gz \# prerelease specs index
 quick/Marshal.<version>/<gemname>.gemspec.rz \# Marshal
 quick index file
 
-## Active project GEMFILE entries
+## Active project GEMfile entries
 
 | Name                  | Version | Comments |
 |-----------------------|---------|----------|
@@ -522,7 +553,7 @@ need to perform the following:
 
 Here is an example:
 
-```bash
+```apache
 <VirtualHost \*:80>
     ServerName www.phusion.nl
     DocumentRoot /websites/phusion/public
@@ -722,6 +753,58 @@ but different syntax:
 
 -   Configatron
 -   Configutation
+
+### Rails development error in client environment
+
+#### Undefined method "authenticate_user!" for controller 
+    
+    make sure you include the name of the table/model that hold all the 'users' in your application; in the case instead of 'user' model it should be declared as "authenticate_account!" 
+        
+    
+## Installing ruby javascript/css frameworks gems in client environment      
+    
+### Installing Bootstrap to a rails application via bootstrap-sass and autoprefixer-rails gem 
+1. place the above gem name in the GEM.file
+2. call bundle install
+3. add the following to app/assests/stylesheet/application.css.sass; you may have to use the folllowing command to create .sass file
+    ```bash
+    $ mov app/assests/stylesheet/application.css app/assests/stylesheet/application.css.sass
+    $ echo @import "bootstrap-sprockets" >> app/assests/stylesheet/application.css.sass
+    $ echo @import "bootstrap" >> app/assests/stylesheet/application.css.sass```
+4. import bootstrap javascript assets to app/assets/javascripts/application.js; text provided below
+    //= require bootstrap-sprockets
+
+    The file should have the following entries: 
+         //= require jquery
+         //= require jquery_ujs
+         //= require tubrolinks
+         //= require bootstrap-sprockets
+         //= require _tree .
+
+
+### Windows workarounds to add $PATH entries without having add prileages
+
+```bat
+> rundll22 sysadmin.cpl EditEnvironmentVariables 
+```
+
+### Issues that occured after installing above gems
+
+#### current ExexJS runtime doesn't support ES5, Please install Node.js
+
+Here some code that I've used to pin point the issue, I've tried to change the JS runtime to Node.JS 
+
+```ruby 
+>> require 'execjs'
+>> puts ExecJS.runtime.name
+>> ExecJS.runtime = ExecJS::Runtime::Node
+```
+
+After locating the error within all the installed gems, it was discovered the autoprefixer.gem was looking for a particalur javacript feature and raised an error when it could not found it. Solution was not to include the gem in the project; need to fix the code or it a updated version of the gem.  
+
+```ruby 
+ExecJS.eval('typeOf(Array.prototype.map)')!= function
+```
 
 [Inline-CSS-Extractor](https://github.com/peterlazzarino/Inline-CSS-Extractor) 
 ===============================================================================
