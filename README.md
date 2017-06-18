@@ -756,7 +756,56 @@ but different syntax:
 
 ### Rails development error in client environment
 
-#### Undefined method "authenticate_user!" for controller 
+#### Installing RSpec in rails app
+
+After including rspec in the rails GEMfile, run the following command
+
+```bash
+$ rails g rspec:install
+```
+
+    create .rspec
+    create spec
+    create spec/c:user/mcgrudc-dev/AppData/Temp/d.../spec_helper.rb
+        Error ../ruby/2.2.0/fleutils.rb:252:in 'mkdir':Invalid argument
+        @dir_s_mkdir - U:/git/shine/spec/c: (Errno: EINVAL)
+
+    Solution Comments: Went on Linux system and ran the following command and copied over the generated files that was not created in windows
+ 
+#### Not able to in install phantomsjs in the system path (phantomjs.2.11.windows.zip) - [Need to review poltergeist setting](https://github.com/teampoltergeist/poltergeist/blob/master/README.md)
+
+   Figure out if the spec/rails_help.rb, sepec/spec_help.rb, or even if there is away to configure the path from within poltergeist's client.rb.
+  
+``` ruby
+Solution Comments: Is outline below:
+ options = { js_errors: false,
+             logger: NilLogger.new,
+             #phantomjs_logger: STDOUT,
+             phantomjs_logger: 
+                    File.open("#{Rails.root}/log/test_phantomjs.log",
+             phantomjs_options: ['--debug=true'],
+             debug: false  }
+                     
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+```
+
+`options` is a hash of options. The following options are supported:
+
+
+*   `:phantomjs` (String) - A custom path to the phantomjs executable
+
+
+[check out stackoverflow](https://stackoverflow.com/questions/35844186/how-to-properly-debug-with-capybara-poltergeist)
+
+### Useful commands for poltergeist within rspec test 
+```ruby
+save_screenshoot('path.png', full=>true)
+```
+
+Tried to ma
+#### Working wit Devise gem: Undefined method "authenticate_user!" for controller 
     
     make sure you include the name of the table/model that hold all the 'users' in your application; in the case instead of 'user' model it should be declared as "authenticate_account!" 
         
@@ -764,9 +813,9 @@ but different syntax:
 ## Installing ruby javascript/css frameworks gems in client environment      
     
 ### Installing Bootstrap to a rails application via bootstrap-sass and autoprefixer-rails gem 
-1. place the above gem name in the GEM.file
+1. place the above gem name in the GEMfile
 2. call bundle install
-3. add the following to app/assests/stylesheet/application.css.sass; you may have to use the folllowing command to create .sass file
+3. add the following to app/assests/stylesheet/application.css.sass; you may have to use the folllowing commands to create .sass file
     ```bash
     $ mov app/assests/stylesheet/application.css app/assests/stylesheet/application.css.sass
     $ echo @import "bootstrap-sprockets" >> app/assests/stylesheet/application.css.sass
