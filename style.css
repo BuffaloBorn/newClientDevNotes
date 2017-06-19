@@ -2,9 +2,7 @@
     background: aqua;
 }
 
-.col-md-4,
-.col-sm-4,
-.col-xs-4{
+.colcol {
     border: 1px solid black;
     height: 200px;
 }
