@@ -120,7 +120,7 @@
 |  257 | Request Specs and Capybara         |           none              |
 |  186 | Pickle with Cucumber               |           none              |
 |  392 | A Tour of State Machines           |           none              |
-|      |                                    |           none              |
+|  269 | template-inheritance               |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
