@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
+    </head>
+    <body>
+        <div class="mermaid">
+graph TB
+
+ subgraph Order ROM
+    A[Customer Place Order] -- Auto ROM -->  B[ROM on hold]
+    A -- Manual ROM  --> C[Pending Manual Rom]
+    B --> D{Recieved}
+    B --> E[Closed ROM]
+    C --> D
+    C --> E[Closed ROM]
+    D --> Z[ROM Completed]
+  end
+
+subgraph Uploaded CAF
+    F[Service Provider Upload CAF] -- Pending-->  G[Pending CAF Accepted]
+    G -->  I[Customer Accepted CAF]
+    G-->  H[Customer Rejected CAF]
+    H -- Customer Rejects --> G
+    I --> J[Evaluation]
+    I --> K[On Hold]
+    I --> L[Engineering]
+    I --> M[Provisioning]
+    I --> N[Testing]
+    I --> O[Ready]
+    I --> P[Active]
+    I --> Q[Pending Disconnect]
+    I --> R[Disconnect]
+    I --> S[Withdrawn]
+    I --> T[ROM Completed]
+ end
+
+        </div>
+
+
+        <!-- jQuery first, then Bootstrap JS -->
+
+        <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    </body>
+</html>
