@@ -277,10 +277,15 @@ Hello world!
 | Command             | Short Describe                                       | Interesting options |
 |---------------------|------------------------------------------------------|---------------------|
 | gem environment     | Display information about the RubyGems environment   | --debug             |
-| gem list            | Display local gems whose name matches REGEXP         | -all                |
+| gem list [REGEXP]   | Display local gems whose name matches REGEXP         | -all                |
+| gem list -details   | Display detailed information of gem(s)               |                     |
 | gem generate\_index | Generates the index files for a gem server directory |                     |
 | gem help            | Provide help on the ‘gem’ command                    |                     |
 | gem contents        | Display the contents of the installed gems           |                     |
+
+RadRails provide a cool that list gem descriotion - check plugin folder
+org.jruby.xxxxx
+com.aptana.feature.shell.xxxxx
 
 ### Errors encountered while setup up a server 
 
