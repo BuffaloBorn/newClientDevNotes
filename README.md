@@ -121,7 +121,7 @@
 |  186 | Pickle with Cucumber               |           none              |
 |  392 | A Tour of State Machines           |           none              |
 |  269 | template-inheritance               |           none              |
-|      |                                    |           none              |
+|  392 | a tour of state machines           |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
