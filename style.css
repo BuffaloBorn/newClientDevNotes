@@ -11,9 +11,19 @@ body{
    /*height: 200px;*/
 }
 
-
 .fixed-top{
     background-color: darkblue;
+}
+
+.carousel-item img{
+    width: 100%;
+}
+.carousel-indicators li{
+    background-color: #f4f2f2;
+}
+
+.carousel-indicators .active{
+    background-color: #d42222;
 }
 
 @media(max-width:34em){
