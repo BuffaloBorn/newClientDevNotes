@@ -25,8 +25,19 @@
 
 #### 1.5 Using and Modifying the Shell
 
+To identify what shell that you are using, issue the following ```echo $SHELL```
+
+Shell just interprets commands are transfer them to machine instructions to execute.  
+
+They are internal and external commands to the shell. Remember that internal commands are built in the shell itself and external commands are third party commands that are installed to the Linux system.
+
+[esc] + b  or [esc] + f - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
+
+[esc] + a  or [esc] + e - allows you jump to begin of a line or to the end of a line in very long complex string
+
 #### Command Summary
   * bash
+  * echo $SHELL
   * exit
   * env
   * MYDIR=/usr/share/lib
@@ -55,6 +66,8 @@
   *	ls -a	- trying to locate the .bash_history file
   *	cat .bash_history - it may hold 500 to 1000 commands base on settings
   *	![line number] - re-run the command on the that line ex: 117
+  * !! - will run the previous command that was just issued
+  * [up] and [down] keys on the keyboard that allow you to go back to previous commands; this good for two or three commands
   * [ctrl] + r - reverse &#95;i&#95; search - starting typing and it will search the command that starts with those characters
       1.	tree -L 1 /proc - that was enter but wasn't in history
   *	history --help- found more in
@@ -135,7 +148,7 @@ Let issue the following command  ```$ find / -name blah``` and you can see the a
 | 1	     | stdout | standard output |
 | 2	     | stderr | standard error	|
 
-Let issue the following command ```$ find / -name blah 2> /dev/nu11```; this would go no where
+Lets issue the following command ```$ find / -name blah 2> /dev/nu11```; this would go no where
 
 But if you like to review the errors, you need to redirect	to a file. Let issue the following command ```$ find / -name blah 2> errfile``` and then issue ```$ cat errfile``` to see what was saved in the file: ```errfile```. Remember that you will lose the previous contents. so use double ```>>```to retain the
 previous and add the new data to the bottom.
@@ -147,11 +160,11 @@ Issue the following mail command ```$ mai l -s hello root```, use ```mail -h```-
 It sits there waiting to for the body to be typed/entered or a dotted ```.``` to end send the mail. ```$
 ·mai l -s hello root /newline Please learn Linux. /newline. .``` is termation stdinput value that the ```mail``` command is looking to end and send message.
 
-If we would like to do it on all in one command - - - $ mail -s hello root <
+If we would like to do it on all in one command ```$ mail -s hello root <```
 
 It you have a command that sending the standard error and the standard input	then you can take care of both in a single one; ```$ find / -name	hosts &> /dev/nu11```
 
-so what is this doing? Its sending the standard error (STDERR) and the standard input (STDIN) to the same location whi ch i s - - /dev/nu1 1 ··-
+so what is this doing? Its sending the standard error (STDERR) and the standard input (STDIN) to the same location which is ```/dev/null```
 what if you would like to display the results of the  ```$ ls``` and redirect that same output to a fil e like ```ls.out```?
 
 Issue the following command: ```$ ls | tee ls.out```and using ```$ cat l s.out```. You should see that results on the screen and i n the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
@@ -162,15 +175,15 @@ The following is an example of types of files that programs may create that are 
  find / -name
  ```
 
-But that is side not i n fi ndi ng speci al fi l e any locati on.
-we need to ··'$	find I -name ""'bl ah" '·'so we go ahead create to 2 blah files
+But that is side not in finding special file any location.
+we need to ```$find / -name "blah"``` so we go ahead create to 2 blah files
 
 ```bash
 $ touch lbl ah
 $ touch 2bl ah
 ```
 
-Re-issue '"$ find I -name "'''bl ah" '" and see the resul ts of the above fi l es i n the resul ts. Now we can i ssue ```$ find I -name ```blah``` |  xargs -d "\n" rm```
+Re-issue ```$ find I -name "blah"```  and see the results of the above fi l es in the results. Now we can issue ```$ find I -name "blah" | xargs -d "\n" rm```
 
 what does the previous string of commands do?
 
@@ -182,7 +195,7 @@ what does the previous string of commands do?
 
 ###### Note: Many think ```xargs``` is complicated	but sometime is Linux things are improved. Here is the same results with only using the ```find``` command options
 
-Try to issue this command find / blah" -exec rm {} \; ···
+Try to issue this command ```find / blah" -exec rm {} \;```
   1.	find all the files that has ```blah``` at the end of its filename
   2.	execute the ```rm``` command with the results of the previous ```find``` results defined with ```{}\;```
 
@@ -203,12 +216,192 @@ Try to issue this command find / blah" -exec rm {} \; ···
 
 ## 2.2 File Viewing commands
 
+Now we are going to look a commands that us look the contents of files.
+
+Let revisit our old friend ```$ cat /etc/passwd``` so we know what it does.
+
+Issue ```$ tac /etc/passwd``` and it is just ```cat``` in reverse, not sure how useful this command is
+
+Issue ```$ cat -E /etc/hosts```, it ends each line with a dollar sign this is useful in some configuration files that may have spaces at the ends
+
+Issue ```$ cat -T /etc/hosts```, it shows all the tabs in that are in a file
+
+Issue ```$ cat -n /etc/hosts``` or $``` cat -n /etc/hosts > myhosts```, it shows all the lines of a file with line number
+
+The command ```cat``` is useful but not for large files; ```less``` is more sui ted for very long files
+
+Issue ```$ less /var/log/messages```, automatically allows you to page through page of content via pager view of the file, you can use up arrow or spacebar.
+
+Issue ```$ tail /var/log/secure```, show the last 10 lines of the authentication related log messages. ```tail``` also have a useful flag called - ```-f``` that allows you follow the file as it is updated and ```-n``` allows ¥OU to see more then then default of 10 if 20	is passed in as ```tail -n 20 /var/log/secure```.
+
+The opposite of tail is head , so try this out ```$ head -n 20 /etc/passwd```
+
+Now we can combine	other commands to focus on a 2 lines like line 19 and 20 of ```/etc/passwd```. For example, ```$ head -n 20 /etc/passwd | tail -n 2```
+
+We can refocus our attention to line 19 only by issuing	```$ head -n 19 /etc/passwd | tail -n 1``` to verify our results, we can issue ```$ cat -n /etc/passwd```
+
+Very interesting command is ```od``` which is an octal dump, not used a lot but it on Linux+ exam.
+
+### command summary
+  *	head
+  *	less
+  *	tail
+  *	cat
+  *	od
+  * cut
+
+## 2.3 Fil e Formatting Commands
+
+Back in the day there wasn't many monitors that we have today. There as just printers that printed output so it was very important to instruct the computer format the file in particular way.
+
+We'll start with the base command ```$ cat /var/log/secure``` and we see the file as normal.
+
+Issue ```fmt -w 50 /var/log/secure```it print only 50 wide characters.
+
+Issue ```$cat /var/log/secure | pr -d``` ,	adding page information to printed page you will have header.
+
+Issue ```$ cat /var/l og/secure | pr -D |  lpr```, will send document to unix lined printer
+
+Issue ```expand /var/hosts |cat -T```, will replace all tabs with spaces
+
+### command summary
+  * fmt
+  *	pr
+  *	expand
+  * unexpand
+  * convert
+
+##  2.4	File Processing Commands
+
+so let's talk about some other nice commands. we need to create a couple of example files.
+
+* file1
+  1	susie
+  2	jane
+  3	tarzan
+
+* file2
+ 1	amsterdam
+ 2	antartica
+ 3	alabama
+
+Issue ```join file1 file2```, will combine the two file base on the first field so the first column have to be similar.
+
+Useful to merge ascii files.
+
+Issue ```paste file1 file2```, it will take first line of both files and paste them to the standard output as well any following lines
+
+Issue ```paste fil el fi l e2 > newfilse```, as above but redirect the output to a file
+
+Issue ```cat /etc/hosts | nl``` ··- , gives you the number of lines but many utilities these days have options to provide this information. But back in the old days Unix gods felt that if there was utility that al ready perform a particular functionality why recreate that functionality
+
+Here we are coming to create a file named ```$ vi m anotherfile``` - with the following contain:
+
+```bash
+ hello
+ bye
+ bye
+ andhello
+```
+
+Now we are going to look at ```sed``` command , especially the following command and options
+```bash
+$ sed	-i s/bye/BYE/g anotherfile
+ ```
+where ```i``` means edit files in place which is interactive with file
+
+where ```s/``` means substitute what follows with the another next string
+
+where ```/g``` means apply globally to the entire file
+
+This very usefully for configuration files that have settings that are placeholder; this save time in opening and editing it manually.
+
+Now we are going to look at ```sort``` command , especially the following command and options
+
+Here we need to create a file named  ```$ vi m sortfile``` with the following contain:
+```bash
+one
+one
+1
+11
+124
+bye
+beer
+sleep
+weekend
+21
+```
+Issue	```sort sortfile```, the sortfile results are now sorted
+
+```bash
+1
+11
+124
+21
+beer
+bye one
+one
+sleep
+weekend
+```
+
+But note that 124 and 21 are not correct, because it take the first portion of the text not number. To make work with number we need to pass ```-n```
+
+Issue ```	$ sort -n sortfile```, the sortfile results are now sorted
+```bash
+beer			
+bye			
+one			
+one			
+sleep			
+weekend			
+1			
+11			
+21			
+124
+```
+
+Some older version of ```sort``` are case-sensitive. To make it work properly we need to pass ```-f``` version that need this flag will do all lower case and then uppercase
+
+Issue	```sort -r sortfile```, will sort the file in reverse order
+
+Issue ```sort -k2 file2```, the file2 results are now sorted in the second column
+
+```bash
+3   alabama
+1   ansterdam
+2   antartica
+```
+
+Good for analyzing data on the screen that is shown on Linux system with having to print it out.
+
+This options above are sort	are frequently used and are not that common.
+
+Now we are goi ng to di scuss ···spl i t _ _ _
+we need to create a bi gfi le to use. Issue ···1 s -R	I >	/bigfi l e ···
+
+##### Note: ```-R``` means list subdirectories recursively
+
+Lets make sure we have that fil e created ```ls -l bigfile``` and it size is big as well
+```bash
+$	mkdi r
+$ mv bigfile
+$ cd temp
+$ ls
+$	split
+ ```
+
+Why is this useful?
+
+Maybe your bigfile and plainly to big and you to look at it in small chunks, where you have 1000 lines per fil e
+
+Now we are going to look at ··- tr ···command ; we goi ng to run a simple ```$ echo hi``` -> ```$ hi``` command we will see how ```$ echo hi I [a-z] [A-zJ``` -> ```$ HI```·
+
 As you can see, ```tr```can translate, squeeze, and/or delete characters from standard input, writing to standard output.
 
 This very useful in shell scripts when you will expect characters to be in a particular case.
 
 Let's setup couple of files to tackle our next command.
-
 
 Here we are need to create a file named ```$ vi m ufile``` with the following contain:
 
@@ -322,7 +515,9 @@ Issue ```$ /proc/version``` - to see kernel version and gcc version used to buil
 #### 9.3 Installing , Reinstalling , Upgrading , and Removing Packages usi ng RPM and YUM
 
 For the exam, be able to reproduce the correct command ei ther its for rpm, yum or debian related package manager.
-on Red hat system, most important is to use yum.
+
+On Red hat system, most important is to use yum.
+
 Issue	```yum search nmap``` looks in the repo for any that matches the nmap or search parameter .
 
 Issue ```yum info nmap``` to get more information about the package
