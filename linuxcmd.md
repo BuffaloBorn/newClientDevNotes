@@ -1,0 +1,381 @@
+# Module 1: Essential Skills
+
+## Lesson 1: Performing Basic Tasks from a Shell Environment
+
+#### 1.3 Finding Files and Commands on Linux System
+
+#### Command Summary
+  * finding
+  * locate
+  * updatedb
+  * whereis
+  * which
+  * /etc/updatedb.conf
+
+#### 1.4 Using Single Shell Commands and One-line Command Sequences
+
+#### Command Summary
+
+  * cal
+  * cal 2029
+  * cal 2029 > ~/calfile
+  * cat ~/calfile
+  * ps aux | grep http
+  * man many
+
+#### 1.5 Using and Modifying the Shell
+
+#### Command Summary
+  * bash
+  * exit
+  * env
+  * MYDIR=/usr/share/lib
+  * echo
+  * cd $MYDIR
+  * echo $MYDIR - in the subshell an is produced
+  * exit
+  * export TODAY - friday - allows for all shells displayed
+  * exit
+  * help - many commands are available
+  *	help set	- long list of information
+  *	help set | less - this give you a shorten view of the options that provide for the help
+  * pwd
+  * set
+  * unset
+  * uname - gives the name for OS
+  * uname --help
+  *	uname -p
+  *	uname -r
+
+#### 1.6 Using and Editing command History
+
+##### Command Summary
+
+  * history
+  *	ls -a	- trying to locate the .bash_history file
+  *	cat .bash_history - it may hold 500 to 1000 commands base on settings
+  *	![line number] - re-run the command on the that line ex: 117
+  * [ctrl] + r - reverse &#95;i&#95; search - starting typing and it will search the command that starts with those characters
+      1.	tree -L 1 /proc - that was enter but wasn't in history
+  *	history --help- found more in
+  *	history -c	- cl ear out the hi story
+  *	history - run this command again and everything is gone
+  *	cat .bash_history	- will contain all the history information that was thought to be cl eared out
+  * rm .bash_history - to permanently remove history; not really good thing to do
+
+#### 1.7 Invoking Commands Inside and Outside the Defined Path
+
+we need to understand what is happening when you issue a command on the command line.
+
+You need to ask yourself, what actually is happening when issue a command on the command line? First, Linux goes though the system PATH and looks to see if that command is available.
+
+If you try to call a command , ```$ hello``` that isn't in the current path; you need to provide the exact path to locate the command, ```$ ./hello```.
+
+If you would like to call an internal command and you do not know if it is available; just issue ```$ help``` command and Linux will show you list available internal commands
+
+If we type ```$ which time``` and use the complete path that is returned; try to issue the complete path with the command; if you receive a different results
+
+This mean there is an internal command that is placed before the one that we've used eg.	```$ /usr/bin/time``` and ```$ time```
+
+Let issue ```$ time ls``` this tell us how long it take to run the time command
+
+Let issue ```$ /usr/bin/time ls```; this is doing the same but more information this the previous version
+
+There can be a bi nary version and internal version of the same in which can leave many confused on the correct on to use.
+
+By using the ```$ type``` before the command you are trying to issue. Givens us an idea where the command is coming from.
+
+As you can see, the PATH is very important aspect of a Linux system. The PATH is built on the first process when is booted up. If could ```intit``` or ```sysmd``` base on the type of Linux distribution you have installed.
+
+##### Command Summary
+  *	ls
+  *	env | grep PATH
+  *	who
+  *	vi m help -> echo hello world
+  *	chmod +x hello
+  *	hello
+  *	./hello
+  *	time - how do you know it a Linux command
+  *	help
+  *	which time
+  *	/usr/bin/time
+  *	time ls
+  *	/usr/bin/time ls
+  *	type time type useradd
+
+#### Summary
+
+The previous lesson was a warm-up to Linux OS and on the basic shell operations.
+
+## Lesson 2: Processing and Working with Text Files
+
+#### 2.1 Using Streams, Pipes, and Redirects
+
+By default, ```$ ls``` command will go to the standard output(STDOUT) what is the current screen
+
+You redirected the standard output with  ```>``` to a file like OUTFILE
+
+If we issue the following command  ```$ ls > /dev/zero```
+
+If we issue the following command ``` $ ls > outfile```
+
+If we issue the following command ```$ cat /etc/hosts > outfile```
+
+Now ```$ cat errfile``` checkout what redirected , will see the contains that is normally displayed on the screen in the file.
+
+Single ```>``` will always overwrite the contents in the file that it redirected to.
+
+Double ```>>``` will append the contents to the end of the file. In some case you would like to add information.
+
+Let issue the following command  ```$ find / -name blah``` and you can see the all the errors on the screen. But this can be redirected to a file. I do not want to see the errors.
+
+| Handle | Name 	| Description     |
+|--------|--------|-----------------|
+| 0	     |  stdin | standard input  |
+| 1	     | stdout | standard output |
+| 2	     | stderr | standard error	|
+
+Let issue the following command ```$ find / -name blah 2> /dev/nu11```; this would go no where
+
+But if you like to review the errors, you need to redirect	to a file. Let issue the following command ```$ find / -name blah 2> errfile``` and then issue ```$ cat errfile``` to see what was saved in the file: ```errfile```. Remember that you will lose the previous contents. so use double ```>>```to retain the
+previous and add the new data to the bottom.
+
+There are ways to redirect from the STDIN what looks for input from the keyboard.
+
+Issue the following mail command ```$ mai l -s hello root```, use ```mail -h```- for help.
+
+It sits there waiting to for the body to be typed/entered or a dotted ```.``` to end send the mail. ```$
+·mai l -s hello root /newline Please learn Linux. /newline. .``` is termation stdinput value that the ```mail``` command is looking to end and send message.
+
+If we would like to do it on all in one command - - - $ mail -s hello root <
+
+It you have a command that sending the standard error and the standard input	then you can take care of both in a single one; ```$ find / -name	hosts &> /dev/nu11```
+
+so what is this doing? Its sending the standard error (STDERR) and the standard input (STDIN) to the same location whi ch i s - - /dev/nu1 1 ··-
+what if you would like to display the results of the  ```$ ls``` and redirect that same output to a fil e like ```ls.out```?
+
+Issue the following command: ```$ ls | tee ls.out```and using ```$ cat l s.out```. You should see that results on the screen and i n the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
+
+The following is an example of types of files that programs may create that are temporary files
+
+```bash
+ find / -name
+ ```
+
+But that is side not i n fi ndi ng speci al fi l e any locati on.
+we need to ··'$	find I -name ""'bl ah" '·'so we go ahead create to 2 blah files
+
+```bash
+$ touch lbl ah
+$ touch 2bl ah
+```
+
+Re-issue '"$ find I -name "'''bl ah" '" and see the resul ts of the above fi l es i n the resul ts. Now we can i ssue ```$ find I -name ```blah``` |  xargs -d "\n" rm```
+
+what does the previous string of commands do?
+
+1. find all the files that has ```blah``` at the end of its filename
+
+2.	take the output and place it to ```xargs``` command force a new line character between the filenames with ```-d "/n"```
+
+3.	remove the files that were provided in the input
+
+###### Note: Many think ```xargs``` is complicated	but sometime is Linux things are improved. Here is the same results with only using the ```find``` command options
+
+Try to issue this command find / blah" -exec rm {} \; ···
+  1.	find all the files that has ```blah``` at the end of its filename
+  2.	execute the ```rm``` command with the results of the previous ```find``` results defined with ```{}\;```
+
+
+#### Command Summary
+
+* ls
+* STDOUT
+* 1s > outfile
+* cat outfile
+* ls » outfile
+* cat outfile
+*	find / -name blah
+*	find / -name blah 2> errfile
+* cat errfile
+* tee
+* xargs
+
+## 2.2 File Viewing commands
+
+As you can see, ```tr```can translate, squeeze, and/or delete characters from standard input, writing to standard output.
+
+This very useful in shell scripts when you will expect characters to be in a particular case.
+
+Let's setup couple of files to tackle our next command.
+
+
+Here we are need to create a file named ```$ vi m ufile``` with the following contain:
+
+```bash
+aa
+aa
+aa
+bb
+bb
+cc
+```
+Issue ```$ uniq ufile ```command ; here is what we expect to get back
+
+```bash
+aa
+bb
+cc
+```
+
+Here we are need to create a file named ```$ vim somenames```	with the following contain:
+
+```bash
+linda
+lisa
+lori
+bob
+lori
+bob
+```
+Issue ```$ uniq ufile``` command; here is what we expect to get back But we do see that same output with the same values
+
+```bash
+linda
+lisa
+lori
+bob  
+lori
+bob
+```
+Remember that Linux/Unix philosophy is that commands/utilities should be combined	to get the functionality that each is good at to achieved the correct results.
+
+Issue ```$ sort somenames | uniq``` and check out the results
+
+```bash
+bob
+linda
+lisa
+lori
+```
+
+very useful command ```wc``` stands for word count checkout these results ```$ ls -R |  wc```
+
+Now check out , ```cat /etc/passwd``` allows you to see the contents of this file. Now we combine that with ```wc``` and try ```cat /etc/passwd | wc```  
+
+```bash
+$ 23	36	1138
+```
+As you can see there are 23 lines so we have 23 users.
+
+In total there are very useful commands and some that are not so useful. ```sed```, ```WC```	and	```sort``` are the ones that you should think about using more often.
+
+##### command summary
+* join
+* paste
+* nl
+* sed
+* sort
+* split
+* tr
+* uniq
+* wc
+
+
+## 2.5 Understanding vi
+
+## 2.6 Editing Text Files with vi
+
+## 2.7 Using Regular Expressions to Work with Text Files
+
+## 2.8 Searching Text Patterns with grep
+
+## Summary
+
+# Module 2: Administration Tasks
+
+## Lesson 9: Managing Software
+
+#### 9.1 Understanding Packages and Meta Package Handlers
+
+#### 9.2 Understanding variations in Linux software Management
+
+Major Linux distributions and their subversion distributions.
+
+Red hat has rpm which standard for redhat package manager and Debi an has dpkg stands for Debi an package manager
+  * Red Hat - rpm
+    * Centos
+    * Ferdra
+    * SUSE
+  * Debian - dpkg (deb)
+    * Ubuntu
+    * Mint
+
+Two different worlds; there a tool called alien to assist in using either other distributions package manager but it would be very difficult to install rpm on Debian distributions and vise a versa.
+
+Issue the following commands to figure out what distributions is currently running on you favor of Linux Here are several method different listed below:
+
+Issue ```$ cat /etc/*-release```- to provide simple output
+Issue ```$ lsb_release -a``` - to find out the Linux distributions name/version
+Issue ```$ /proc/version``` - to see kernel version and gcc version used to build the same
+
+#### 9.3 Installing , Reinstalling , Upgrading , and Removing Packages usi ng RPM and YUM
+
+For the exam, be able to reproduce the correct command ei ther its for rpm, yum or debian related package manager.
+on Red hat system, most important is to use yum.
+Issue	```yum search nmap``` looks in the repo for any that matches the nmap or search parameter .
+
+Issue ```yum info nmap``` to get more information about the package
+
+Issue	```yum install nmap``` if you like what you it will install directly from the repo and all the dependencies that is associated with that	package.
+
+Issue	```yum search sealert``` may produce no matches.
+
+yum is great tool to search and install packages but sometimes you will not found what you are looking for search. The search looks in the package description but you need to look at the actual files within the packages.
+
+Issue	```yum whatprovides */sealert``` receive a list of packages that meet the supplied package name. If the result you will see the package name, package version	and platform.
+
+ex: setroubleshoot-server-3.2.1 7.el7.x86_64
+
+Issue	```yum upgrade``` without any arguments will upgrade everything on your system.
+
+Issue ```yum upgrade kernel``` this will try to upgrade the kernel only
+
+Issue ```yum repo list``` returns a list of repos that are currently being used
+
+To locate or define the available repos, ```cd /etc/yum.repos.d/``` and then ```ls``` You will see a list of files that end will ```.repo```; each entry may contain mirror list that is considered import if that is used if it can connect to the baseurl.
+
+##### command summary
+
+Include in this are	commands not used often but are need for the exam:
+*	rpm -ivh - used to install rpm without yum
+*	rpm -uvh - used to update rpm without yum
+*	rpm -e	- erase (uninstall) package
+* rpm -F	- upgrade package(s) if already installed
+*	rpm2cpi o - used to retrieve tar fil e within rpm; results cpio file
+*	/etc/yum/repos.d
+*	yum search
+*	yum whatprovides
+*	yum install
+*	yum reinstall - when recent installed is accedient removed
+*	yum remove
+*	yum check-update
+*	yum upgrade
+*	yum clean
+*	yum local install	- better then rpm -ivh
+*	yum local update
+* yum downloader
+
+
+#### 9.4 Obtaining Information on RPM Packages
+
+On Redhat system, allows you to do rpm queries to get information about packages. Let try this out from ``` $ cd /usr/sbin``` or ``` $ cd /sbi n``` and then ```$ ls``` Issue	```rpm -qf /sbin/ipmaddr```, it tells what package that is utility came from
+
+
+Issue	```rpm -qi net-tools-l.60-110.el6_2.x86_64```, it tells what package that is utility came from
+
+Issue	```rpm -ql net-tools```	it returns list of files in this package
+
+Issue	```rpm -qd net-tools``` it returns all documentation within this package
+
+Issue	```rpm -qc net-tools```	if a package has additional configuration files you can use this This feature uses the rpm database that holds all the information for all installed packages.
