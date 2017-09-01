@@ -2,6 +2,7 @@
 #  List of Atom Packages
 
 * [Atom IDE Windows](https://github.com/atom/atom/releases/download/v1.19.3/atom-windows.zip)
+* [Atom Tail](https://atom.io/packages/tail)
 * [Atom Todo](https://github.com/mrodalgaard/atom-todo-show/archive/v2.0.0.zip)
 * [Atom Seti Icons](https://github.com/wyze/atom-seti-icons/archive/v1.5.4.zip)
 * [Monokai Seti](https://github.com/schmittyjd/monokai-seti/archive/v0.9.0.zip)
