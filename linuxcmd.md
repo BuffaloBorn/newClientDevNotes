@@ -195,9 +195,9 @@ what does the previous string of commands do?
 
 ###### Note: Many think ```xargs``` is complicated	but sometime is Linux things are improved. Here is the same results with only using the ```find``` command options
 
-Try to issue this command ```find / blah" -exec rm {} \;```
+Try to issue this command ```find / blah" -exec rm {}\```
   1.	find all the files that has ```blah``` at the end of its filename
-  2.	execute the ```rm``` command with the results of the previous ```find``` results defined with ```{}\;```
+  2.	execute the ```rm``` command with the results of the previous ```find``` results defined with ```{}\```
 
 
 #### Command Summary
@@ -250,7 +250,7 @@ Very interesting command is ```od``` which is an octal dump, not used a lot but 
   *	od
   * cut
 
-## 2.3 Fil e Formatting Commands
+## 2.3 File Formatting Commands
 
 Back in the day there wasn't many monitors that we have today. There as just printers that printed output so it was very important to instruct the computer format the file in particular way.
 
@@ -264,7 +264,7 @@ Issue ```$ cat /var/l og/secure | pr -D |  lpr```, will send document to unix li
 
 Issue ```expand /var/hosts |cat -T```, will replace all tabs with spaces
 
-### command summary
+### Command Summary
   * fmt
   *	pr
   *	expand
@@ -377,8 +377,9 @@ Good for analyzing data on the screen that is shown on Linux system with having 
 
 This options above are sort	are frequently used and are not that common.
 
-Now we are goi ng to di scuss ···spl i t _ _ _
-we need to create a bi gfi le to use. Issue ···1 s -R	I >	/bigfi l e ···
+Now we are going to discuss ```split```;we need to create a bigfile to use.
+
+Issue ```ls -R	/ >	~/bigfile```
 
 ##### Note: ```-R``` means list subdirectories recursively
 
@@ -477,13 +478,171 @@ In total there are very useful commands and some that are not so useful. ```sed`
 
 ## 2.5 Understanding vi
 
+The default editor in Linux is ```vi``` and it very oldest editor that been available for years.
+
+Its a good idea to always give the name of the file that you want to work on when issuing the ```vi``` command
+
+```bash
+$ vi [filename]
+```
+By default, ```vi``` is opened in command mode this allows you to type command. To type, you must switch to input mode by issues the following commands:
+
+  * i
+  * o
+  * a
+
+When you are done in input mode, you must exit out of input mode by issue ```[esc]``` key
+
+To save the file you need to issue ```:wq```
+
 ## 2.6 Editing Text Files with vi
+
+There is ```vi``` and ```vim```, ```vim``` is a	Vi IMproved - enhanced ```vi``` editor version
+
+Now let use the ```bigfile``` that we have created previously
+
+```bash
+$ vi ~/bigfile
+```  
+
+Issue ```:/run``` to search for any accordance of text 'run'
+Issue ```[n]``` key to get to the next accordance of text 'run'
+
+By issuing ```:/[sometext]``` you are looking downward and by issuing ```:?[sometext]``` you are looking upward.
+
+Here is an example from our ```~/bigfile:```;  ```:?run``` go upward in the list and like we saw earlier  ```:/run``` will go downward in text
+
+Remember that not all Linux systems have up and down keys. So will have to use a standard unix version which ```[h], [j], [k], [l]```
+
+  * k - up
+  * j - down (jump)
+  * h - right  
+  * l - left  
+
+Now let talk about editing a file. We can use ```i``` for inserted and that will insert at the point of te cursor. The text will be insert at that location and the original text moved over one.
+
+To append that location, we can use ```a``` for append after the point of the cursor.
+
+To create a empty newline, we can use lower case ```o``` which stands for open a newline below the cursor
+
+To create a empty newline, we can use upper case ```O``` which stands for open a newline above the cursor
+
+Using ```d``` by itself does not do nothing  but use ```v``` and above direction keys: ```[h], [j], [k], [l]``` then ```d``` will delete the selected text, that it appears.
+
+You are not deleting the text but placing that text within a buffer and allow it to be accessed later.
+
+If you are not happy with your changes, you can use ```u``` for undo, all the way back to you ```vi``` session.
+
+The caret key ```^``` allows you to go to the beginning of the line; [Shift] + 6
+
+Let try the follow ```vi``` commands,   ```^```, ```v``` and ```G``` and this brings us to the bottom of the document. But it not all the data will need to do ```$```; [Shift] + 4 to get the result of the text.
+
+Now that we issue ```d``` will remove the text and ```u``` will undo the deleted changes.
+
+By pressing  ```v```, we can ```k``` to go up the several lines and then issue ```y``` this will invoke the yank operation
+
+In our case, your yanked 11 lines which is like copy within ```vi``` then press ```p``` to paste the yanked lines to the  
+
+```bash
+11 lines yanked
+```
+If you haven't made a selection, you can do a ```yy``` on the line and it will copy that line then press ```p```
+
+Placing your cursor on a line and issuing ```dd``` allows to remove a single
+
+To get to the beginning of a file by issuing ```gg``` that send you to the beginning of file.
+
+Very interesting command that allows you to go word by word is using ```w```
+
+Within command mode, ```:%/lori/Lori``` this will run substitution with the values supplied. By adding ```g``` at the end, will apply global
+to the file.   
+
+To remove a single letter is by using the ```x``` on top of the letter to remove.
+
+Each editor ```vi``` and ```vim``` display syntax differently. ```vim``` applies syntax highlighting while ```vi``` doesn't have this type of features. This is the reason to use ```vim``` instead of ```vi```
+
+##### Command Summary
+  * /, ?
+  * h, j, k, l
+  * i, o, a
+  * c, d, p, y, dd, yy
+  * ZZ, :w!, :q!, :e!
+  * r, O
+  * w, $, gg, G
+  * :%s/old/new/g
+  * u
 
 ## 2.7 Using Regular Expressions to Work with Text Files
 
+Regular expression are very handle in grabbing text within text files.
+
+There's a difference between basic and extended regular expressions!
+
+Some regular expression will not work will all utilities because of this fact.
+
+Bracket expressions: grep b[iae]g &#42; - look for all files that contains big &#42;, bag &#42;, beg &#42;,  
+
+Range expressions: grep [0-9][0-9]&#42; - look for all the files that contain 2 numbers.
+
+Any character: grep .&#42;
+
+Line position: grep ^lisa$&#42; - looking for lines that start with lisa
+
+Repetition operators:
+    * &#42;:zero or more of preceding character
+    * &#43;:one or more of preceding character
+    * &#63;:zero or one of preceding character
+
+Multiple strings: grep cat|dog &#42;
+Parentheses: to define subexpressiions
+
+##### Command Summary
+
+None
+
 ## 2.8 Searching Text Patterns with grep
 
+Here is a utility that uses regular expression allot is ```grep```
+
+The following command ```$ ps aux``` that returns overview all processes on the Linux system
+
+Lets see how ```grep``` can assist us here, we issue ```$ ps aux | grep nfs```
+
+Let look at other ways ```grep``` can be used first go to ```$ cd /etc``` directory; issue ```$ grep sys * ``` and this will produce ```Is a directory``` results; we do not care for those messages in our output.
+
+But we can send those message ```stderr```somewhere else and have our output look cleaner then what we saw before with ```$ grep sys * 2> /dev/null```
+
+But it shows all files that contains any combination of ```sys``` but can use a regular expression to narrow it down to only lines that start with ```sys``` by issuing ```$ grep ^sys * 2> /dev/null```
+
+#### Note: Remember that we have the filename:line that contains the text followed.
+
+```bash
+subgid:systemd-timesync:100000:65536
+subgid:systemd-network:165536:65536
+subgid:systemd-resolve:231072:65536
+subgid:systemd-bus-proxy:296608:65536
+subuid:systemd-timesync:100000:65536
+```
+
+We can also do combination searches that allows us to grep multiple text strings: ```$ grep -E "sys|nat" * 2> /dev/null```
+
+More last option that we should be aware of is ```-i```, when used with grep is allows us to search with worrying about the case in which the text is in. So we can issue ```$ grep -i sys * 2> /dev/null```
+
+The option are those that used most often but we still go to the ```$ man grep``` to learn more.
+
+grep stands for: general regular expression processor
+
+##### Command Summary
+  * grep -R root/
+  * grep -E "cat|dog" ~
+  * ps aux | grep -v grep
+  * grep -i bash *
+
 ## Summary
+
+Make sure you can recognize the correct commands and the options that can be passed to them. We've went though some of the common options that is used most frequently.
+
+## Lesson 3: Performing Basic File Management Tasks  
 
 # Module 2: Administration Tasks
 
@@ -495,10 +654,10 @@ In total there are very useful commands and some that are not so useful. ```sed`
 
 Major Linux distributions and their subversion distributions.
 
-Red hat has rpm which standard for redhat package manager and Debi an has dpkg stands for Debi an package manager
+Red hat has rpm which standard for red hat package manager and Debi an has dpkg stands for Debi an package manager
   * Red Hat - rpm
     * Centos
-    * Ferdra
+    * Fedora
     * SUSE
   * Debian - dpkg (deb)
     * Ubuntu
@@ -512,9 +671,9 @@ Issue ```$ cat /etc/*-release```- to provide simple output
 Issue ```$ lsb_release -a``` - to find out the Linux distributions name/version
 Issue ```$ /proc/version``` - to see kernel version and gcc version used to build the same
 
-#### 9.3 Installing , Reinstalling , Upgrading , and Removing Packages usi ng RPM and YUM
+#### 9.3 Installing , Reinstalling , Upgrading , and Removing Packages using RPM and YUM
 
-For the exam, be able to reproduce the correct command ei ther its for rpm, yum or debian related package manager.
+For the exam, be able to reproduce the correct command either its for rpm, yum or debian related package manager.
 
 On Red hat system, most important is to use yum.
 
@@ -540,7 +699,7 @@ Issue ```yum repo list``` returns a list of repos that are currently being used
 
 To locate or define the available repos, ```cd /etc/yum.repos.d/``` and then ```ls``` You will see a list of files that end will ```.repo```; each entry may contain mirror list that is considered import if that is used if it can connect to the baseurl.
 
-##### command summary
+##### Command Summary
 
 Include in this are	commands not used often but are need for the exam:
 *	rpm -ivh - used to install rpm without yum
@@ -564,7 +723,7 @@ Include in this are	commands not used often but are need for the exam:
 
 #### 9.4 Obtaining Information on RPM Packages
 
-On Redhat system, allows you to do rpm queries to get information about packages. Let try this out from ``` $ cd /usr/sbin``` or ``` $ cd /sbi n``` and then ```$ ls``` Issue	```rpm -qf /sbin/ipmaddr```, it tells what package that is utility came from
+On Red hat system, allows you to do rpm queries to get information about packages. Let try this out from ``` $ cd /usr/sbin``` or ``` $ cd /sbi n``` and then ```$ ls``` Issue	```rpm -qf /sbin/ipmaddr```, it tells what package that is utility came from
 
 
 Issue	```rpm -qi net-tools-l.60-110.el6_2.x86_64```, it tells what package that is utility came from
