@@ -644,6 +644,68 @@ Make sure you can recognize the correct commands and the options that can be pas
 
 ## Lesson 3: Performing Basic File Management Tasks  
 
+#### 3.1 Adding, Modifying, and Removing Users
+
+Basic file and directory manipulation
+
+Here we can create directories and remove directories:
+
+```bash
+$ mkdir files
+$ rmdir files
+```
+
+Sometimes it useful to create entire directory tree structures in a single command. If we try to create a two level like ```$ mkdir some/files```
+
+It will produces the following error: ```$ mkdir somes/files```
+
+``` bash
+$ mkdir: cannot create directory 'some/files': No such file or directory
+```
+
+To properly create this type of structure you need to issue, ```$ mkdir -p some/files``` and then ```$ cd some```
+
+Now let's copy files into this directory over by issuing ```$ cp /etc/h * .```
+
+If we have directories in the source folder we can copy them over as well by issuing ```$ cp -R /etc/G* .``` Issue a ```ls``` to check the results.
+
+Let try to remove a directory,
+
+```bash
+$ rm gss
+rm: cannot remove 'gss': Is a directory
+$ rmdir gss
+rmdir: failed to remove 'gss': Directory not empty
+$ rm -rf gss
+```  
+We need to use ```rm -f``` force the  ```rm``` command to remove a directory with content
+
+Issue  ```$ ls -a``` - list all files and  hidden files
+Issue ```$ ls -l``` - long listing of files
+
+Another useful command is ```mv``` that moves or renames files
+
+```bash
+$ ls gai.conf
+-rw-r--r--  1 root root    2584 Sep  2 20:29 gai.conf
+$ mv gai.conf blah
+$ ls blah ga*
+ls: cannot access ga*: No such file or directory
+blah
+```
+As you can see, the message shows that we do not have ```gai.conf```
+
+Beware of using ```rm -rf / blah``` because it will remove you entire root directory
+
+##### Command Summary
+  * mv
+  * ls
+  * rm
+  * rmdir
+
+#### 3.2 Adding and Modifying Groups
+
+
 # Module 2: Administration Tasks
 
 ## Lesson 9: Managing Software
