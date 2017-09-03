@@ -835,9 +835,76 @@ This may work but we try it later.
 
 ## 3.4 Creating Backups
 
- Mother of all mothers of backups is ```tar``` command
+   Mother of all mothers of backups is ```tar``` command
 
- First we issue, ```$ tar cvf /root.tar /root /home``` 
+   First we try to issue and explain what are different parts of this command, ```$ tar cvf /root.tar /root /home```
+
+
+```bash
+-c, --create       : create a new archive
+-v, --verbose      : verbosely list files processed
+-f, --file ARCHIVE : use archive file or device ARCHIVE
+```
+followed by [source] [destination]
+
+Remember that order matters, make sure use this utility with the same options in the same order.
+
+Another backup utility is ```cpio``` is good to know; stand for copy files to and from archives.
+
+Another backup utility is ```dd``` is convert and copy a file not cc because that is the of C compile.
+developer took the next letter in alphabet.
+
+Remember Linux/Unix works with devices, so we can do something like ```$ dd if=/dev/sda1 of=sda1.img```  
+
+```bash
+if=FILE : read from FILE instead of stdin
+of=FILE : write to FILE instead of stdout
+```
+This allows you to have to two identical hard disc by issuing ```$ dd if=/dev/sda1 of=/dev/sda2``` but you would have make sure that ```/dev/sda2``` is mounted on the Linux system.
+
+Warning: ```$ dd if=/dev/zero of=/dev/sda2``` will ripe clean your entire hard disk. If are clearly do not care what happens to your hard drive.
+
+Let's go back to ```tar``` command and we want to compress the tar file that we've created. We have several compression tools to choice from ```gzip, bzip2, and xz```.
+
+```bash
+$ gzip ~/cem.tar
+$ ls -ld cem*
+-rw-r--r-- 1 root root 81666628 Sep  3 19:59 cem.tar.gz
+$ bzip2 cem.tar.gz
+$ ls -ld cem*
+-rw-r--r-- 1 root root 81416477 Sep  3 19:59 cem.tar.gz.bz2
+```
+
+After we compress the file gzip we compress it again with bzip2. It only compressed it a 200MB more with bzip2. Cool but not very useful.
+
+```bash
+$ bunzip2 cem.tar.gz.bz2
+$ ls -ld cem*
+-rw-r--r-- 1 root root 81666628 Sep  3 19:59 cem.tar.gz
+$ gunzip cem.tar.gz
+$ ls -ld cem*
+-rw-r--r-- 1 root root 232028160 Sep  3 19:59 cem.tar
+```
+This isn't the most convenient way of creating a tar and zip file.
+
+```bash
+$ rm -f cem.tar
+$ tar czvf backup /home/cem /home
+$ ls -l backup
+-rw-r--r-- 1 root root 255078377 Sep  3 20:50 backup
+$ file backup
+backup: gzip compressed data, last modified: Sun Sep  3 20:49:23 2017, from Unix
+```
+
+Here we see the same operations with fewer steps. Notice how useful the file command can be if you download or recive a file with or without an extension. You can alway use a handy ```file``` command.
+
+##### Command Summary
+  * tar
+  * cpio
+  * dd
+  * gzip
+  * bzip2
+  * xz
 
 
 # Module 2: Administration Tasks
