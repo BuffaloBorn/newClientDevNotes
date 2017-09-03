@@ -727,6 +727,119 @@ Issue, ```$ ls -d [abc]?t*``` - show me anything that starts with a, b, or c and
 
 This is called globbing; Globbing interprets the standard wild card characters * and ?, character lists in square brackets, and certain other special characters (such as ^ for negating the sense of a match).
 
+## 3.3 Other File Management Tools
+
+These commands do not felt in with the other sections.
+
+```bash
+$ touch file1
+$ touch file2
+$ ls -l
+-rw-r--r-- 1 root root 0 Sep  3 02:39 file1
+-rw-r--r-- 1 root root 0 Sep  3 02:40 file2
+$ date
+Sun Sep  3 02:41:16 UTC 2017
+$ date -s 02:51
+$ touch *
+$ ls -l
+-rw-r--r-- 1 root root 0 Sep  3 02:50 file1
+-rw-r--r-- 1 root root 0 Sep  3 02:50 file2
+```
+In case, we are focus on the timestamps on the files we created. This is useful when we have backup process that needs a particular time a file was last accessed.
+
+The next useful command is ```file```  
+```bash
+$ file /etc/passwd
+/etc/passwd: ASCII text
+$ file file1
+file1: empty
+$ file /usr/bin/md5sum
+/usr/bin/md5sum: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=38ef10c94031487d564682a4683cf2d41049c0b8, stripped
+```
+This command is very useful because Linux do not have extensions so this command allows you recognize the type of file you are working with
+
+Next going back to review additional features of the ```find``` command. First we need to setup the demo by issuing the set of commands:
+
+```bash
+$ cd /
+$ find / -name 'hosts'
+/etc/hosts
+/var/spool/postfix/etc/hosts
+```
+We well familiar with this usage for ```find```
+
+Now we can issue,
+```bash
+$ find / -iname 'hosts'
+/etc/hosts
+/var/spool/postfix/etc/hosts
+/home/cem/.rbenv/versions/2.3.3/share/ri/2.3.0/system/Resolv/Hosts
+```
+but iname is for case-insensitive searching
+
+Now we going to look at ```-user``` flag
+
+```bash
+$ find / -user root
+all files that root owns
+```
+
+Ok, lets looks a common user account and login as them plus we will create a couple of files. But first, issue ```useradd -m lori``` this will create a common user account with home directory
+
+```bash
+$ cat /etc/passwd
+lori:x:1003:1003::/home/lori:/bin/sh
+$ su - lori
+$ cd /tmp
+$ touch lori1
+$ touch lori2
+$ touch lori3
+$ exit
+$ find / -user lori
+/home/lori
+/home/lori/.bash_logout
+/home/lori/.bashrc
+/home/lori/.profile
+find: `/proc/12511/task/12511/fd/5': No such file or directory
+find: `/proc/12511/task/12511/fdinfo/5': No such file or directory
+find: `/proc/12511/fd/5': No such file or directory
+find: `/proc/12511/fdinfo/5': No such file or directory
+/tmp/lori3
+/tmp/lori1
+/tmp/lori2
+```
+This type of ```find``` is very useful but we can go the next steps and provide additional operations with results that ```find``` command returns.
+
+```bash
+$ find -user lori -exec cp {} /root/dir \;
+```
+What can this type command be used for?
+
+When there a ton of files on your system that you will like to clean up that was created by a particular user. This command comes in handle.
+
+Note: ```{}``` refers to the results from find command and  ```\;``` closes out the ```-exec``` portion of the command
+
+We've looked at ```find``` command options on ```-user``` and  ```-name```. Now we going check out ```-size```
+
+Let review the man page on find first: ```$ man find```
+
+```bash
+$ find -size gt 10M
+```
+This may work but we try it later.
+
+##### Command Summary
+  * touch
+  * file
+  * find
+
+## 3.4 Creating Backups
+
+ Mother of all mothers of backups is ```tar``` command
+
+ First we issue, ```$ tar cvf /root.tar /root /home``` 
+
+
 # Module 2: Administration Tasks
 
 ## Lesson 9: Managing Software
