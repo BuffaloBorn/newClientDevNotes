@@ -1,3 +1,5 @@
+# CompTIA Linux+ LX0-103 and LPIC-1 (Exam 101): Introduction
+
 # Module 1: Essential Skills
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
@@ -644,7 +646,7 @@ Make sure you can recognize the correct commands and the options that can be pas
 
 ## Lesson 3: Performing Basic File Management Tasks  
 
-#### 3.1 Adding, Modifying, and Removing Users
+#### 3.1 Copying, Moving, and Removing Files
 
 Basic file and directory manipulation
 
@@ -703,8 +705,27 @@ Beware of using ```rm -rf / blah``` because it will remove you entire root direc
   * rm
   * rmdir
 
-#### 3.2 Adding and Modifying Groups
+## 3.2 Using Wildcards
 
+Wildcards are useful to return items that you do not know exact name but portions of the name.
+
+```bash
+$ cd /etc
+$ ls h*
+```
+ Issue  ```$ ls -d h*```, is will list directories themselves, not their contents
+
+Wildcards look like regular expressions but they are not
+
+For example, ```$ grep 1[h*] 2[h*]```
+  1. is a regular expression
+  2. is a shell wildcard
+
+Issue, ```$ s -d [abc]*``` - show me anything that starts with a, b, or c
+
+Issue, ```$ ls -d [abc]?t*``` - show me anything that starts with a, b, or c and the second position I do not care but the third position it must be 't'
+
+This is called globbing; Globbing interprets the standard wild card characters * and ?, character lists in square brackets, and certain other special characters (such as ^ for negating the sense of a match).
 
 # Module 2: Administration Tasks
 
@@ -795,3 +816,39 @@ Issue	```rpm -ql net-tools```	it returns list of files in this package
 Issue	```rpm -qd net-tools``` it returns all documentation within this package
 
 Issue	```rpm -qc net-tools```	if a package has additional configuration files you can use this This feature uses the rpm database that holds all the information for all installed packages.
+
+
+# CompTIA Linux+ LX0-104 and LPIC-1 (Exam 102)
+
+## Lesson 3: Managing User and Group Accounts
+
+#### 3.1 Adding, Modifying, and Removing Users
+
+#### 3.2 Adding and Modifying Groups
+
+```bash
+$ useradd linda
+$ groupadd sales
+$ sudo ulindasermod -g sales linda
+$ userdel linda
+```
+If you want to manage permissions on Linux system, you do not want to manage permission for individual users.
+
+To add groups, we will start with ```groupadd --help```  
+ ```
+ -g, --gid GID                 use GID for the new group
+```
+ ```bash
+  $ groupadd sales
+groupadd: group 'sales' already exists
+$ groupmems -g sales -l
+linda
+```
+Users are assigned a primary group in which there name/username but its better to add them  
+
+When you are adding or modifying groups there a several files that involved. Let check out /etc/passwd file
+
+```
+$ tail -n 5 /etc/passwd
+```
+##### Command Summary
