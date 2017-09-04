@@ -906,6 +906,139 @@ Here we see the same operations with fewer steps. Notice how useful the file com
   * bzip2
   * xz
 
+#### 3.5 Analyzing and Extracting tar Backups
+
+Now we have the this file called ```backup```, we can extract the contents but it would nice to see what is in it before extract the content. ```tar``` provides options the do such a task ```tar tvf backup```; this will show all the contents in the backup before extracting it.
+
+All the files are relative and not absolute file names this means that the files can be placed anywhere and they will work as the originals.
+
+Think very clearly what you are doing when you run the following ```tar xvf``` command and options. It would good idea to place it in a temporary location by including option flag ```-C```
+
+```
+-x, --extract, --get : extract files from an archive
+-C, --directory DIR  : change to directory DIR
+```
+
+```bash
+$ mkdir /restore
+$ tar xvf backup -C /home/cem/linux+/restore/
+```
+
+This allows us to analyze what we extracted before it may cause files to be overwritten by a headache to recover from.
+
+Another thing that backups are good for is when a user's home directory is removed by accident and the backups are all we have.
+
+```bash
+$ cd /home
+$ rm -rf lisa
+$ tar xvf backup home/lisa
+```
+Be carefully not to use ```tar xvf backup /home/lisa``` because we do not havethat but we do have ```tar xvf backup home/lisa``` from our backup file.
+
+This means we can select certain portions of the backup file and not the entire backup structure.
+
+##### Command Summary
+  * tar -tvf myfile.tar
+  * tar -xvf myfile.tar -C /mydestination  
+
+#### 3.6 Understanding Links and Inodes
+
+This section is to be able to understand how Linux system is organize on a hard disk.
+
+Files data is stored in blocks; blocks is the basic structure of a hard drive. A block is basic a 4 kilobytes or more.
+
+A collection of blocks are typical a type file. All the metadata/administrative data of a file is stored in an inode.
+
+Every file has a single inode. The inode references each block with in the file. Each inode has a number on the Linux system. For an user, usinng the number system wouldn't be very easy to use. So that way we are working with filenames instead.
+
+For example, ```/etc/hosts``` is used; which is the entry point to the inode. The relationship with filename and inode is one direction where filename is the parent and the inode is the child. The node do not know about the filename it may or not be pointed to.
+
+Inode just keep track the filenames that is pointed with a counter. Each filename is considered to be a hardlink; with type of setup you can have multiple hardlinks attached to the same inode.
+
+This allows multiple filenames pointing to the same file. This not a copy of the original file but a reference to the inode. In a file copy, you would get a new inode and a new hardlink would be created.
+
+If anything changes in the original blocks the all the filenames that refer to the block's inode will is the changes. In the case when a filename is removed, the other hardlinks are still pointing to the inode so the data is still able to be referenced.
+
+Linux provide a secondary method of creating links which is called ```symbolic links```. Symbolic link doesn't point to a inode it points to a filename. Symbolic allows you to work on files on a other device.
+
+If a filename is deleted then the symbolic link becomes invalid.      
+
+## 3.7 Managing Hard and Symbolic Links
+
+Let's create some links in Linux.
+
+```bash
+$ cp /etc/passwd users
+$ ls -il /etc/passwd users
+19911 -rw-r--r-- 1 root root 1679 Sep  3 13:07 /etc/passwd
+144031 -rw-r--r-- 1 cem  cem  1679 Sep  4 13:20 users
+```
+You can see that the inode number is different.
+
+```bash
+$ echo hello >> users
+$ ls -il /etc/passwd users
+ 19911 -rw-r--r-- 1 root root 1679 Sep  3 13:07 /etc/passwd
+144031 -rw-r--r-- 1 cem  cem  1685 Sep  4 13:23 users
+```
+You can see that the size has changed. So these two file totally independent of each other.
+
+Now we are going to create a hard link  on users
+
+```bash
+$ ln users hard
+$ ls -il users hard
+144031 -rw-r--r-- 2 cem cem 1685 Sep  4 13:23 hard
+144031 -rw-r--r-- 2 cem cem 1685 Sep  4 13:23 users
+```
+If you notice that they same the same inode number. Now execute:
+
+```bash
+$ echo someusers >> hard
+$ ls -il users hard
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 hard
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 users
+```
+
+Now you can see that they both have the same size.
+
+```bash
+$ ln -s users hard
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 hard
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 users
+```
+
+```bash
+$ ln -s symlink hard
+ln: failed to create symbolic link 'hard': File exists
+$ ln -s hard symlink
+$ ls -il users hard symlink
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 hard
+144032 lrwxrwxrwx 1 cem cem    4 Sep  4 13:34 green[symlink] -> hard
+144031 -rw-r--r-- 2 cem cem 1695 Sep  4 13:30 users
+```
+As you can see, new inode has been created for the symbolic and the symbolic only have a size of 4 bytes. Why? The word ```hard``` it only for characters and so that it only need that many characters to reference.
+
+```bash
+$ rm hard -f
+$ ls -il users hard symlink
+ls: cannot access hard: No such file or directory
+144032 lrwxrwxrwx 1 cem cem    4 Sep  4 13:34 red[symlink] -> red[hard]
+144031 -rw-r--r-- 1 cem cem 1695 Sep  4 13:30 users
+$ cat symlink
+cat: symlink: No suc fie or directory
+```
+
+The color has changed that indicates that the link is broken.
+To fix this issue simplely running the following commands.
+
+```bash
+$ ln users hard
+$ cat symlink
+```
+### Summary
+
+Learn how to work on the filesystem, how work basic filesytem commands and how to work on backups plus hard and symbolic links
 
 # Module 2: Administration Tasks
 
@@ -960,7 +1093,7 @@ Issue ```yum upgrade kernel``` this will try to upgrade the kernel only
 
 Issue ```yum repo list``` returns a list of repos that are currently being used
 
-To locate or define the available repos, ```cd /etc/yum.repos.d/``` and then ```ls``` You will see a list of files that end will ```.repo```; each entry may contain mirror list that is considered import if that is used if it can connect to the baseurl.
+To locate or define the available repos, ```cd /etc/yum.repos.d/``` and then ```ls``` You will see a list of files that end will ```.repo```; each entry may contain mirror list that is considered import if that is used if it can connect to the base url.
 
 ##### Command Summary
 
