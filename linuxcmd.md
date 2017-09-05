@@ -1074,8 +1074,7 @@ sleep 3600
 
 If you do not want to have the job going anymore you can issue [ctrl] + c
 
-A job usually sticks in the shell that it is running in. For example you opened a terminal session and decides to run background job and later you close you shell all the children processes will terminate as well. This is not what we would to happen for background jobs.
-
+A job usually sticks in the shell that it is running in. For example you opened a terminal session and decide to run background job and later you close you shell all the children processes will terminate as well. This is not what we would to happen for background jobs.
 
 We like to have the background not attached to the shell. To accomplish this, you can use the ```nohup```
 
@@ -1097,6 +1096,49 @@ $ screen
   * bg
   * nohup
   * screen
+
+#### 4.2 Sending Signals to Processes
+
+To manage processes on a Linux system by sending signals to a process.
+
+```bash
+$ man 7 signal
+```
+
+This gives us an overview all the signals
+
+```
+Signal     Value     Action   Comment
+----------------------------------------------------------------------
+SIGHUP        1       Term    Hangup detected on controlling terminal
+                              or death of controlling process
+SIGINT        2       Term    Interrupt from keyboard
+SIGQUIT       3       Core    Quit from keyboard
+SIGILL        4       Core    Illegal Instruction
+SIGABRT       6       Core    Abort signal from abort(3)
+SIGFPE        8       Core    Floating point exception
+SIGKILL       9       Term    Kill signal
+SIGSEGV      11       Core    Invalid memory reference
+SIGPIPE      13       Term    Broken pipe: write to pipe with no readers
+SIGALRM      14       Term    Timer signal from alarm(2)
+SIGTERM      15       Term    Termination signal
+SIGUSR1   30,10,16    Term    User-defined signal 1
+SIGUSR2   31,12,17    Term    User-defined signal 2
+SIGCHLD   20,17,18    Ign     Child stopped or terminated
+SIGCONT   19,18,25    Cont    Continue if stopped
+SIGSTOP   17,19,23    Stop    Stop process
+SIGTSTP   18,20,24    Stop    Stop typed at terminal
+SIGTTIN   21,21,26    Stop    Terminal input for background process
+SIGTTOU   22,22,27    Stop    Terminal output for background process
+
+The   signals  SIGKILL  and  SIGSTOP  cannot  be  caught, blocked, or ignored.
+```
+
+Some signal are always implemented or some are not implemented. ```SIGTERM``` is a nice way to ask a process to please stop it work. ```SIGKILL``` is not a nice way to tell a process to stop doing its work. It will cause all the items that have opened to be closed which can cause damage. ```SIGHUP``` is used to reinitialize a process.
+
+```bash
+$ 
+```
 
 # Module 2: Administration Tasks
 
