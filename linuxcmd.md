@@ -1134,10 +1134,10 @@ SIGTTOU   22,22,27    Stop    Terminal output for background process
 The   signals  SIGKILL  and  SIGSTOP  cannot  be  caught, blocked, or ignored.
 ```
 
-Some signal are always implemented or some are not implemented. ```SIGTERM``` is a nice way to ask a process to please stop it work. ```SIGKILL``` is not a nice way to tell a process to stop doing its work. It will cause all the items that have opened to be closed which can cause damage. ```SIGHUP``` is used to reinitialize a process.
+Some signals are always implemented or some are not implemented. ```SIGTERM``` is a nice way to ask a process to please stop it work. ```SIGKILL``` is not a nice way to tell a process to stop doing its work. It will cause all the items that have opened to be closed which can cause damage. ```SIGHUP``` is used to reinitialize a process.
 
 ```bash
-$ 
+$
 ```
 
 # Module 2: Administration Tasks
