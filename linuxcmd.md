@@ -1030,7 +1030,7 @@ cat: symlink: No suc fie or directory
 ```
 
 The color has changed that indicates that the link is broken.
-To fix this issue simplely running the following commands.
+To fix this issue simply running the following commands.
 
 ```bash
 $ ln users hard
@@ -1038,7 +1038,65 @@ $ cat symlink
 ```
 ### Summary
 
-Learn how to work on the filesystem, how work basic filesytem commands and how to work on backups plus hard and symbolic links
+Learn how to work on the file system, how work basic file system commands and how to work on backups plus hard and symbolic links
+
+## Lesson 4: Managing Processes
+
+#### 4.1 Running Jobs in Foreground and Background
+
+What is a job?
+
+When you run a command from the shell that is considered a job. So issuing ```$ ls``` is a job. These type of jobs are executed immediately and run for a very short period of time.  
+
+Ok. let issue this ```$ sleep 3600``` seconds or 1 hour. We'll not want that long so will do [ctrl]+z this will stop the job temporary.  Do not wait to long to make it a background job. ```bg``` command places the job in the background after it has been issued.
+
+```bash
+$ sleep 3600
+^Z
+[1]+  Stopped                 sleep 3600
+$ bg
+[1]+ sleep 3600 &
+```
+```
+[1]+ means it is showing up as job 1 wit append sign behind it
+```
+Append sign is a method that allows you to place a command in the background immediately.
+
+But we can move jobs to foreground by going though the filling steps:
+
+```bash
+$ jobs
+[1]-  Running                 sleep 3600 &
+[2]+  Running                 sleep 36000 &
+$ fg 1
+sleep 3600
+```
+
+If you do not want to have the job going anymore you can issue [ctrl] + c
+
+A job usually sticks in the shell that it is running in. For example you opened a terminal session and decides to run background job and later you close you shell all the children processes will terminate as well. This is not what we would to happen for background jobs.
+
+
+We like to have the background not attached to the shell. To accomplish this, you can use the ```nohup```
+
+```bash
+$ nohup find / -xdev -type f -perm +u=s -print > ~/findsuid.txt &
+```
+nohup - run a command immune to hangups, with output to a non-tty
+
+screen is anohter technqie to accomplish the same task
+
+```bash
+$ ssh server201
+$ screen
+```
+## Command summary
+  * &
+  * jobs
+  * fg
+  * bg
+  * nohup
+  * screen
 
 # Module 2: Administration Tasks
 
