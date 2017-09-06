@@ -1141,10 +1141,37 @@ $
 ```
 
 # Module 2: Administration Tasks
+Learn about common Linux administration tasks. At this point you have the basic
+down to work with Linux, it time to go deeper with Linux OS.  
 
 ## Lesson 9: Managing Software
 
+You learn how to manage software on Linux. You will also learn the Debian
+approach and Red Hat approach. How to work with the respective package managers.
+Know when to which commands because it is an important topic on the exam.  
+
 #### 9.1 Understanding Packages and Meta Package Handlers
+
+Before we begin, we need to understand the one fundamental difference in managing software. That is the between a ```package``` and a ```meta package handler```.
+
+Let look at ```rpm``` or ```dpgk```, a package has something called ```dependency```
+dependency means that in order to install specify software you need other software.
+Because many software packages are using libraries that allow you to get functionality from some else.
+
+In Linux before the ```meta package handler```, this was often problematic. This means,
+you would download some software on the web and the installer would complain about missing dependencies. What meant that you had to go back on the web and download all the dependencies before you can install the original software you were trying to install in the first place.
+
+This process was so painful that it had its own name: ```dependency hell```
+
+The solution for ```dependency hell```  is the ```meta package handler```
+
+What is in the ```meta package handler```?
+
+A repository, it is topically a web server, directory or anything that provides installable packages.
+
+When a user install software, they will go though the ```meta package handler``` and ```meta package handler``` will to repository to retrieve the package. During the installation phase it automatically check the repository for dependencies.
+
+On Red Hat the ```meta package handler``` is ```yum```and Ubuntu it is ```apt``` but on SUSE it is the ```zyppor``` utility. There are others out there but it doesn't matter what one you are using the solution behind it is always the same.    
 
 #### 9.2 Understanding variations in Linux software Management
 
