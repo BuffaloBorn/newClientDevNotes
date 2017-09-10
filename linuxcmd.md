@@ -896,7 +896,7 @@ $ file backup
 backup: gzip compressed data, last modified: Sun Sep  3 20:49:23 2017, from Unix
 ```
 
-Here we see the same operations with fewer steps. Notice how useful the file command can be if you download or recive a file with or without an extension. You can alway use a handy ```file``` command.
+Here we see the same operations with fewer steps. Notice how useful the file command can be if you download or receive a file with or without an extension. You can always use a handy ```file``` command.
 
 ##### Command Summary
   * tar
@@ -1267,6 +1267,314 @@ Issue	```rpm -V```	is for verify a package compares information about the instal
   * rpm -q on installed and uninstalled
   * rpm -qi
   * rpm -V
+
+#### 9.5 Understanding Debian/Ubuntu Package Management
+
+Debian packages are organized in the same way as rpm. To work with these packages we use ```dpkg``` utility. This is useful to work with package and database that is already installed on your system; just like ```rpm``` for RedHat.
+
+```bash
+$ dpkg --get-selections
+```
+
+Now that we know what the type of packages are installed. We can see what files are installed with the package by issuing:
+
+```bash
+$ dpkg -L vim
+```
+
+If would like to know which package that a file come from:
+
+```bash
+$ dpkg -S  /usr/bin/eject
+eject: /usr/bin/eject
+```
+
+So it returns the name of package and the name of the file (that searching for)
+
+```bash
+$ dpkg -S eject
+eject: /usr/lib/eject/dmcrypt-get-device
+eject: /usr/share/locale/pt/LC_MESSAGES/eject.mo
+eject: /usr/share/doc/eject/README
+linux-image-3.16.0-4-amd64: /lib/modules/3.16.0-4-amd64/kernel/net/ipv4/netfilter/nft_reject_ipv4.ko
+eject: /usr/share/doc/eject/copyright
+eject: /usr/share/locale/de/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/ru/LC_MESSAGES/eject.mo
+eject: /usr/lib/eject
+linux-image-3.16.0-4-amd64: /lib/modules/3.16.0-4-amd64/kernel/net/netfilter/nft_reject_inet.ko
+eject: /usr/share/locale/tr/LC_MESSAGES/eject.mo
+eject: /usr/share/doc/eject/changelog.Debian.gz
+linux-image-3.16.0-4-amd64: /lib/modules/3.16.0-4-amd64/kernel/net/netfilter/nft_reject.ko
+eject: /usr/share/locale/fr/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/sl/LC_MESSAGES/eject.mo
+eject: /usr/share/doc/eject/changelog.gz
+eject: /usr/share/locale/zh_TW/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/cs/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/it/LC_MESSAGES/eject.mo
+eject: /usr/share/doc/eject/TODO
+eject: /usr/share/man/man1/eject.1.gz
+eject: /usr/share/locale/sv/LC_MESSAGES/eject.mo
+linux-image-3.16.0-4-amd64: /lib/modules/3.16.0-4-amd64/kernel/net/ipv6/netfilter/nft_reject_ipv6.ko
+eject: /usr/share/lintian/overrides/eject
+eject: /usr/share/doc/eject/AUTHORS
+eject: /usr/share/doc/eject
+eject: /usr/share/doc/eject/NEWS.gz
+eject: /usr/share/locale/pt_BR/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/es/LC_MESSAGES/eject.mo
+eject: /usr/share/locale/ja/LC_MESSAGES/eject.mo
+eject: /usr/bin/eject
+```
+This does a regular expression on every that matches all the files that meet the search value
+
+```bash
+$ dpkg -p wget
+
+Package: wget
+Priority: important
+Section: web
+Installed-Size: 1725
+Maintainer: NoÃ«l KÃ¶the <noel@debian.org>
+Architecture: amd64
+Multi-Arch: foreign
+Version: 1.16-1+deb8u1
+Depends: libc6 (>= 2.17), libgnutls-deb0-28 (>= 3.3.0), libidn11 (>= 1.13), libnettle4, libpsl0 (>= 0.4.0), libuuid1 (>= 2.16), zlib1g (>= 1:1.1.4)
+Recommends: ca-certificates
+Conflicts: wget-ssl
+Filename: pool/main/w/wget/wget_1.16-1+deb8u1_amd64.deb
+Size: 495812
+MD5sum: 1cca36679c3dad4adec9121c4fab47b4
+Description: retrieves files from the web
+Description-md5: 63a4a740bcd9e8e94bf661e4f1806e02
+Homepage: http://www.gnu.org/software/wget/
+Tag: implemented-in::c, interface::commandline, network::client,
+ protocol::ftp, protocol::http, protocol::ssl, role::program,
+ suite::gnu, use::downloading, works-with::file
+SHA1: 1103a7e4f82bebd3fe85ef26cc4200b896355c44
+SHA256: 0982f09bf056fb0be9c2a519a20009c4c7dc8df45e05de983ae2c04e82cd1ab8
+```
+This basically gives you information on a package.
+
+Here is a listing of the most important package commands:
+
+dpkg, dselect and apt-get are the tools
+  * dpkg -i - install
+  * dpkg --configure - reconfigure
+  * dpkg -r - removes, but leaves configuration; use -P to purge config
+  * dpkg --get-selections - show currently installed
+  * dpkg -p - prints information about an installed package
+  * dpkg -l packagename - gives info about an uninstalled package
+  * dpkg -L - lists installed files associated with a package
+  * dpkg -S - pattern locates the packages that own a specific file
+  * dpkg -C - checks for partially installed packages
+
+Here is the  ```$ dselect ``` command that is a menu driven interface. It is not
+installed by default but it very useful    
+
+Here ```cat /etc/apt/sources.list``` we have the location where all repositories
+are stored at when issue ```sudo apt-get install```
+
+Before using ```sudo apt-get install``` it is good practice to use ```apt-get check```;
+this command makes sure all the information  updated and available by comparing
+the current state with state of the packages listed in the repositories and
+rebuilding the local cache.
+
+Now that we use commands like ```apt-get show [whatever package]```- it displays
+the latest information on that package.
+
+Another useful command is ```apt-cache search [whatever package]``` - if you do
+not know the exact name of the package; you pass generic name like ```ldap```.  
+Getting a list of packages with ```ldap``` in its description.
+
+To add to the command above ```apt-cache depends [whatever package]``` - allows
+you query all dependencies for package. For example:
+
+```bash
+$ apt-cache depends sudo
+Depends: libaudit1
+  Depends: libc6
+  Depends: libpam0g
+  Depends: libselinux1
+  Depends: libpam-modules
+  Conflicts: sudo-ldap
+  Replaces: sudo-ldap
+```
+
+In for reverse operation, we can get all the packages that is depended on the
+package. ```apt-cache rdepends [whatever package]```
+
+```bash
+$ apt-cache rdepends sudo
+Depends: libaudit1
+sudo
+Reverse Depends:
+  ctdb
+    sudo-ldap
+  xfce4-session
+    sudo-ldap
+  wicd-curses
+    sudo-ldap
+  wicd-cli
+    sudo-ldap
+  wajig
+    sudo-ldap
+  ubuntu-dev-tools
+    sudo-ldap
+  sudo-ldap
+    sudo-ldap
+  sudo-ldap
+......
+```
+
+To get any stats on the installed packages, you can run the following command:
+
+```bash
+$ apt-cache stats
+
+Total package names: 54297 (1086 k)
+Total package structures: 54300 (3041 k)
+  Normal packages: 41905
+  Pure virtual packages: 407
+  Single virtual packages: 4724
+  Mixed virtual packages: 460
+  Missing: 6804
+Total distinct versions: 43759 (3151 k)
+Total distinct descriptions: 84911 (2038 k)
+Total dependencies: 271981 (7615 k)
+Total ver/file relations: 45188 (1085 k)
+Total Desc/File relations: 84911 (2038 k)
+Total Provides mappings: 7702 (154 k)
+Total globbed strings: 80 (655 )
+Total dependency version space: 1115 k
+Total slack space: 52.3 k
+Total space accounted for: 15.1 M
+```
+
+The meta-package handler for Debian is ```apt-get install``` but before you us this command
+you must ensure that the state of the packages installed on your Linux system is
+in sync with the packages that are listed in the ```/etc/apt/sources.list```. You
+can do this by issuing ```sudo apt-get update```.
+
+You may get errors message on downloading; it fix that just re run
+the ```sudo apt-get update``` command.
+
+Now lets install ```nmap``` package -
+```bash
+$sudo apt-get install nmap
+sudo apt-get install nmap
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+ libc-ares2 libv8-3.14.5
+Use 'apt-get autoremove' to remove them.
+The following extra packages will be installed:
+ libblas-common libblas3 libgfortran3 liblinear1 liblua5.2-0
+ libpcap0.8
+Suggested packages:
+ liblinear-tools liblinear-dev
+Recommended packages:
+ ndiff
+The following NEW packages will be installed:
+ libblas-common libblas3 libgfortran3 liblinear1 liblua5.2-0
+ libpcap0.8 nmap
+0 upgraded, 7 newly installed, 0 to remove and 84 not upgraded.
+Need to get 4651 kB of archives.
+After this operation, 20.5 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://http.us.debian.org/debian/ jessie/main libgfortran3 amd64 4.9.2-10 [255 kB]
+Get:2 http://http.us.debian.org/debian/ jessie/main libblas-common amd64 1.2.20110419-10 [8496 B]
+Get:3 http://http.us.debian.org/debian/ jessie/main libblas3 amd64 1.2.20110419-10 [167 kB]
+Get:4 http://http.us.debian.org/debian/ jessie/main liblinear1 amd64 1.8+dfsg-4 [32.9 kB]
+Get:5 http://http.us.debian.org/debian/ jessie/main liblua5.2-0 amd64 5.2.3-1.1 [82.4 kB]
+Get:6 http://http.us.debian.org/debian/ jessie/main libpcap0.8 amd64 1.6.2-2 [133 kB]
+Get:7 http://http.us.debian.org/debian/ jessie/main nmap amd64 6.47-3+deb8u2 [3973 kB]
+Fetched 4651 kB in 0s (11.1 MB/s)
+Selecting previously unselected package libgfortran3:amd64.
+(Reading database ... 32933 files and directories currently installed.)
+Preparing to unpack .../libgfortran3_4.9.2-10_amd64.deb ...
+Unpacking libgfortran3:amd64 (4.9.2-10) ...
+Selecting previously unselected package libblas-common.
+Preparing to unpack .../libblas-common_1.2.20110419-10_amd64.deb ...
+Unpacking libblas-common (1.2.20110419-10) ...
+Selecting previously unselected package libblas3.
+Preparing to unpack .../libblas3_1.2.20110419-10_amd64.deb ...
+Unpacking libblas3 (1.2.20110419-10) ...
+Selecting previously unselected package liblinear1:amd64.
+Preparing to unpack .../liblinear1_1.8+dfsg-4_amd64.deb ...
+Unpacking liblinear1:amd64 (1.8+dfsg-4) ...
+Selecting previously unselected package liblua5.2-0:amd64.
+Preparing to unpack .../liblua5.2-0_5.2.3-1.1_amd64.deb ...
+Unpacking liblua5.2-0:amd64 (5.2.3-1.1) ...
+Selecting previously unselected package libpcap0.8:amd64.
+Preparing to unpack .../libpcap0.8_1.6.2-2_amd64.deb ...
+Unpacking libpcap0.8:amd64 (1.6.2-2) ...
+Selecting previously unselected package nmap.
+Preparing to unpack .../nmap_6.47-3+deb8u2_amd64.deb ...
+Unpacking nmap (6.47-3+deb8u2) ...
+Processing triggers for man-db (2.7.0.2-5) ...
+Setting up libgfortran3:amd64 (4.9.2-10) ...
+Setting up libblas-common (1.2.20110419-10) ...
+Setting up libblas3 (1.2.20110419-10) ...
+update-alternatives: using /usr/lib/libblas/libblas.so.3 to provide /usr/lib/libblas.so.3 (libblas.so.3) in auto mode
+Setting up liblinear1:amd64 (1.8+dfsg-4) ...
+Setting up liblua5.2-0:amd64 (5.2.3-1.1) ...
+Setting up libpcap0.8:amd64 (1.6.2-2) ...
+Setting up nmap (6.47-3+deb8u2) ...
+Processing triggers for libc-bin (2.19-18+deb8u7) ...
+```
+
+Other commands like; ```apt-get upgrade``` and ```apt-get dist-upgrade``` perfroms
+a dependencies resolution process that determines from important to not so important
+packages are not dropped.
+
+To check for breaking installing by issuing ```apt-get check```
+
+To clean the package cache by issuing ```apt-get clean``` - this is also good
+to free up disk space for packages that are not used anymore.
+
+Here is a listing of the most useful apt-get commands:
+
+* ```apt-get``` installs from repository
+  * uses /etc/apt/sources.list
+  * ```apt-get update```: updates infromation about pacages (cache)
+  * apt-get upgrade: upgrades all installed packages
+  * apt-get dist-upgrade: smart, doesn't upgrade if the breaks a dependency
+   * apt-get install/remove
+   * apt-get clean: cleans cache
+* Some additional options can be used, with specific commands as listed above
+    * -d upgrade -> download only
+    * -m upgrade -> ignore missing packages
+    * -s ALL simulate install
+    * -y feeds a yes if you do not want to interact with prompt
+
+Do not forget about ```alien``` utility that allow you install rpm or tar achieves on Debian Linux system .
+
+#### 9.6 Finding Packages Containing Specific Files.
+
+There are tools on Debian that allow you find specific files.
+
+Like ```dpkg -L``` - lists installed files associated with a package   
+
+Or ```dpkg -S``` - _pattern_ locates the packages that own a specific file  
+
+#### 9.7 Obtaining Package Information about Debian Packages
+
+You get package infromation on Debian packages on you Linux system
+
+* ```dpkg --get``` - shows currently installed  
+
+* ```dpkg -p``` - prints Information about an installed package
+
+* ```dpkg -l``` - gives info about uninstalled packages
+
+#### Summary
+
+In this lesson we went a ton commands, for the exam go over as many a you can.
+
+Also take in consideration the configuration files  for Red Hat and Debian especially Debian repositories that are being used. Need to know which files are where. Be prepared to enter command name and fill the blanks and select the right options. 
+
+Pretty Important items here.
+
 
 # CompTIA Linux+ LX0-104 and LPIC-1 (Exam 102)
 
