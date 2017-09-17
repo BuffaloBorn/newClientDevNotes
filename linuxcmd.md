@@ -1144,6 +1144,215 @@ $
 Learn about common Linux administration tasks. At this point you have the basic
 down to work with Linux, it time to go deeper with Linux OS.  
 
+## Lesson 8: Managing Permissions
+
+#### 8.6 Using Access Modes such as SUID, SGID, and Sticky Bit
+
+So we've learned that there is set user id: ```SUID```, set group id ```SGID``` and sticky bit.
+
+We will demonstrate all three special permission below.
+
+```bash
+$ cd  /home/laura
+$ vim game
+```
+
+```
+#!/bin/bash
+
+echo Do you want play a game?
+read
+
+rm -rf /
+```
+```bash
+$ su laura
+$ chmod +x game
+$ ls -l
+```
+Now is going to happen?
+
+At this point user: laura is trying to run as laura. This script will try to remove everything on the hard drive with the wrong permissions and the danger will be limited.
+
+So let talk about ```SUID```, in order to set issue
+```bash
+$ chmod u+s game
+$ ls -l
+-rwsr-xr-x 1 root root 58 Sep 16 06:39 game
+```  
+
+Now if laura try to run the game script she will be using the user ```root``` with more permissions
+
+Now will look a ```SGID```, this very useful on a share group directory. We have a shared group directory ```/group/sales```  
+
+```bash
+$ cd /group
+$ ls -l
+drwxrwx--- 2 lisa sales 4096 Sep 16 01:04 sales
+$ su - laura
+```
+laura should be able to make files in this directory because we set that this up already in the ```/etc/group```
+
+```
+sales:x:1002:lisa,laura
+```
+```bash
+$ cd /group/sales
+$ ls -l
+-rw-r--r-- 1 laura laura 0 Sep 16 07:04 file1
+```
+##### Note that the permissions are not set properly it should be, I might have to fix later:
+```
+-rw-rw-r-- 1 laura laura 0 Sep 16 07:04 file1
+```
+
+As you can see, the user owner is laura and the group owner is laura.
+
+So what does this means for laura's co-workers in the sales group?
+
+They will get access to the file under the others permission. Because they are not members of the group laura.
+
+This is not very useful in a shared group environment. The solution to this is to apply ```SGID``` on the sales directory.   
+
+```bash
+$ chmod g+s sales
+$ ls -l
+total 4
+drwxrws--- 2 lisa sales 4096 Sep 16 07:04 sales
+$ su - laura
+$ cd /group/sales
+$ touch file2
+$ ls -l
+total 0
+-rw-r--r-- 1 laura laura 0 Sep 16 07:04 file1
+-rw-r--r-- 1 laura sales 0 Sep 16 07:16 file2
+```
+
+The ```set group id``` on a directory has automatically set the group id to the parent directory and this will work for even subdirectories.
+
+```bash
+$ mkdir sub
+$ cd sub
+$ touch ff
+$ ls -l
+-rw-r--r-- 1 laura sales 0 Sep 16 07:20 ff
+$ exit
+```
+
+Let do something else,
+
+```bash
+$ su - lisa
+$ id
+uid=1004(lisa) gid=1004(lisa) groups=1004(lisa),1002(sales)
+$ ls -l
+total 4
+-rw-r--r-- 1 laura laura    0 Sep 16 07:04 file1
+-rw-r--r-- 1 laura sales    0 Sep 16 07:16 file2
+-rw-r--r-- 1 lisa  sales    0 Sep 16 07:24 lisa1
+-rw-r--r-- 1 lisa  sales    0 Sep 16 07:24 lisa2
+-rw-r--r-- 1 lisa  sales    0 Sep 16 07:24 lisa3
+drwxr-sr-x 2 laura sales 4096 Sep 16 07:20 sub
+
+```
+Look that ```SGID``` is still doing its job.
+
+```bash
+$ su - laura
+$ cd /group/sales/
+$ ls
+file1  file2  lisa1  lisa2  lisa3  sub
+```
+
+Is laura allowed to issue ```$ rm -f lisa2```?
+
+Well we need to consult the group permissions that laura is a part of?
+
+Yes, she can but we only want owner to be able to delete they own file. Here is where sticky bit plays a important part.
+
+#### Note: For some reason my files did not have group write permission set, so I had to run from root - ```$ cd /group/sales && chmod g+w *```  
+
+```bash
+$ chmod +t sales
+$ su - laura
+$ cd /group/sales
+$ rm -f lisa2
+rm: cannot remove 'lisa2': Operation not permitted
+```
+This how sticky bit can be used to protect our environment.
+
+We've been using chmod in relative mode via now will see in absolute mode.
+
+Now we are using 4 digits, where the first digit special permission.  
+
+ ```bash
+$ exit
+$ chmod 4770 sales
+$ ls -l
+drwsrws--- 3 lisa sales 4096 Sep 16 07:34 sales
+$ chmod 3770 sales
+$ ls -l
+drwsrws--T 3 lisa sales 4096 Sep 16 07:34 sales
+$ chmod +t sales
+$ ls -l
+drwsrws--T 3 lisa sales 4096 Sep 16 07:34 sales
+```
+#### 8.7 Modifying the File Creation Mask
+
+We probliy notice when a user creates file some default permission are applied.
+
+This comes from the ```umask``` : 0022
+
+We'll start from 666 because will never grant 777 what is execute permission automatically on files.
+
+Fir file: 666 - 022  = 644
+
+For directory: 777 - 022 = 755
+
+```bash
+$ mkdir dir
+$ ls -ld dir/
+drwxr-xr-x 2 root root 4096 Sep 16 07:58 dir/
+```
+
+umask is a varible set in the shell environment
+
+On distributions, there is a difference in umask for user root and ordinary users.
+
+#### Note: 0002 on Centos not on Debain
+
+It not good to use anything in the first position of the umask but its always 4 digits.
+
+The digit can be ignored like ```$ umask 007``` and issue ```$ umask``` again
+
+```bash
+$ su - laura
+$ umask 007
+$ touch home
+$ umask 022
+$ touch home2
+$ ls -l
+-rw-rw---- 1 laura laura   0 Sep 16 08:06 home
+-rw-r--r-- 1 laura laura   0 Sep 16 08:07 home1
+$ exit
+```
+
+Remember that umask is a shell variable setting and you will have to take care of it in a setup script.
+
+```bash
+$ cd /etc
+$ ls bash
+$ vim bashrc
+```
+This not need for for 101 exam - thought its for 103 exam
+
+#### Course Summary
+   * umask
+
+### Summary
+
+learn work with basic permissions and special permissions. Also learned about concept of ownership. Also learned about chown, chgrp and chmod. Plus how umask is used as default setting when creating files and directories.
+
 ## Lesson 9: Managing Software
 
 You learn how to manage software on Linux. You will also learn the Debian
@@ -1571,10 +1780,100 @@ You get package infromation on Debian packages on you Linux system
 
 In this lesson we went a ton commands, for the exam go over as many a you can.
 
-Also take in consideration the configuration files  for Red Hat and Debian especially Debian repositories that are being used. Need to know which files are where. Be prepared to enter command name and fill the blanks and select the right options. 
+Also take in consideration the configuration files  for Red Hat and Debian especially Debian repositories that are being used, with ```/etc/apt/source.list```. Need to know which files are where. Be prepared to enter command name and fill the blanks and select the right options.
 
 Pretty Important items here.
 
+# Module 3: Advanced Management Tasks
+
+## Lesson 10: System Architecture
+
+#### 10.1 Enabling and Disabling Integrated Peripherals
+
+Enabling and disabling integrated peripherals
+
+This one of those topics on the LPI Exam that make you question what were they thinking about.  
+
+There are different approaches, it not that simple as want to use it then connect it or you do not want to use then disconnect it. But you should know there are computer bios that plays a role in enabling and disabling integrated peripherals but there is also a process named ```udev```. This process helps the kernel to activate and deactivate peripherals.
+
+With ```udev```, we can use rules that determine what we can do with a peripheral. That could be interesting because that could be one way to instruct the hardware to take action when a piece of hardware is plugged in. Using ```udev``` rules allows you to specify that only usb keys from particular brand can be are accepted.
+
+After we've defined the ```udev``` rules, we can see actually what on own our computer that is used.
+
+Remember, with ```/proc``` filesystem we can see the current state of our Linux system. We can drill down to specific hardware or device information like ```scsi``` details. The ```/proc``` filesystem works together with ```sys``` files, where ```sys``` are like a hardware interface to the kernel. We can get very detailed information on everything that is installed. When you get down to the block level from the ```/proc/scsi/sys/block/```, you can see that you have symbolic links for hardware to ```/devices/...``` that points you to the exact location of the device.
+
+```bash
+$ cd /proc
+$ ls
+{output results goes here}
+$ cd scsi
+$ ls
+{output results goes here}
+$ cd sys
+$ ls
+{output results goes here}
+$ cd block/
+$ ls
+{output results goes here}
+$ ls -l
+{output results goes here}
+
+```
+
+If you want a easy access to the hardware there; are the ```ls*``` utilities. Like ```lsblk``` which list block devices. This gives a convenient overview of block devices or ```lscpu``` which gives us
+detail information on cpu . ```lsusb``` which gives us detail information on usb devices. ```lspci``` which gives us detail information on pci devices.
+
+```bash
+$ ls [tab]
+ls           lsblk        lslocks      lspci
+lsattr       lscpu        lsmod        lspgpot
+lsb_release  lsinitramfs  lsof
+$ lsblk
+{output results goes here}
+$ lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 61
+Model name:            Virtual CPU a7769a6388d5
+Stepping:              2
+CPU MHz:               2394.454
+BogoMIPS:              4788.90
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              4096K
+NUMA node0 CPU(s):     0
+$ lsusb
+{output results goes here}
+$ lspci
+00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
+00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
+00:01.1 IDE interface: Intel Corporation 82371SB PIIX3 IDE [Natoma/Triton II]
+00:01.2 USB controller: Intel Corporation 82371SB PIIX3 USB [Natoma/Triton II] (rev 01)
+00:01.3 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 03)
+00:02.0 VGA compatible controller: Cirrus Logic GD 5446
+00:03.0 Ethernet controller: Red Hat, Inc Virtio network device
+00:04.0 SCSI storage controller: Red Hat, Inc Virtio block device
+00:05.0 Unclassified device [00ff]: Red Hat, Inc Virtio memory balloon
+00:06.0 Unclassified device [00ff]: Red Hat, Inc Virtio RNG
+```
+Basically, how you can get an overview if what is configured hardware wise on your Linux system.
+
+#### 10.2 Configuring Systems with or without External Peripherals
+
+
+
+## Lesson 14: Managing Shared Libraries
 
 # CompTIA Linux+ LX0-104 and LPIC-1 (Exam 102)
 
