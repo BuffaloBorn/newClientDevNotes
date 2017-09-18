@@ -1871,7 +1871,264 @@ Basically, how you can get an overview if what is configured hardware wise on yo
 
 #### 10.2 Configuring Systems with or without External Peripherals
 
+Here is another specification in the LPI exam objective is configuring systems with or without external peripherals.
 
+So what exactly is this about?
+
+This about servers that can be configured with or without a keyboard.
+
+So how can you do this?
+
+On some types of servers, you will have blade servers that do not have keyboard or any type of optical device.
+
+So how do you interact with them as administrator?
+
+As a Linux administrator, you should have a idea how to approach these type of servers. To install these types of servers you can use a unattended installation, like an installation server. An installation server, doing a PXE boot from the network. Here it will get information, like the installation image, from the network everything is prepared that allow the server to install itself. Once these systems are installed, we need to be able to remote access them via ```ssh``` - secure shell allows you to get remote or VNC - that give graphical access to a remote server. A service can be configured with a ```management board```, what is contains its own operating system that allows you to do remote connection to the system.  
+
+What is PXE boot used for?
+
+In computing, the Preboot eXecution Environment (PXE, sometimes pronounced as pixie) specification describes a standardized client-server environment that boots a software assembly, retrieved from a network, on PXE-enabled clients.
+
+#### 10.3 Differentiating Between the Various Types of Mass Storage Devices
+
+Let talk about different block devices.
+
+The single most important part of information about block device is the ```/proc/partations``` file
+
+This the kernel perspective of the block devices installed on the Linux system.
+
+```bash
+$ cat /proc/partations
+```
+
+major minor  #blocks  name
+
+ 254        0   15728640 vda
+ 254        1   15727227 vda1
+  11        0    1048575 sr0
+
+On most Linux systems, you will see the ```sd``` devices that stands for SCSI and SATA controllers device file name is - sda, sdb, sdc.
+
+
+### Note: ```/dev/sda``` is the first disk that's either SCSI or (more likely) providing the SCSI drive API to user land. This includes SATA drives and IDE drives using libata. This can also be an IDE/SATA/SCSI/etc. drive emulated by the hypervisor.
+
+#### ```/dev/vda``` is the first disk using the virtualization-aware disk driver. The performance should be much better, as the hypervisor doesn't have to emulate some hardware interface.
+
+#### If the disk has been exposed to your VM under both interfaces, you should prefer ```/dev/vda``` as it'll almost certainly be faster.
+
+  * sda  - first SCSI
+  * sda1 - second SCSI   
+
+If you see ```sdb``` then you can that this system may have 2 different ```SCSI``` disc.
+
+If you see ```sr``` thats the optical drive. So if you see ```sr0``` is the first optical drive.
+
+Don't forget about ```fd0```, there are not used often these days
+
+There other devices like ```hd``` which are classic IDE devices.   
+
+KVM visual machine - ```vda``` discussed above
+
+And ```xvd``` devices are used Xen visual machines.
+
+SAN devices are not seen with a different type; they are labelled as ```sda``` devices
+
+Remember that you can see these devices by issuing ```$ cat /proc/partations``` or ```$ lsblk```; just a different way to see the same information.
+
+```bash
+$ cat /proc/partations
+major minor  #blocks  name
+
+ 254        0   15728640 vda
+ 254        1   15727227 vda1
+  11        0    1048575 sr0
+
+$ lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0     11:0    1 1024M  0 rom
+vda    254:0    0   15G  0 disk
+#&39;-vda1 254:1    0   15G  0 part /
+```
+
+But with ```lsblk``` you can see additional information in the major and minor (MAJ:MIN)  column how the kernel see the device. The kernel doesn't care about ```sda``` labels
+it mainly care about major and minor device category.
+
+This devices are defined as files in the ```/dev``` directory. The Linux kernel automatically takes cares of creating these files.
+
+```bash
+$ cd /dev
+....
+dvd              sg0                 tty27  tty53  vcsa
+fd               shm                 tty28  tty54  vcsa1
+full             snapshot            tty29  tty55  vcsa2
+fuse             snd                 tty3   tty56  vcsa3
+hidraw0          sr0                 tty30  tty57  vcsa4
+hpet             stderr              tty31  tty58  vcsa5
+hugepages        stdin               tty32  tty59  vcsa6
+hwrng            stdout              tty33  tty6   vda
+initctl          tty                 tty34  tty60  vda1
+input            tty0                tty35  tty61  vfio
+...
+$ ls -l sd*
+ls: cannot access sd*: No such file or directory
+$ ls -l vd*
+brw-rw---- 1 root disk 254, 0 Sep 16 00:46 vda
+brw-rw---- 1 root disk 254, 1 Sep 16 00:46 vda1
+```  
+
+The  column of the permissions indicates what of file that is references. For example, b in ```brw-rw---- ``` stands for block device.
+
+```bash
+$ ls -l
+crw-rw---- 1 root tty       7, 128 Sep 16 00:46 vcsa
+crw-rw---- 1 root tty       7, 129 Sep 16 00:46 vcsa1
+crw-rw---- 1 root tty       7, 130 Sep 16 00:46 vcsa2
+crw-rw---- 1 root tty       7, 131 Sep 16 00:46 vcsa3
+crw-rw---- 1 root tty       7, 132 Sep 16 00:46 vcsa4
+crw-rw---- 1 root tty       7, 133 Sep 16 00:46 vcsa5
+crw-rw---- 1 root tty       7, 134 Sep 16 00:46 vcsa6
+brw-rw---- 1 root disk    254,   0 Sep 16 00:46 vda
+brw-rw---- 1 root disk    254,   1 Sep 16 00:46 vda1
+drwxr-xr-x 2 root root          60 Sep 16 00:46 vfio
+```
+Here we have ```c``` in the first column in ```crw-rw----```, which mean character devices.
+
+#### 10.4 Differentiating between Coldplug and Hotplug Devices
+
+Coldplug device is a device in which you have shutdown you Linux system to plug it in and boot you system back up; the new device is put up. Add a new CPU is a prime example.
+
+Hotplug device is a device that is detected automatically; like a USB key. In order to use hotplug devices, the kernel works together with ```udev``` process.
+
+The kernel and ```udev``` are trying detect devices and they will construct the device configurations at the moment that a hotplug device is detected.
+
+There is a nice command to monitor the activity ```udev```.
+
+```bash
+$ cd
+$ udevadm monitor
+{output results goes here }
+```
+The above command just starts the monitoring logs. This is just for fun, to see how ```udev``` process works.
+
+This not from the exam but it give you idea how ```udev```
+works in the background.
+
+```bash
+$ cd /dev
+$ ls sd*
+sdc sdc1
+```
+In order to access the device, you need kernel modules. To get a overview, of kernel modules we can issue ```$ lsmod``` this will show all the kernel modules that are currently loaded. A long list of modules are shown.
+
+When a hotplug become active and it detects a new device. In order to initiate the devise, ```udev``` found out which kernel module that is needed. And the kernel modules we need added automatically.
+
+In the case of a coldplug, you may have initalize the kernel modules. In this case, will usw the ```modprobe``` command and you will need to name of the kernel module to load.
+
+Here is dummy example
+
+```bash
+$ modprobe vfat
+$ modinfo vfat
+{output results goes here}
+$ lsmod | grep vfat
+```
+
+If you load the manually, you must unload it manually as well.
+
+```bash
+$ modprobe -r vfat
+```
+
+This will remove the kernel module. If the hardware is not in use you can remove it but if it is  you will get a error message below:
+
+```
+modprobe: FATAL: Module vfat is in use.
+```
+
+#### 10.5 Determining Hardware Resources for Devices
+
+Determining hardware resources for devices involves a couple of commands, basically commands that we've already seen.
+
+```bash
+$ lspci
+```
+This is showing the pci bus and all the devices that are connected pci bus as well. There is a verbose mode that show all the hardware resources that is available on that device.
+
+```bash
+$ lspci -v
+```
+
+It is showing us what type of network controller that we have. The subsystem tells us what type of controller we have and the physical slot , memory addresses, show the capabilities<access denied> and plus the kernel drivers.
+
+This was ran on a VPS system but need to check out results on other platforms.
+
+```
+00:03.0 Ethernet controller: Red Hat, Inc Virtio network device
+        Subsystem: Red Hat, Inc Device 0001
+        Physical Slot: 3
+        Flags: bus master, fast devsel, latency 0, IRQ 10
+        I/O ports at c060 [size=32]
+        Memory at febf1000 (32-bit, non-prefetchable) [size=4K]
+        Memory at fc000000 (64-bit, prefetchable) [size=8M]
+        Capabilities: <access denied>
+        Kernel driver in use: virtio-pci
+
+```
+So if you need to found more information about device ```$ $ lspci -v``` command is used.
+
+```bash
+$ lsusb -v
+{output results goes here}
+```
+Same as above.
+
+All this information comes from ```/sys``` directory but you want to stand clear of this directory.
+
+```bash
+$ cd /sys
+$ ls
+block  class  devices   fs          kernel  power
+bus    dev    firmware  hypervisor  module
+```
+This is something that you need to be skilled at this point of learning administrator as Linux system.
+
+By get the ```/sys/devices```, it show another way of showing all the devices that exist. Let check out the pci devices by diving into ```/sys/devices/pci0000:00```. If you like scan particular pci address .
+
+```bash
+$ cd /dev
+$ ls
+block  char
+$ cd ../devices
+$ ls
+LNXSYSTM:00  pci0000:00  pnp0      system      virtual
+breakpoint   platform    software  tracepoint
+$ cd pci0000:00
+$  ls
+0000:00:00.0  0000:00:01.2  0000:00:03.0  0000:00:06.0   pci_bus
+0000:00:01.0  0000:00:01.3  0000:00:04.0  QEMU0002:00    power
+0000:00:01.1  0000:00:02.0  0000:00:05.0  firmware_node  uevent
+$ cd 0000\:00\:00.0/
+$ ls
+```
+
+This gives you the entire device configuration as it been created by ```udev``` and be used by the kernel can be found here, what is pretty nice.
+
+#### Course Summary
+
+  * lspci
+  * lsusb
+  * /sys
+  * /proc
+  * /dev
+
+
+#### 10.6 Tools and Utilities to List Various Hardware Information
+
+#### 10.7 Tools and Utilities to Manipulate USB Devices
+
+#### 10.8 Conceptual Understanding of sysfs, udev, dbus
+
+#### Summary
 
 ## Lesson 14: Managing Shared Libraries
 
