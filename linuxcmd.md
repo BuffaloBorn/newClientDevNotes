@@ -2125,10 +2125,57 @@ This gives you the entire device configuration as it been created by ```udev``` 
 #### 10.6 Tools and Utilities to List Various Hardware Information
 
 #### 10.7 Tools and Utilities to Manipulate USB Devices
+```bash
+$  ps aux | grep dbus
+message+   467  0.0  0.4  42124  3108 ?        Ss   Sep16   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+cem      16325  0.0  0.1  11132  1028 pts/0    S+   23:52   0:00 grep dbus
+$ dmesg
+{output results goes here}
+```
+
+ display message or driver message - ```dmesg```  is a command on most Unix-like operating systems that prints the message buffer of the kernel. The output of this command typically contains the messages produced by the device drivers.
+
+ With ```dmesg```, we can see if something is happening hardware-wise; often you will see messages logged here. For example, any devices that might have been added
+
+ ```bash
+$ tail -f /var/log/messages
+ ```
+
+ On most Linux system, by default will this file available. This will give you interesting information on hardware events. If you have a incorrect time server you may get strange time entries in the file as well.
+
+##### Command Summary
+  * lsusb
+  * usb-devices
 
 #### 10.8 Conceptual Understanding of sysfs, udev, dbus
 
+When managing devices on Linux system, we should have a conceptual understanding ```udev``` and ```sysfs``` (sys filesystem).  
+
+How does this work ?
+
+There is the ```kernel``` and it is responsible for loading devices. Now as an administrator, we need an interface to work with there devices and we an opportunity to determine if the device are created in a particular way.
+
+That is exactly what ```udev``` is doing. ```udev``` is a helper for the ```kernel``` that makes sure  that devices are loaded. To assist the kernel, there are rules. This rules decides how this devices are created.
+
+In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize.
+
+```
+         (kernel)
+
+          (udev) -------- (rules)
+             |
+             |
+             |
+             v
+          /sys - file system
+```
 #### Summary
+
+In this lesson, we learned a little bit about how Linux is managing hardware. The kernel is the central part of the operating system to address hardware and to make that the hardware is available for the kernel. ```udev``` plays an important role, plays a role in loading modules and creating device files and making sure everything is in order the way it should be.
+
+For an administrator perspective, there are the ```ls``` utilities like ```lsblk```, ```lsusb```, ...
+
+These are very nice utilities to show more information about hardware that is attached to your Linux system.
 
 ## Lesson 14: Managing Shared Libraries
 
