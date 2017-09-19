@@ -2157,7 +2157,11 @@ There is the ```kernel``` and it is responsible for loading devices. Now as an a
 
 That is exactly what ```udev``` is doing. ```udev``` is a helper for the ```kernel``` that makes sure  that devices are loaded. To assist the kernel, there are rules. This rules decides how this devices are created.
 
+<<<<<<< HEAD
 In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize.
+=======
+In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize. 
+>>>>>>> 293cdc25e34c56797896c631d43002d7aa611d7e
 
 ```
          (kernel)
