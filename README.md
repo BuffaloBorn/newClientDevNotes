@@ -1,4 +1,4 @@
-## Avaiable Gems in internal repository 
+## Available Gems in internal repository 
 
 | Name                        | Version | Comments                    |
 |-----------------------------|---------|-----------------------------|
@@ -56,22 +56,22 @@
 | cancancan                   | 1.6.10  |                             |
 | assm                        | 4.110   |                             |
 | activejob                   | 0.7.2   |                             |
-| act_as_versioned            | 0.6.0   |                             | 
+| act_as_versioned            | 0.6.0   |                             |
 | act_as_tree                 | 1.2.0   |                             |
 | authlogic                   | 3.1.3   |                             |
-| act_as_commentable          | 4.0.0   |                             | 
+| act_as_commentable          | 4.0.0   |                             |
 | workflow                    | 1.0.0   |                             |
 | authlogic                   | 3.1.3   |                             |
-| statemachine                | 2.2.0   |                             | 
+| statemachine                | 2.2.0   |                             |
 | statemachine_audit_trail    | 0.1.3   |                             |
 | nifty-generator             | 0.4.6   |                             |
-| progressbar                 | 1.0.5   |                             | 
+| progressbar                 | 1.0.5   |                             |
 | webrat                      | 0.7.3   |                             |
 | shoulda                     | 3.5.0   |                             |
-| should_matchers             | 2.7.0   |                             | 
+| should_matchers             | 2.7.0   |                             |
 | seed-fu                     | 2.3.3   |                             |
 | cucumber                    | 2.1.0   |                             |
-| cucumber-rails              | 1.4.2   |                             | 
+| cucumber-rails              | 1.4.2   |                             |
 | css-parse                   | 1.2.5   |                             |
 | bootstrap-sass              | 2.1.0.0 |                             |
 | bootstrap-sass-rails        | 2.3.0.0 |                             |
@@ -81,7 +81,7 @@
 | autoprefixer                | ?       |   issue w/ on client version|
 
 
-## Requested Gems from Dev Ops 
+## Requested Gems from Dev Ops
 
 | Name                        | Version | Comments                    |
 |-----------------------------|---------|-----------------------------|
@@ -183,20 +183,20 @@ cd sqlite-autoconf-3070701
 make && make install
 cd $RAILS\_APP\_DIR
 ```
-```bash 
+```bash
 $ vi Gemfile```
 
-```bash 
-$ bundle config build.sqlite3 --with-sqlite3-include=$HOME/include 
+```bash
+$ bundle config build.sqlite3 --with-sqlite3-include=$HOME/include
 --with-sqlite3-lib=$HOME/lib --with-sqlite3-dir=$HOME/bin```
-```bash 
+```bash
 $ bundle install --path vendor/bundle```
 
 # Error while installing sqlite3
-```bash 
+```bash
 $ yum install sqlite sqlite-devel```
 
-```bash 
+```bash
 $ gem install sqlite3```
 
 # Install a gem from local tar/zip
@@ -204,7 +204,7 @@ $ gem install sqlite3```
 gem 'rails', :require => 'rails', :path => "/path\_to/rails"```
 
 **From: http://guides.rubygems.org/make-your-own-gem/\#introduction**
-```bash 
+```bash
 $ tree```
 
 
@@ -215,7 +215,7 @@ $ tree```
 └── lib
 └── hola.rb
 ```
-```bash 
+```bash
 $ cat lib/hola.rb ```
 
 ```ruby
@@ -244,7 +244,7 @@ Gem::Specification.new do |s|
     s.license = 'MIT'
 end
 ```
-```bash 
+```bash
 $ gem build hola.gemspec```
 
 Successfully built RubyGem
@@ -255,14 +255,14 @@ Version: 0.0.0
 
 File: hola-0.0.0.gem
 
-```bash 
+```bash
 $ gem install ./hola-0.0.0.gem```
 
 Successfully installed hola-0.0.0
 
 1 gem installed
 
-```ruby 
+```ruby
 $ irb
 
 >> require 'hola'
@@ -287,7 +287,7 @@ RadRails provide a cool that list gem descriotion - check plugin folder
 org.jruby.xxxxx
 com.aptana.feature.shell.xxxxx
 
-### Errors encountered while setup up a server 
+### Errors encountered while setup up a server
 
 
 #### Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
@@ -300,7 +300,7 @@ socket=/var/lib/mysql/mysql.sock
 ```
 you can check if mysql is running with the following command:
 
-```bash 
+```bash
 $ mysqladmin -u root -p status```
 
 try changing your permission to mysql folder. If you are working
@@ -351,10 +351,10 @@ I hope it helps.
 
 Checkout how apache layout and hooks into rails
 #### Remove Linux folder
-```bash 
+```bash
 rm -rf mydir```
 
-#### Renaming an existing file 
+#### Renaming an existing file
 ```bash
 mv /home/user/oldname /home/user/newname (maybe \[-T\]) ```
 
@@ -372,7 +372,7 @@ When done, it will generate a set of files like this:
 gems/\*.gem \# .gem files you want to
 
 \# index
-specs.<version>.gz 
+specs.<version>.gz
 \# specs index
 
 latest\_specs.<version>.gz \# latest specs index
@@ -646,9 +646,9 @@ Options -MultiViews
 </VirtualHost>
 
 | check my answer [here](https://serverfault.com/a/410351) to a similar question about serving multiple rails applications from sub-url's.  
-                                                                                                                                            
+
  If you want to server your two rails apps from two different ports, apart from the virtual host, you have to also add to your apache conf  
-                                                                                                                                            
+
  ```bash
  Listen 80                                                                                                                                                                                                                                                                            
  Listen 3000                                                                                                                                                                                                                                                            
@@ -668,7 +668,7 @@ Workbench to connect remotely**
 Create a batch file and place the following putty command and augments
 inside:
 
-```bash 
+```bash
 ../putty –L \[localPort\]:\[remoteservername\]:\[remotePort\] unser```
 
 [How to have multiple versions of Ruby AND Rails, and their combinations on Windows?](http://stackoverflow.com/questions/3648744/how-to-have-multiple-versions-of-ruby-and-rails-and-their-combinations-on-windo)
@@ -776,21 +776,21 @@ $ rails g rspec:install
         @dir_s_mkdir - U:/git/shine/spec/c: (Errno: EINVAL)
 
     Solution Comments: Went on Linux system and ran the following command and copied over the generated files that was not created in windows
- 
+
 #### Not able to in install phantomsjs in the system path (phantomjs.2.11.windows.zip) - [Need to review poltergeist setting](https://github.com/teampoltergeist/poltergeist/blob/master/README.md)
 
    Figure out if the spec/rails_help.rb, sepec/spec_help.rb, or even if there is away to configure the path from within poltergeist's client.rb.
-  
+
 ``` ruby
 Solution Comments: Is outline below:
  options = { js_errors: false,
              logger: NilLogger.new,
              #phantomjs_logger: STDOUT,
-             phantomjs_logger: 
+             phantomjs_logger:
                     File.open("#{Rails.root}/log/test_phantomjs.log",
              phantomjs_options: ['--debug=true'],
              debug: false  }
-                     
+
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, options)
 end
@@ -804,20 +804,20 @@ end
 
 [check out stackoverflow](https://stackoverflow.com/questions/35844186/how-to-properly-debug-with-capybara-poltergeist)
 
-### Useful commands for poltergeist within rspec test 
+### Useful commands for poltergeist within rspec test
 ```ruby
 save_screenshoot('path.png', full=>true)
 ```
 
 Tried to ma
-#### Working wit Devise gem: Undefined method "authenticate_user!" for controller 
-    
-    make sure you include the name of the table/model that hold all the 'users' in your application; in the case instead of 'user' model it should be declared as "authenticate_account!" 
-        
-    
+#### Working wit Devise gem: Undefined method "authenticate_user!" for controller
+
+    make sure you include the name of the table/model that hold all the 'users' in your application; in the case instead of 'user' model it should be declared as "authenticate_account!"
+
+
 ## Installing ruby javascript/css frameworks gems in client environment      
-    
-### Installing Bootstrap to a rails application via bootstrap-sass and autoprefixer-rails gem 
+
+### Installing Bootstrap to a rails application via bootstrap-sass and autoprefixer-rails gem
 1. place the above gem name in the GEMfile
 2. call bundle install
 3. add the following to app/assests/stylesheet/application.css.sass; you may have to use the folllowing commands to create .sass file
@@ -828,7 +828,7 @@ Tried to ma
 4. import bootstrap javascript assets to app/assets/javascripts/application.js; text provided below
     //= require bootstrap-sprockets
 
-    The file should have the following entries: 
+    The file should have the following entries:
          //= require jquery
          //= require jquery_ujs
          //= require tubrolinks
@@ -839,16 +839,16 @@ Tried to ma
 ### Windows workarounds to add $PATH entries without having add prileages
 
 ```bat
-> rundll22 sysadmin.cpl EditEnvironmentVariables 
+> rundll22 sysadmin.cpl EditEnvironmentVariables
 ```
 
 ### Issues that occured after installing above gems
 
 #### current ExexJS runtime doesn't support ES5, Please install Node.js
 
-Here some code that I've used to pin point the issue, I've tried to change the JS runtime to Node.JS 
+Here some code that I've used to pin point the issue, I've tried to change the JS runtime to Node.JS
 
-```ruby 
+```ruby
 >> require 'execjs'
 >> puts ExecJS.runtime.name
 >> ExecJS.runtime = ExecJS::Runtime::Node
@@ -856,11 +856,11 @@ Here some code that I've used to pin point the issue, I've tried to change the J
 
 After locating the error within all the installed gems, it was discovered the autoprefixer.gem was looking for a particalur javacript feature and raised an error when it could not found it. Solution was not to include the gem in the project; need to fix the code or it a updated version of the gem.  
 
-```ruby 
+```ruby
 ExecJS.eval('typeOf(Array.prototype.map)')!= function
 ```
 
-[Inline-CSS-Extractor](https://github.com/peterlazzarino/Inline-CSS-Extractor) 
+[Inline-CSS-Extractor](https://github.com/peterlazzarino/Inline-CSS-Extractor)
 ===============================================================================
 
 <img src="./media/image1.png" width="624" height="287" />
@@ -871,5 +871,3 @@ ExecJS.eval('typeOf(Array.prototype.map)')!= function
 
 <img src="./media/image3.png" width="624" height="259" />
 =========================================================
-
-

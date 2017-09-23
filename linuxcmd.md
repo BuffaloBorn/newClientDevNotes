@@ -4,7 +4,7 @@
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
 
-### Learning objectives
+### Learning Objectives
 
 Let's get started with lesson one now.
 
@@ -112,9 +112,9 @@ Shell just interprets commands are transfer them to machine instructions to exec
 
 They are internal and external commands to the shell. Remember that internal commands are built in the shell itself and external commands are third party commands that are installed to the Linux system.
 
-* ```[esc] + b```  or ```[esc] + f``` - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
+  * ```[esc] + b```  or ```[esc] + f``` - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
 
-* ```[esc] + a```  or ```[esc] + e``` - allows you jump to begin of a line or to the end of a line in very long complex string
+  * ```[esc] + a```  or ```[esc] + e``` - allows you jump to begin of a line or to the end of a line in very long complex string
 
 #### Command Summary
   * bash
@@ -171,7 +171,7 @@ We can also use	![line number] to re-run the command on that line: ex: 117
 
 Issuing: ```!!``` - will run the previous command that was just issued
 
-Here are some command that aslo can be use with Shell history:
+Here are some command that also can be use with Shell history:
 
   * [up] and [down] keys on the keyboard that allow you to go back to previous commands; this good for two or three commands
   * [ctrl] + r - reverse &#95;i&#95; search - starting typing and it will search the command that starts with those characters
@@ -183,7 +183,7 @@ Here are some command that aslo can be use with Shell history:
 
 We can remove the current history by issusing ```rm .bash_history``` - to permanently remove history; not really good thing to do
 
-##### Command Summary
+#### Command Summary
 
   * history
   * .bash_history
@@ -214,7 +214,7 @@ There can be a binary version and internal version of the same in which can leav
 
 By using the ```$ type``` before the command you are trying to issue. Givens us an idea where the command is coming from.
 
-As you can see, the PATH is very important aspect of a Linux system. The PATH is built on the first process when is booted up. If could ```intit``` or ```sysmd``` base on the type of Linux distribution you have installed.
+As you can see, the PATH is very important aspect of a Linux system. The PATH is built on the first process when is booted up. If could ```init``` or ```systemd``` base on the type of Linux distribution you have installed.
 
 ##### Command Summary
   *	ls
@@ -247,7 +247,7 @@ Let's move on to lesson number two.
 
 ## Lesson 2: Processing and Working with Text Files
 
-### Learning objectives
+### Learning Objectives
 
 In this lesson, you'll learn how to work with text files.
 
@@ -302,8 +302,7 @@ There are ways to redirect from the STDIN what looks for input from the keyboard
 
 Issue the following mail command ```$ mai l -s hello root```, use ```mail -h```- for help.
 
-It sits there waiting to for the body to be typed/entered or a dotted ```.``` to end send the mail. ```$
-·mai l -s hello root /newline Please learn Linux. /newline. .``` is termation stdinput value that the ```mail``` command is looking to end and send message.
+It sits there waiting to for the body to be typed/entered or a dotted ```.``` to end send the mail. ```$ mail -s hello root /newline Please learn Linux. /newline. .``` is termination stdinput value that the ```mail``` command is looking to end and send message.
 
 If we would like to do it on all in one command ```$ mail -s hello root <```
 
@@ -312,7 +311,7 @@ It you have a command that sending the standard error and the standard input	the
 so what is this doing? Its sending the standard error (STDERR) and the standard input (STDIN) to the same location which is ```/dev/null```
 what if you would like to display the results of the  ```$ ls``` and redirect that same output to a fil e like ```ls.out```?
 
-Issue the following command: ```$ ls | tee ls.out``` and using ```$ cat l s.out```. You should see that results on the screen and i n the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
+Issue the following command: ```$ ls | tee ls.out``` and using ```$ cat l s.out```. You should see that results on the screen and in the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
 
 The following is an example of types of files that programs may create that are temporary files
 
@@ -324,8 +323,8 @@ But that is side not in finding special file any location.
 we need to ```$find / -name "blah"``` so we go ahead create to 2 blah files
 
 ```bash
-$ touch lbl ah
-$ touch 2bl ah
+$ touch 1blah
+$ touch 2blah
 ```
 
 Re-issue ```$ find I -name "blah"```  and see the results of the above fi l es in the results. Now we can issue ```$ find I -name "blah" | xargs -d "\n" rm```
@@ -358,7 +357,7 @@ Try to issue this command ```find / blah" -exec rm {}\```
 * tee
 * xargs
 
-## 2.2 File Viewing commands
+#### 2.2 File Viewing commands
 
 Now we are going to look a commands that us look the contents of files.
 
@@ -386,7 +385,7 @@ We can refocus our attention to line 19 only by issuing	```$ head -n 19 /etc/pas
 
 Very interesting command is ```od``` which is an octal dump, not used a lot but it on Linux+ exam.
 
-### command summary
+#### Command Summary
   *	head
   *	less
   *	tail
@@ -394,7 +393,7 @@ Very interesting command is ```od``` which is an octal dump, not used a lot but 
   *	od
   * cut
 
-## 2.3 File Formatting Commands
+#### 2.3 File Formatting Commands
 
 Back in the day there wasn't many monitors that we have today. There as just printers that printed output so it was very important to instruct the computer format the file in particular way.
 
@@ -408,14 +407,14 @@ Issue ```$ cat /var/l og/secure | pr -D |  lpr```, will send document to unix li
 
 Issue ```expand /var/hosts |cat -T```, will replace all tabs with spaces
 
-### Command Summary
+#### Command Summary
   * fmt
   *	pr
   *	expand
   * unexpand
   * convert
 
-##  2.4	File Processing Commands
+#### 2.4	File Processing Commands
 
 so let's talk about some other nice commands. we need to create a couple of example files.
 
@@ -529,7 +528,7 @@ Issue ```ls -R	/ >	~/bigfile```
 
 Lets make sure we have that fil e created ```ls -l bigfile``` and it size is big as well
 ```bash
-$	mkdi r
+$	mkdir
 $ mv bigfile
 $ cd temp
 $ ls
@@ -558,7 +557,7 @@ bb
 bb
 cc
 ```
-Issue ```$ uniq ufile ```command ; here is what we expect to get back
+Issue ```$ uniq ufile```command ; here is what we expect to get back
 
 ```bash
 aa
@@ -608,10 +607,10 @@ As you can see there are 23 lines so we have 23 users.
 
 In total there are very useful commands and some that are not so useful. ```sed```, ```WC```	and	```sort``` are the ones that you should think about using more often.
 
-##### command summary
+#### Command Summary
 * join
-* paste
 * nl
+* paste
 * sed
 * sort
 * split
@@ -620,7 +619,7 @@ In total there are very useful commands and some that are not so useful. ```sed`
 * wc
 
 
-## 2.5 Understanding vi
+#### 2.5 Understanding vi
 
 The default editor in Linux is ```vi``` and it very oldest editor that been available for years.
 
@@ -639,7 +638,7 @@ When you are done in input mode, you must exit out of input mode by issue ```[es
 
 To save the file you need to issue ```:wq```
 
-## 2.6 Editing Text Files with vi
+#### 2.6 Editing Text Files with vi
 
 There is ```vi``` and ```vim```, ```vim``` is a	Vi IMproved - enhanced ```vi``` editor version
 
@@ -705,7 +704,7 @@ To remove a single letter is by using the ```x``` on top of the letter to remove
 
 Each editor ```vi``` and ```vim``` display syntax differently. ```vim``` applies syntax highlighting while ```vi``` doesn't have this type of features. This is the reason to use ```vim``` instead of ```vi```
 
-##### Command Summary
+#### Command Summary
   * /, ?
   * h, j, k, l
   * i, o, a
@@ -716,7 +715,7 @@ Each editor ```vi``` and ```vim``` display syntax differently. ```vim``` applies
   * :%s/old/new/g
   * u
 
-## 2.7 Using Regular Expressions to Work with Text Files
+#### 2.7 Using Regular Expressions to Work with Text Files
 
 Regular expression are very handle in grabbing text within text files.
 
@@ -740,11 +739,11 @@ Repetition operators:
 Multiple strings: grep cat|dog &#42;
 Parentheses: to define subexpressiions
 
-##### Command Summary
+#### Command Summary
 
 None
 
-## 2.8 Searching Text Patterns with grep
+#### 2.8 Searching Text Patterns with grep
 
 Here is a utility that uses regular expression allot is ```grep```
 
@@ -758,7 +757,7 @@ But we can send those message ```stderr```somewhere else and have our output loo
 
 But it shows all files that contains any combination of ```sys``` but can use a regular expression to narrow it down to only lines that start with ```sys``` by issuing ```$ grep ^sys * 2> /dev/null```
 
-#### Note: Remember that we have the filename:line that contains the text followed.
+##### Note: Remember that we have the filename:line that contains the text followed.
 
 ```bash
 subgid:systemd-timesync:100000:65536
@@ -776,13 +775,13 @@ The option are those that used most often but we still go to the ```$ man grep``
 
 grep stands for: general regular expression processor
 
-##### Command Summary
+#### Command Summary
   * grep -R root/
   * grep -E "cat|dog" ~
   * ps aux | grep -v grep
   * grep -i bash *
 
-## Summary
+#### Summary
 
 This brings us to the end of the long lesson two, processing and working with text files.
 
@@ -794,7 +793,7 @@ You should be prepared to recognize the correct commands and the options that ca
 
 ## Lesson 3: Performing Basic File Management Tasks  
 
-### Learning objectives
+### Learning Objectives
 
 Hi, welcome to lesson three.
 
@@ -859,13 +858,13 @@ As you can see, the message shows that we do not have ```gai.conf```
 
 Beware of using ```rm -rf / blah``` because it will remove you entire root directory
 
-##### Command Summary
+#### Command Summary
   * mv
   * ls
   * rm
   * rmdir
 
-## 3.2 Using Wildcards
+#### 3.2 Using Wildcards
 
 Now wildcards are about the shell, and they make matching files easier.
 
@@ -891,9 +890,9 @@ Issue, ```$ s -d [abc]*``` - show me anything that starts with a, b, or c
 
 Issue, ```$ ls -d [abc]?t*``` - show me anything that starts with a, b, or c and the second position I do not care but the third position it must be 't'
 
-This is called globbing; Globbing interprets the standard wild card characters * and ?, character lists in square brackets, and certain other special characters (such as ^ for negating the sense of a match).
+This is called globbing; globbing interprets the standard wild card characters * and ?, character lists in square brackets, and certain other special characters (such as ^ for negating the sense of a match).
 
-## 3.3 Other File Management Tools
+#### 3.3 Other File Management Tools
 
 So let's talk about some other file managements tools.
 
@@ -1004,12 +1003,12 @@ $ find -size gt 10M
 ```
 This may work but we try it later.
 
-##### Command Summary
+#### Command Summary
   * touch
   * file
   * find
 
-## 3.4 Creating Backups
+#### 3.4 Creating Backups
 
 The mother of all backup utilities is ```tar```, ```tar``` stands for tape archiver. Mother of all mothers of backups is ```tar``` command
 
@@ -1082,7 +1081,7 @@ backup: gzip compressed data, last modified: Sun Sep  3 20:49:23 2017, from Unix
 
 Here we see the same operations with fewer steps. Notice how useful the file command can be if you download or receive a file with or without an extension. You can always use a handy ```file``` command.
 
-##### Command Summary
+#### Command Summary
   * tar
   * cpio
   * dd
@@ -1130,7 +1129,7 @@ Be carefully not to use ```tar xvf backup /home/lisa``` because we do not haveth
 
 This means we can select certain portions of the backup file and not the entire backup structure.
 
-##### Command Summary
+#### Command Summary
   * tar -tvf myfile.tar
   * tar -xvf myfile.tar -C /mydestination  
 
@@ -1156,7 +1155,7 @@ Linux provide a secondary method of creating links which is called ```symbolic l
 
 If a filename is deleted then the symbolic link becomes invalid.      
 
-## 3.7 Managing Hard and Symbolic Links
+#### 3.7 Managing Hard and Symbolic Links
 
 Now that we all understand how hard and symbolic links are working on Linux, let's create some links.
 
@@ -1233,17 +1232,18 @@ cat: symlink: No suc fie or directory
 ```
 
 The color has changed that indicates that the link is broken.
+
 To fix this issue simply running the following commands.
 
 ```bash
 $ ln users hard
 $ cat symlink
 ```
-### Summary
+#### Summary
 
 So this was Lesson 3.
 
-In this lesson, youhave learned how to work
+In this lesson, you have learned how to work
 
 on the file system.
 
@@ -1320,7 +1320,7 @@ screen is anohter technqie to accomplish the same task
 $ ssh server201
 $ screen
 ```
-## Command summary
+#### Command summary
   * &
   * jobs
   * fg
@@ -1397,7 +1397,7 @@ In lesson five, you'll learn how a hard disk layout is organized.
 
 You'll learn about different file systems and partitions, about swap space and logical volumes, about requirements to boot a system and why a Linux system typically consists of different partitions and logical volumes.
 
-### Summary
+#### Summary
 
 So this concludes lesson five.
 
@@ -1425,7 +1425,7 @@ Next, we'll look at the fdisk and gdisk utilities.
 
 The utilities that I use to create partitions.
 
-### Summary
+#### Summary
 
 So this brings us to the end of Lesson Six.
 
@@ -1433,7 +1433,7 @@ In this lesson you have learned how to create Partitions, and we have seen the d
 
 We have also seen that on GPT it behaves different than on NBR.
 
-You've also learned how to create Filesystems, and how to check file system problems.
+You've also learned how to create filesystems, and how to check file system problems.
 
 Now let's move on to the next lesson
 
@@ -1501,7 +1501,7 @@ $ ls -l
 ```
 Now is going to happen?
 
-At this point user: laura is trying to run as laura. This script will try to remove everything on the hard drive with the wrong permissions and the danger will be limited.
+At this point user: ```laura``` is trying to run as ```laura```. This script will try to remove everything on the hard drive with the wrong permissions and the danger will be limited.
 
 So let talk about ```SUID```, in order to set issue
 ```bash
@@ -1599,7 +1599,7 @@ Well we need to consult the group permissions that laura is a part of?
 
 Yes, she can but we only want owner to be able to delete they own file. Here is where sticky bit plays a important part.
 
-#### Note: For some reason my files did not have group write permission set, so I had to run from root - ```$ cd /group/sales && chmod g+w *```  
+##### Note: For some reason my files did not have group write permission set, so I had to run from root - ```$ cd /group/sales && chmod g+w *```  
 
 ```bash
 $ chmod +t sales
@@ -1634,7 +1634,7 @@ This comes from the ```umask``` : 0022
 
 We'll start from 666 because will never grant 777 what is execute permission automatically on files.
 
-Fir file: 666 - 022  = 644
+For file: 666 - 022  = 644
 
 For directory: 777 - 022 = 755
 
@@ -1644,11 +1644,11 @@ $ ls -ld dir/
 drwxr-xr-x 2 root root 4096 Sep 16 07:58 dir/
 ```
 
-umask is a varible set in the shell environment
+umask is a variable set in the shell environment
 
 On distributions, there is a difference in umask for user root and ordinary users.
 
-#### Note: 0002 on Centos not on Debain
+##### Note: 0002 on Centos not on Debain
 
 It not good to use anything in the first position of the umask but its always 4 digits.
 
@@ -1673,19 +1673,21 @@ $ cd /etc
 $ ls bash
 $ vim bashrc
 ```
-This not need for for 101 exam - thought its for 103 exam
+This not need for 101 exam - thought its for 103 exam
 
 #### Course Summary
    * umask
 
-### Summary
+#### Summary
 
 learn work with basic permissions and special permissions. Also learned about concept of ownership. Also learned about chown, chgrp and chmod. Plus how umask is used as default setting when creating files and directories.
 
 ## Lesson 9: Managing Software
 
-You learn how to manage software on Linux. You will also learn the Debian
-approach and Red Hat approach. How to work with the respective package managers.
+### Learning Objectives
+
+You learn how to manage software on Linux. You will also learn the Debian approach and Red Hat approach. How to work with the respective package managers.
+
 Know when to which commands because it is an important topic on the exam.  
 
 #### 9.1 Understanding Packages and Meta Package Handlers
@@ -1716,11 +1718,11 @@ On Red Hat the ```meta package handler``` is ```yum```and Ubuntu it is ```apt```
 Major Linux distributions and their subversion distributions.
 
 Red hat has rpm which standard for red hat package manager and Debi an has dpkg stands for Debi an package manager
-  * Red Hat - rpm
+    * Red Hat - rpm
     * Centos
     * Fedora
     * SUSE
-  * Debian - dpkg (deb)
+    * Debian - dpkg (deb)
     * Ubuntu
     * Mint
 
@@ -1760,31 +1762,30 @@ Issue ```yum repo list``` returns a list of repos that are currently being used
 
 To locate or define the available repos, ```cd /etc/yum.repos.d/``` and then ```ls``` You will see a list of files that end will ```.repo```; each entry may contain mirror list that is considered import if that is used if it can connect to the base url.
 
-##### Command Summary
+#### Command Summary
 
 Include in this are	commands not used often but are need for the exam:
-*	rpm -ivh - used to install rpm without yum
-*	rpm -uvh - used to update rpm without yum
-*	rpm -e	- erase (uninstall) package
-* rpm -F	- upgrade package(s) if already installed
-*	rpm2cpi o - used to retrieve tar fil e within rpm; results cpio file
-*	/etc/yum/repos.d
-*	yum search
-*	yum whatprovides
-*	yum install
-*	yum reinstall - when recent installed is accedient removed
-*	yum remove
-*	yum check-update
-*	yum upgrade
-*	yum clean
-*	yum local install	- better then rpm -ivh
-*	yum local update
-* yum downloader
+  *	rpm -ivh - used to install rpm without yum
+  * rpm -uvh - used to update rpm without yum
+  *	rpm -e	- erase (uninstall) package
+  * rpm -F	- upgrade package(s) if already installed
+  *	rpm2cpi o - used to retrieve tar fil e within rpm; results cpio file
+  *	/etc/yum/repos.d
+  *	yum search
+  *	yum whatprovides
+  *	yum install
+  *	yum reinstall - when recent installed is accedient removed
+  *	yum remove
+  *	yum check-update
+  *	yum upgrade
+  *	yum clean
+  *	yum local install	- better then rpm -ivh
+  *	yum local update
+  * yum downloader
 
 #### 9.4 Obtaining Information on RPM Packages
 
 On Red hat system, allows you to do rpm queries to get information about packages. Let try this out from ``` $ cd /usr/sbin``` or ``` $ cd /sbi n``` and then ```$ ls``` Issue	```rpm -qf /sbin/ipmaddr```, it tells what package that is utility came from
-
 
 Issue	```rpm -qi net-tools-l.60-110.el6_2.x86_64```, it tells what package that is utility came from
 
@@ -1798,7 +1799,7 @@ Issue	```rpm -qpc net-tools```	if have a package that you haven't installed yet 
 
 Issue	```rpm -V```	is for verify a package compares information about the installed files in the package with information about the files taken from the package metadata stored in the rpm database. Checks the status of what has been changed since installation.
 
-##### Command Summary
+#### Command Summary
   * yum info
   * rpm -qpi
   * rpm -q on installed and uninstalled
@@ -1920,6 +1921,7 @@ the latest information on that package.
 
 Another useful command is ```apt-cache search [whatever package]``` - if you do
 not know the exact name of the package; you pass generic name like ```ldap```.  
+
 Getting a list of packages with ```ldap``` in its description.
 
 To add to the command above ```apt-cache depends [whatever package]``` - allows
@@ -1986,17 +1988,15 @@ Total slack space: 52.3 k
 Total space accounted for: 15.1 M
 ```
 
-The meta-package handler for Debian is ```apt-get install``` but before you us this command
-you must ensure that the state of the packages installed on your Linux system is
-in sync with the packages that are listed in the ```/etc/apt/sources.list```. You
-can do this by issuing ```sudo apt-get update```.
+The meta-package handler for Debian is ```apt-get install``` but before you us this command you must ensure that the state of the packages installed on your Linux system is in sync with the packages that are listed in the ```/etc/apt/sources.list```.
 
-You may get errors message on downloading; it fix that just re run
-the ```sudo apt-get update``` command.
+You can do this by issuing ```sudo apt-get update```.
+
+You may get errors message on downloading; it fix that just re run the ```sudo apt-get update``` command.
 
 Now lets install ```nmap``` package -
 ```bash
-$sudo apt-get install nmap
+$ sudo apt-get install nmap
 sudo apt-get install nmap
 Reading package lists... Done
 Building dependency tree
@@ -2066,8 +2066,7 @@ packages are not dropped.
 
 To check for breaking installing by issuing ```apt-get check```
 
-To clean the package cache by issuing ```apt-get clean``` - this is also good
-to free up disk space for packages that are not used anymore.
+To clean the package cache by issuing ```apt-get clean``` - this is also good to free up disk space for packages that are not used anymore.
 
 Here is a listing of the most useful apt-get commands:
 
@@ -2116,7 +2115,7 @@ Pretty Important items here.
 
 ## Lesson 10: System Architecture
 
-#### Learning Objectives
+### Learning Objectives
 
 Lesson ten is about some Architecture.
 
@@ -2157,11 +2156,9 @@ $ ls
 {output results goes here}
 $ ls -l
 {output results goes here}
-
 ```
 
-If you want a easy access to the hardware there; are the ```ls*``` utilities. Like ```lsblk``` which list block devices. This gives a convenient overview of block devices or ```lscpu``` which gives us
-detail information on cpu . ```lsusb``` which gives us detail information on usb devices. ```lspci``` which gives us detail information on pci devices.
+If you want a easy access to the hardware there; are the ```ls*``` utilities. Like ```lsblk``` which list block devices. This gives a convenient overview of block devices or ```lscpu``` which gives us detailed information on cpu . ```lsusb``` which gives us detail information on usb devices. ```lspci``` which gives us detail information on pci devices.
 
 ```bash
 $ ls [tab]
@@ -2414,7 +2411,7 @@ This was ran on a VPS system but need to check out results on other platforms.
         Kernel driver in use: virtio-pci
 
 ```
-So if you need to found more information about device ```$ $ lspci -v``` command is used.
+So if you need to found more information about device ```$ lspci -v``` command is used.
 
 ```bash
 $ lsusb -v
@@ -2526,9 +2523,9 @@ For an administrator perspective, there are the ```ls``` utilities like ```lsblk
 
 These are very nice utilities to show more information about hardware that is attached to your Linux system.
 
-# Lesson 11: Boot the System
+## Lesson 11: Boot the System
 
-## Learning objectives
+### Learning Objectives
 
 Hi. Welcome to lesson 11.
 
@@ -2552,9 +2549,9 @@ You have also seen how you can request information about the boot procedure.
 
 Now let's continue this subject a little bit more in lesson 12.
 
-# Lesson 12: Install a Boot Manager
+## Lesson 12: Install a Boot Manager
 
-## Learning objectives
+### Learning Objectives
 
 Hello and welcome to lesson 12.
 
@@ -2580,7 +2577,7 @@ Let's move on to lesson 13.
 
 ## Lesson 13: Install a Boot Manager
 
-### Learning objectives
+### Learning Objectives
 
 Welcome to lesson 13.
 
@@ -2600,7 +2597,7 @@ Now let's move on to the last lesson in this course, which is about libraries.
 
 ## Lesson 14: Managing Shared Libraries
 
-### Learning objectives
+### Learning Objectives
 
 Congratulations, you've made it to the last lesson.
 
@@ -2620,9 +2617,47 @@ And that's all for this lesson, and that brings us to the end of the course.
 
 ## Lesson 3: Managing User and Group Accounts
 
+### Learning Objectives
+
+Hello, and welcome to lesson 3.
+
+In this lesson, you'll learn how to manage users and groups.
+
+We'll go through the procedures for adding, modifying, and removing users.
+
+And we'll do the same for group accounts.
+
+Next, I'll show you how to manage user and group accounts through their configuration files.
+
+I'll also explain how to work with special purpose and limited user accounts.
+
+And at the end of this section, we'll go through group membership
+
 #### 3.1 Adding, Modifying, and Removing Users
 
+Now, this lesson is about users and user management.
+
+Before we get started, it's important to realize what exactly a user is.
+
+Because when talking about users, folks tend to think about people that are logging into a computer.
+
+But a Linux user often has nothing to do with a person.
+
+A user on Linux is an entity that is needed
+
 #### 3.2 Adding and Modifying Groups
+
+If you want to manage permissions on a Linux system
+
+you don't want to be managing permissions for individual users.
+
+That's where groups come in handy.
+
+To add groups you can use ```groupadd```.
+
+There's a few options that can be used with it.
+
+So the useful options, well maybe the -g to specify a group ID, and basically every thing else is not really useful, which mean group adds
 
 ```bash
 $ useradd linda
@@ -2633,20 +2668,55 @@ $ userdel linda
 If you want to manage permissions on Linux system, you do not want to manage permission for individual users.
 
 To add groups, we will start with ```groupadd --help```  
- ```
+
+```
  -g, --gid GID                 use GID for the new group
 ```
- ```bash
-  $ groupadd sales
+```bash
+$ groupadd sales
 groupadd: group 'sales' already exists
 $ groupmems -g sales -l
 linda
 ```
-Users are assigned a primary group in which there name/username but its better to add them  
+Users are assigned a primary group in which their name/username but its better to add them  
 
-When you are adding or modifying groups there a several files that involved. Let check out /etc/passwd file
+When you are adding or modifying groups there a several files that involved. Let check out ```/etc/passwd``` file
 
 ```
 $ tail -n 5 /etc/passwd
 ```
-##### Command Summary
+#### Command Summary
+
+#### Summary
+
+So, we've been talking about user and group managing.
+
+You have learned how to use user ads, group ads, and the other obvious commands to manage user and group environments.
+
+We have also discussed some of the important configuration files, like /etc/login.defs and /etc/defaults/useradd which I used to get some default values
+
+## Lesson 13: SQL Data Management
+
+### Learning Objectives
+
+Hi, welcome to lesson 13.
+
+This lesson is about SQL fundamentals.
+
+SQL is structured query language, a language that's used in database environments.
+
+As databases are important for many companies, you should know some of the basics of working with databases.
+
+You'll learn how to setup an example database and how to use basic SQL commands to get the information you need out of the database.
+
+#### Command Summary
+
+#### Summary
+
+So this was Lesson 13.
+
+In this lesson, you have learned how to install MariaDB. We have created a small database, and we have added some records to the database, as well.
+
+And after that, we have seen some of the basic MySQL data manipulations.
+
+And that's about all that you need to know about databases when taking the LPIC-1 or 2 exam.
