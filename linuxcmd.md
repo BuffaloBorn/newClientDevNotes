@@ -4,7 +4,60 @@
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
 
+#### 1.1 Understanding the File System Layout in the FHS
+
+So let's talk about file system hierarchy.
+
+In your computer, you probably have a hard disk.
+
+Let's say this is the hard disk.
+
+If you install Linux on the hard disk, you are going to have a root directory on your hard disk.
+
+And below the root directory, you will have many different directories.
+
+These directories can be on the hard disk itself or somewhere else:
+
+    * /boot - standard directory that holds everything your computer needs to startup
+    * /usr - default directory where Linux keeps the binaries
+    * /var - where Linux places logs files
+    * /home - where your users home directories are
+
+On a Linux system, it is probably to connect different devices to standard or new created directories.
+
+This technqie is called mounting; this is a important aspect of Linux system what is happening with mounting.
+
+Imagine that your home directory is becaming very full, you decide to install a different hard disk. Tell your current ```/home``` directory to mount on the new hard disk filesystem. This allows you to extend your Linux operating system is organized.
+
+To understand the detail layout of Linux system you need to know FHS - filesystem handling standard. It indicates that you filesystem should have a detail layout.
+
+That means FHS creates a standard for any Linux distribution. So any Linux will have the same directories listed above.
+
+#### 1.2 Knowing the Location and Purpose of Important Files and Directories as Defined in the FHS
+
+Now let we log into this CentOS box so that we can talk about how the file system hierarchy is organized on a typical Linux machine.
+
+As I just mentioned, it's not random at all, how Linux is organized.
+
+There's a standard, and if you want to know all about this hierarchy standard, you just type ```$ man hier```.  
+
+```bash
+$ cd /
+$ ls
+
+```    
+
 #### 1.3 Finding Files and Commands on Linux System
+
+This lesson is about finding stuff.
+
+Especially about finding files and commands and anything else that is useful on a Linux system.
+
+There's a couple of commands to help you do that.
+
+The most important command, well, it's not difficult to guess, is ```find```.
+
+If you use ```find```, there are many, many options, but let me just start by doing an example.
 
 #### Command Summary
   * finding
@@ -15,6 +68,14 @@
   * /etc/updatedb.conf
 
 #### 1.4 Using Single Shell Commands and One-line Command Sequences
+
+So now that we have a basic understanding of the layout of the Linux file system and how we can find stuff let's have a look at working from the shell.
+
+The shell is the default command interpreter environment.
+
+Basically the thing that we are looking at right now that's the shell.
+
+In this shell you type commands such as ```ls``` for a listing of files or ```pwd``` for print working directory.
 
 #### Command Summary
 
@@ -27,15 +88,23 @@
 
 #### 1.5 Using and Modifying the Shell
 
+Now let's talk about some features of the shell, because the shell as a command interpreter environment has a lot of internal commands to make working with the shell possible.
+
+So the name of the default shell in Linux is ```bash```.
+
+You can type that as a command and if you do, you start with subshell.
+
+You cannot really see that but if you type exit again, you leave the subshell, basically this is something that is
+
 To identify what shell that you are using, issue the following ```echo $SHELL```
 
 Shell just interprets commands are transfer them to machine instructions to execute.  
 
 They are internal and external commands to the shell. Remember that internal commands are built in the shell itself and external commands are third party commands that are installed to the Linux system.
 
-[esc] + b  or [esc] + f - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
+* ```[esc] + b```  or ```[esc] + f``` - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
 
-[esc] + a  or [esc] + e - allows you jump to begin of a line or to the end of a line in very long complex string
+* ```[esc] + a```  or ```[esc] + e``` - allows you jump to begin of a line or to the end of a line in very long complex string
 
 #### Command Summary
   * bash
@@ -150,7 +219,7 @@ Let issue the following command  ```$ find / -name blah``` and you can see the a
 | 1	     | stdout | standard output |
 | 2	     | stderr | standard error	|
 
-Lets issue the following command ```$ find / -name blah 2> /dev/nu11```; this would go no where
+Lets issue the following command ```$ find / -name blah 2> /dev/null```; this would go no where
 
 But if you like to review the errors, you need to redirect	to a file. Let issue the following command ```$ find / -name blah 2> errfile``` and then issue ```$ cat errfile``` to see what was saved in the file: ```errfile```. Remember that you will lose the previous contents. so use double ```>>```to retain the
 previous and add the new data to the bottom.
@@ -2157,11 +2226,7 @@ There is the ```kernel``` and it is responsible for loading devices. Now as an a
 
 That is exactly what ```udev``` is doing. ```udev``` is a helper for the ```kernel``` that makes sure  that devices are loaded. To assist the kernel, there are rules. This rules decides how this devices are created.
 
-<<<<<<< HEAD
 In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize.
-=======
-In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize. 
->>>>>>> 293cdc25e34c56797896c631d43002d7aa611d7e
 
 ```
          (kernel)
