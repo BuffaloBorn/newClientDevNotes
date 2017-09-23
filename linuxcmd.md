@@ -4,7 +4,70 @@
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
 
+### Learning objectives
+
+Let's get started with lesson one now.
+
+In this lesson, you'll learn how the files on a Linux computer are organized.
+
+This is important knowledge because as a Linux administrator you'll work a lot on the file system.
+
+We'll cover basic tools as well and working with the shell, which is the environment you'll be using to work with the commands.
+
+#### 1.1 Understanding the File System Layout in the FHS
+
+So let's talk about file system hierarchy.
+
+In your computer, you probably have a hard disk.
+
+Let's say this is the hard disk.
+
+If you install Linux on the hard disk, you are going to have a root directory on your hard disk.
+
+And below the root directory, you will have many different directories.
+
+These directories can be on the hard disk itself or somewhere else:
+
+    * /boot - standard directory that holds everything your computer needs to startup
+    * /usr - default directory where Linux keeps the binaries
+    * /var - where Linux places logs files
+    * /home - where your users home directories are
+
+On a Linux system, it is probably to connect different devices to standard or new created directories.
+
+This technqie is called mounting; this is a important aspect of Linux system what is happening with mounting.
+
+Imagine that your home directory is becaming very full, you decide to install a different hard disk. Tell your current ```/home``` directory to mount on the new hard disk filesystem. This allows you to extend your Linux operating system is organized.
+
+To understand the detail layout of Linux system you need to know FHS - filesystem handling standard. It indicates that you filesystem should have a detail layout.
+
+That means FHS creates a standard for any Linux distribution. So any Linux will have the same directories listed above.
+
+#### 1.2 Knowing the Location and Purpose of Important Files and Directories as Defined in the FHS
+
+Now let we log into this CentOS box so that we can talk about how the file system hierarchy is organized on a typical Linux machine.
+
+As I just mentioned, it's not random at all, how Linux is organized.
+
+There's a standard, and if you want to know all about this hierarchy standard, you just type ```$ man hier```.  
+
+```bash
+$ cd /
+$ ls
+
+```    
+
 #### 1.3 Finding Files and Commands on Linux System
+
+This lesson is about finding stuff.
+
+Especially about finding files and commands and anything else that is useful on a Linux system.
+
+There's a couple of commands to help you do that.
+
+The most important command, well, it's not difficult to guess, is ```find```.
+
+If you use ```find```, there are many, many options, but let me just start by doing an example.
 
 #### Command Summary
   * finding
@@ -15,6 +78,14 @@
   * /etc/updatedb.conf
 
 #### 1.4 Using Single Shell Commands and One-line Command Sequences
+
+So now that we have a basic understanding of the layout of the Linux file system and how we can find stuff let's have a look at working from the shell.
+
+The shell is the default command interpreter environment.
+
+Basically the thing that we are looking at right now that's the shell.
+
+In this shell you type commands such as ```ls``` for a listing of files or ```pwd``` for print working directory.
 
 #### Command Summary
 
@@ -27,15 +98,23 @@
 
 #### 1.5 Using and Modifying the Shell
 
+Now let's talk about some features of the shell, because the shell as a command interpreter environment has a lot of internal commands to make working with the shell possible.
+
+So the name of the default shell in Linux is ```bash```.
+
+You can type that as a command and if you do, you start with subshell.
+
+You cannot really see that but if you type exit again, you leave the subshell, basically this is something that is
+
 To identify what shell that you are using, issue the following ```echo $SHELL```
 
 Shell just interprets commands are transfer them to machine instructions to execute.  
 
 They are internal and external commands to the shell. Remember that internal commands are built in the shell itself and external commands are third party commands that are installed to the Linux system.
 
-[esc] + b  or [esc] + f - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
+* ```[esc] + b```  or ```[esc] + f``` - allows you jump to begin of a command/word or to the end of a command/word in very long complex string
 
-[esc] + a  or [esc] + e - allows you jump to begin of a line or to the end of a line in very long complex string
+* ```[esc] + a```  or ```[esc] + e``` - allows you jump to begin of a line or to the end of a line in very long complex string
 
 #### Command Summary
   * bash
@@ -62,31 +141,66 @@ They are internal and external commands to the shell. Remember that internal com
 
 #### 1.6 Using and Editing command History
 
-##### Command Summary
+One of the more useful features of the Shell, is the command ```history```.
 
-  * history
-  *	ls -a	- trying to locate the .bash_history file
-  *	cat .bash_history - it may hold 500 to 1000 commands base on settings
-  *	![line number] - re-run the command on the that line ex: 117
-  * !! - will run the previous command that was just issued
+Let's type ```history```.
+
+And you can see a long list of commands that have previously been executed on this computer.
+
+The interesting thing about the
+command ```history``` is that it survives log out.
+
+By default, the command ```history``` is written to a file with the name bash ```history```.
+
+```bash
+$ ls
+$ ls -a
+$ cat .bash_history
+$ !75
+$ !!
+$
+
+```
+If we try to issue just ```ls``` at the ```/home/[user]``` we will not be able to see the ```.bash_history``` file
+
+We need to are trying to locate the ```.bash_history``` file with issuing ```ls -a``` command, we need to add more aguments to ```ls``` because ```.bash_history``` is a hidden file .
+
+ To display the contents of ```.bash_history```we need to  issue: ```cat .bash_history```, this file can hold 500 to 1000 commands base on settings
+
+We can also use	![line number] to re-run the command on that line: ex: 117
+
+Issuing: ```!!``` - will run the previous command that was just issued
+
+Here are some command that aslo can be use with Shell history:
+
   * [up] and [down] keys on the keyboard that allow you to go back to previous commands; this good for two or three commands
   * [ctrl] + r - reverse &#95;i&#95; search - starting typing and it will search the command that starts with those characters
       1.	tree -L 1 /proc - that was enter but wasn't in history
   *	history --help- found more in
-  *	history -c	- cl ear out the hi story
+  *	history -c	- clear out the hi story
   *	history - run this command again and everything is gone
   *	cat .bash_history	- will contain all the history information that was thought to be cl eared out
-  * rm .bash_history - to permanently remove history; not really good thing to do
+
+We can remove the current history by issusing ```rm .bash_history``` - to permanently remove history; not really good thing to do
+
+##### Command Summary
+
+  * history
+  * .bash_history
 
 #### 1.7 Invoking Commands Inside and Outside the Defined Path
 
-we need to understand what is happening when you issue a command on the command line.
+Now we need to understand how a Linux system is behaving when you type a command,  mean, I type ```ls``` and it is doing something, but what exactly is it doing?
+
+I don't know, but I'm going to explain to you.
+
+On a Linux system in the environment there is a path setting.
 
 You need to ask yourself, what actually is happening when issue a command on the command line? First, Linux goes though the system PATH and looks to see if that command is available.
 
 If you try to call a command , ```$ hello``` that isn't in the current path; you need to provide the exact path to locate the command, ```$ ./hello```.
 
-If you would like to call an internal command and you do not know if it is available; just issue ```$ help``` command and Linux will show you list available internal commands
+If you would like to call an internal command and you do not know if it is available; just issue ```$ help``` command and Linux will show you a list of available internal commands
 
 If we type ```$ which time``` and use the complete path that is returned; try to issue the complete path with the command; if you receive a different results
 
@@ -96,7 +210,7 @@ Let issue ```$ time ls``` this tell us how long it take to run the time command
 
 Let issue ```$ /usr/bin/time ls```; this is doing the same but more information this the previous version
 
-There can be a bi nary version and internal version of the same in which can leave many confused on the correct on to use.
+There can be a binary version and internal version of the same in which can leave many confused on the correct on to use.
 
 By using the ```$ type``` before the command you are trying to issue. Givens us an idea where the command is coming from.
 
@@ -116,15 +230,44 @@ As you can see, the PATH is very important aspect of a Linux system. The PATH is
   *	/usr/bin/time
   *	time ls
   *	/usr/bin/time ls
-  *	type time type useradd
+  *	type time
+  * type useradd
 
 #### Summary
 
-The previous lesson was a warm-up to Linux OS and on the basic shell operations.
+So this was our first lesson.
+
+This lesson was to get warmed up with the Linux operating system.
+
+You have learned some of the Linux basics and we have had a look at some of the basics of shell operation.
+
+We've seen shell environment and we have seen how the shell is working to interpret whatever you are typing.
+
+Let's move on to lesson number two.
 
 ## Lesson 2: Processing and Working with Text Files
 
+### Learning objectives
+
+In this lesson, you'll learn how to work with text files.
+
+This is an important lesson also for the exam.
+
+On Linux, many utilities exist to view, process, and modify text files, and in this lesson, you'll learn about them.
+
+You'll also learn how to create your own text files using the vi editor and how to work with regular expressions to make processing text files easier.
+
 #### 2.1 Using Streams, Pipes, and Redirects
+
+Let's talk about using streams, pipes and redirects.
+
+Now what exactly is all that?
+
+Well if a command is running, it produces output.And the output basically goes to the standard output.
+
+Standard output, in fact, is something that is defined on a Linux box and we call it STDOUT.
+
+STDOUT is your screen.
 
 By default, ```$ ls``` command will go to the standard output(STDOUT) what is the current screen
 
@@ -150,7 +293,7 @@ Let issue the following command  ```$ find / -name blah``` and you can see the a
 | 1	     | stdout | standard output |
 | 2	     | stderr | standard error	|
 
-Lets issue the following command ```$ find / -name blah 2> /dev/nu11```; this would go no where
+Lets issue the following command ```$ find / -name blah 2> /dev/null```; this would go no where
 
 But if you like to review the errors, you need to redirect	to a file. Let issue the following command ```$ find / -name blah 2> errfile``` and then issue ```$ cat errfile``` to see what was saved in the file: ```errfile```. Remember that you will lose the previous contents. so use double ```>>```to retain the
 previous and add the new data to the bottom.
@@ -169,7 +312,7 @@ It you have a command that sending the standard error and the standard input	the
 so what is this doing? Its sending the standard error (STDERR) and the standard input (STDIN) to the same location which is ```/dev/null```
 what if you would like to display the results of the  ```$ ls``` and redirect that same output to a fil e like ```ls.out```?
 
-Issue the following command: ```$ ls | tee ls.out```and using ```$ cat l s.out```. You should see that results on the screen and i n the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
+Issue the following command: ```$ ls | tee ls.out``` and using ```$ cat l s.out```. You should see that results on the screen and i n the file as well. ```tee``` always works after the ```|``` pipe operation. The pipe will take the output of command and send it as the input to another command. But ```tee``` will send the output in two directions.
 
 The following is an example of types of files that programs may create that are temporary files
 
@@ -200,7 +343,6 @@ what does the previous string of commands do?
 Try to issue this command ```find / blah" -exec rm {}\```
   1.	find all the files that has ```blah``` at the end of its filename
   2.	execute the ```rm``` command with the results of the previous ```find``` results defined with ```{}\```
-
 
 #### Command Summary
 
@@ -642,9 +784,27 @@ grep stands for: general regular expression processor
 
 ## Summary
 
-Make sure you can recognize the correct commands and the options that can be passed to them. We've went though some of the common options that is used most frequently.
+This brings us to the end of the long lesson two, processing and working with text files.
+
+In this lesson you have learned about some very useful commands and some very obsolete commands.
+
+But even if the commands are obsolete, if you go to the LPI exam it will be good if you have a good understanding and knowledge of all of these commands.
+
+You should be prepared to recognize the correct commands and the options that can be passed to them. We've went though some of the common options that is used most frequently.
 
 ## Lesson 3: Performing Basic File Management Tasks  
+
+### Learning objectives
+
+Hi, welcome to lesson three.
+
+In this lesson, you will learn how to apply basic file management tasks.
+
+We will talk about moving and copying files, about links and inodes, and about backup.
+
+All of these are important topics on the exam and essential skills for a Linux administrator.
+
+So, let's get started.
 
 #### 3.1 Copying, Moving, and Removing Files
 
@@ -707,13 +867,19 @@ Beware of using ```rm -rf / blah``` because it will remove you entire root direc
 
 ## 3.2 Using Wildcards
 
+Now wildcards are about the shell, and they make matching files easier.
+
 Wildcards are useful to return items that you do not know exact name but portions of the name.
+
+We've basically already seen a couple of wildcards when I did ```ls h*``` for example, it tells me to check all files that have a name starting with an ```h```.
+
+Oh by the way, if you notice this weird behavior, in ls ```h*```, I asked it, show me everything
 
 ```bash
 $ cd /etc
 $ ls h*
 ```
- Issue  ```$ ls -d h*```, is will list directories themselves, not their contents
+Issue  ```$ ls -d h*```, is will list directories themselves, not their contents
 
 Wildcards look like regular expressions but they are not
 
@@ -728,6 +894,16 @@ Issue, ```$ ls -d [abc]?t*``` - show me anything that starts with a, b, or c and
 This is called globbing; Globbing interprets the standard wild card characters * and ?, character lists in square brackets, and certain other special characters (such as ^ for negating the sense of a match).
 
 ## 3.3 Other File Management Tools
+
+So let's talk about some other file managements tools.
+
+These are some tools, that don't really fit into anywhere, but we need to talk about them anyway.
+
+First, there's touch.
+
+Touch is a useful command.
+
+And just create a temporary directory, so that we cans tart from an empty directory.
 
 These commands do not felt in with the other sections.
 
@@ -835,9 +1011,17 @@ This may work but we try it later.
 
 ## 3.4 Creating Backups
 
-   Mother of all mothers of backups is ```tar``` command
+The mother of all backup utilities is ```tar```, ```tar``` stands for tape archiver. Mother of all mothers of backups is ```tar``` command
 
-   First we try to issue and explain what are different parts of this command, ```$ tar cvf /root.tar /root /home```
+And if you want to create a backup using ```tar``` you start with the argument c.
+
+By the way, in ```tar``` there is no dash in front of the argument, just ```type c``` and ```tar``` will understand what you want to do.
+
+    * ```C``` stands for create by the way.
+
+Then you will also like ```v``` for verbose.
+
+First we try to issue and explain what are different parts of this command, ```$ tar cvf /root.tar /root /home```
 
 
 ```bash
@@ -908,6 +1092,15 @@ Here we see the same operations with fewer steps. Notice how useful the file com
 
 #### 3.5 Analyzing and Extracting tar Backups
 
+So, we have just created this file with the name backup,
+and we know that it's backup because the name of the file is backup.
+
+Sometimes life makes sense.
+
+So, let's see what we can do with it.
+
+Now, you can use tar to extract the backup, but I would always recommend first to show what is in it, and to do that, you use tar ```tvf```. T stands for type, but basically, it will show us the contain.  
+
 Now we have the this file called ```backup```, we can extract the contents but it would nice to see what is in it before extract the content. ```tar``` provides options the do such a task ```tar tvf backup```; this will show all the contents in the backup before extracting it.
 
 All the files are relative and not absolute file names this means that the files can be placed anywhere and they will work as the originals.
@@ -949,7 +1142,7 @@ Files data is stored in blocks; blocks is the basic structure of a hard drive. A
 
 A collection of blocks are typical a type file. All the metadata/administrative data of a file is stored in an inode.
 
-Every file has a single inode. The inode references each block with in the file. Each inode has a number on the Linux system. For an user, usinng the number system wouldn't be very easy to use. So that way we are working with filenames instead.
+Every file has a single inode. The inode references each block with in the file. Each inode has a number on the Linux system. For an user, using the number system wouldn't be very easy to use. So that way we are working with filenames instead.
 
 For example, ```/etc/hosts``` is used; which is the entry point to the inode. The relationship with filename and inode is one direction where filename is the parent and the inode is the child. The node do not know about the filename it may or not be pointed to.
 
@@ -957,13 +1150,23 @@ Inode just keep track the filenames that is pointed with a counter. Each filenam
 
 This allows multiple filenames pointing to the same file. This not a copy of the original file but a reference to the inode. In a file copy, you would get a new inode and a new hardlink would be created.
 
-If anything changes in the original blocks the all the filenames that refer to the block's inode will is the changes. In the case when a filename is removed, the other hardlinks are still pointing to the inode so the data is still able to be referenced.
+If anything changes in the original blocks the all the filenames that refer to the block's inode will is the changes. In the case when a filename is removed, the other hard links are still pointing to the inode so the data is still able to be referenced.
 
 Linux provide a secondary method of creating links which is called ```symbolic links```. Symbolic link doesn't point to a inode it points to a filename. Symbolic allows you to work on files on a other device.
 
 If a filename is deleted then the symbolic link becomes invalid.      
 
 ## 3.7 Managing Hard and Symbolic Links
+
+Now that we all understand how hard and symbolic links are working on Linux, let's create some links.
+
+So, I will first make a copy of ```/etc/passwd```, and I will call it users.
+
+I want to work on an independent file.
+
+What I want to show you is ```ls -il```.
+
+    * ```- i``` stands for iNote number.
 
 Let's create some links in Linux.
 
@@ -1038,13 +1241,41 @@ $ cat symlink
 ```
 ### Summary
 
+So this was Lesson 3.
+
+In this lesson, youhave learned how to work
+
+on the file system.
+
+We have learned working with some basic filesystem management commands, such as CP and so on, and you have learned how to work with backups and links.
+
+So now that you have acquired pretty the basic experience, let's move on to Lesson 4.
+
 Learn how to work on the file system, how work basic file system commands and how to work on backups plus hard and symbolic links
 
 ## Lesson 4: Managing Processes
 
+### Learning Objectives
+
+Welcome to lesson four.
+
+In this lesson, you'll learn how to manage processes.
+
+This is an important skill because everything that is happening on a Linux system is happening as a process
+
+This lesson teaches you how to monitor processes and also shows you how to manage processes which includes terminating processes and changing process priority.
+
 #### 4.1 Running Jobs in Foreground and Background
 
-What is a job?
+Now in this lesson, we are talking about jobs and processes.
+
+What you should know is what exactly is a job?
+
+Well, if you run a command from the shell, that's a job.
+
+Now this is a job that is executed and it exits immediately because it runs for a short time only.
+
+Some jobs run for a long time.
 
 When you run a command from the shell that is considered a job. So issuing ```$ ls``` is a job. These type of jobs are executed immediately and run for a very short period of time.  
 
@@ -1099,6 +1330,14 @@ $ screen
 
 #### 4.2 Sending Signals to Processes
 
+To manage processes on a Linux machine, you can send signals to the process.
+
+Many signals are defined in the Linux kernel.
+
+Let's type, man seven signal to get an overview of all the signals that exist.
+
+And these signals are just specific instructions that a process cannot ignore.
+
 To manage processes on a Linux system by sending signals to a process.
 
 ```bash
@@ -1141,10 +1380,100 @@ $
 ```
 
 # Module 2: Administration Tasks
-Learn about common Linux administration tasks. At this point you have the basic
-down to work with Linux, it time to go deeper with Linux OS.  
+
+Hi, welcome to part two of this course.
+
+In this part you will learn about common Linux administration tasks.
+
+At this point, you have acquired the basic skills to work with Linux, so it's time to get a bit deeper into exploring the Linux operating system.
+
+Learn about common Linux administration tasks. At this point you have the basic down to work with Linux, it time to go deeper with Linux OS.
+
+## Lesson 5: Design Hard Disk Layout
+
+### Learning Objectives
+
+In lesson five, you'll learn how a hard disk layout is organized.
+
+You'll learn about different file systems and partitions, about swap space and logical volumes, about requirements to boot a system and why a Linux system typically consists of different partitions and logical volumes.
+
+### Summary
+
+So this concludes lesson five.
+
+In this lesson you have learned how to organize this layout.
+
+We have looked at the different file systems that are mounted into the Linux file system hierarchy.
+
+And you have seen how petitions or electrical volumes can be used to compose all that.
+
+Let's move on to the next lesson.
+
+## Lesson 6: Creating Partitions and Filesystems
+
+### Learning Objectives
+
+Hello, and welcome to lesson six.
+
+It's good to see that you're still around, and I hope you like this course so far.
+
+In this lesson we continue talking about partitions and filesystems.
+
+First you'll learn about the differences between GPT and MBR bootloaders and how it affects the way you create partitions on a Linux system.
+
+Next, we'll look at the fdisk and gdisk utilities.
+
+The utilities that I use to create partitions.
+
+### Summary
+
+So this brings us to the end of Lesson Six.
+
+In this lesson you have learned how to create Partitions, and we have seen the difference between Primary Partitions, Extended Partitions, Logical Partitions.
+
+We have also seen that on GPT it behaves different than on NBR.
+
+You've also learned how to create Filesystems, and how to check file system problems.
+
+Now let's move on to the next lesson
+
+## Lesson 7: Common Filesystem Management Tasks
+
+### Learning Objectives
+
+Hi, welcome to lesson seven.
+
+This is the last lesson that is about file system management.
+
+This lesson has two important topics.
+
+You'll learn how to mount and un-mount file systems and how to make sure this happens automatically while booting.
+
+You'll also learn how to limit the amount of disk space that is available to users by working with quota.
+
+#### Summary
+
+In this lesson, you have learned how to mount file systems.
+
+We've talked about mounting and unmounting file systems manually, and how to automate that through the ```fstab```.
+
+We've also talked about quota management, and you have learned how to set a quota so that you can limit the amount of disk space that is available to users.
+
+Now, let's move on to Lesson Eight.
 
 ## Lesson 8: Managing Permissions
+
+### Learning Objectives
+
+Hello, and welcome to lesson eight.
+
+This is one of the most important lessons in this course.
+
+You'll learn how to work with permissions.
+
+We'll talk about the basic read, write and execute permissions, as well as the advanced SUID, SGID, and sticky bit partitions.
+
+You'll also learn how to apply these permissions to your systems.
 
 #### 8.6 Using Access Modes such as SUID, SGID, and Sticky Bit
 
@@ -2157,11 +2486,7 @@ There is the ```kernel``` and it is responsible for loading devices. Now as an a
 
 That is exactly what ```udev``` is doing. ```udev``` is a helper for the ```kernel``` that makes sure  that devices are loaded. To assist the kernel, there are rules. This rules decides how this devices are created.
 
-<<<<<<< HEAD
 In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize.
-=======
-In order to write the correct information to the right location. There the ```/sys``` file system that contains a ton of information about how devices have been initialize. 
->>>>>>> 293cdc25e34c56797896c631d43002d7aa611d7e
 
 ```
          (kernel)
@@ -2182,6 +2507,22 @@ For an administrator perspective, there are the ```ls``` utilities like ```lsblk
 These are very nice utilities to show more information about hardware that is attached to your Linux system.
 
 ## Lesson 14: Managing Shared Libraries
+
+### Learning objectives
+
+Congratulations, you've made it to the last lesson.
+
+This is a short lesson that explains working with libraries.
+
+In this lesson I'll explain how binaries are used in libraries and what you can do as an administrator if you experience problems while working with libraries.
+
+#### Summary
+
+And this brings us to the end of this short lesson about library management.
+
+You have seen how many programs use libraries, how we have dynamic libraries as well as shared libraries, and you have seen what you can do as an administrator if something goes wrong with regard to the libraries.
+
+And that's all for this lesson, and that brings us to the end of the course.
 
 # CompTIA Linux+ LX0-104 and LPIC-1 (Exam 102)
 
