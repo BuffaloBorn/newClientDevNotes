@@ -4,7 +4,6 @@
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
 
-<<<<<<< HEAD
 ### Learning objectives
 
 Let's get started with lesson one now.
@@ -15,8 +14,6 @@ This is important knowledge because as a Linux administrator you'll work a lot o
 
 We'll cover basic tools as well and working with the shell, which is the environment you'll be using to work with the commands.
 
-=======
->>>>>>> 3c6cc58c4cd783b3e5f380e3d33b2cd5d77fff5b
 #### 1.1 Understanding the File System Layout in the FHS
 
 So let's talk about file system hierarchy.
@@ -1784,7 +1781,6 @@ Include in this are	commands not used often but are need for the exam:
 *	yum local update
 * yum downloader
 
-
 #### 9.4 Obtaining Information on RPM Packages
 
 On Red hat system, allows you to do rpm queries to get information about packages. Let try this out from ``` $ cd /usr/sbin``` or ``` $ cd /sbi n``` and then ```$ ls``` Issue	```rpm -qf /sbin/ipmaddr```, it tells what package that is utility came from
@@ -2100,7 +2096,7 @@ Or ```dpkg -S``` - _pattern_ locates the packages that own a specific file
 
 #### 9.7 Obtaining Package Information about Debian Packages
 
-You get package infromation on Debian packages on you Linux system
+You get package information on Debian packages on you Linux system
 
 * ```dpkg --get``` - shows currently installed  
 
@@ -2110,7 +2106,7 @@ You get package infromation on Debian packages on you Linux system
 
 #### Summary
 
-In this lesson we went a ton commands, for the exam go over as many a you can.
+In this lesson we went a ton of commands, for the exam go over as many a you can.
 
 Also take in consideration the configuration files  for Red Hat and Debian especially Debian repositories that are being used, with ```/etc/apt/source.list```. Need to know which files are where. Be prepared to enter command name and fill the blanks and select the right options.
 
@@ -2119,6 +2115,18 @@ Pretty Important items here.
 # Module 3: Advanced Management Tasks
 
 ## Lesson 10: System Architecture
+
+#### Learning Objectives
+
+Lesson ten is about some Architecture.
+
+You'll learn how the Linux kernel works
+
+to initialize hardware devices on your computer.
+
+You'll also learn how to analyze if that process went well.
+
+Different commands are available to request properties of installed hardware, and different interfaces exist in the filesystem to monitor some more.
 
 #### 10.1 Enabling and Disabling Integrated Peripherals
 
@@ -2248,8 +2256,8 @@ On most Linux systems, you will see the ```sd``` devices that stands for SCSI an
 
 #### If the disk has been exposed to your VM under both interfaces, you should prefer ```/dev/vda``` as it'll almost certainly be faster.
 
-  * sda  - first SCSI
-  * sda1 - second SCSI   
+  * sda  - primary SCSI
+  * sda1 - first SCSI partition   
 
 If you see ```sdb``` then you can that this system may have 2 different ```SCSI``` disc.
 
@@ -2503,11 +2511,92 @@ In order to write the correct information to the right location. There the ```/s
 ```
 #### Summary
 
-In this lesson, we learned a little bit about how Linux is managing hardware. The kernel is the central part of the operating system to address hardware and to make that the hardware is available for the kernel. ```udev``` plays an important role, plays a role in loading modules and creating device files and making sure everything is in order the way it should be.
+And that brings us to the end of lesson 10.
+
+In this lesson you have learnt a little bit about how Linux is managing hardware.
+
+So the kernel is the central part of the operating system
+to address hardware and to make sure that hardware is available for the kernel ```UDev``` plays an important role.
+
+    * ```UDev``` plays a role in loading kernel modules creating device files and making sure that everything
+
+The kernel is the central part of the operating system to address hardware and to make that the hardware is available for the kernel. ```udev``` plays an important role, plays a role in loading modules and creating device files and making sure everything is in order the way it should be.
 
 For an administrator perspective, there are the ```ls``` utilities like ```lsblk```, ```lsusb```, ...
 
 These are very nice utilities to show more information about hardware that is attached to your Linux system.
+
+# Lesson 11: Boot the System
+
+## Learning objectives
+
+Hi. Welcome to lesson 11.
+
+In this lesson we'll discuss the boot procedure in general.
+
+You'll how the boot loader starts a kernel and it's ```ramfs```.
+
+And how from there the boot process continues by using either the ```systemd``` or the ```init``` process.
+
+We'll also discuss how you can analyze if all went well, and how to request messages that have been locked during the boot process.
+
+#### Summary
+
+So now we are at the end of lesson 11.
+
+In this lesson, you have learned how a Linux system boots.
+
+We have looked at grub, and we have looked at the different ways of booting, System 5 and System V especially.
+
+You have also seen how you can request information about the boot procedure.
+
+Now let's continue this subject a little bit more in lesson 12.
+
+# Lesson 12: Install a Boot Manager
+
+## Learning objectives
+
+Hello and welcome to lesson 12.
+
+In this lesson we'll continue talking about the boot process.
+
+You'll learn how to change the state your system boots in, by selecting a runlevel in the system five boot procedure.
+or a target in system D.
+
+You'll also learn how to shut down your computer, and how to tell your users that it is shutting down before doing that.
+
+
+#### Summary
+
+So in this lesson you have learnt how to move between targets and how to shut down a system.
+
+You've seen that again there are few differences between the System D approach and the
+
+System 5 approach.
+
+But fortunately there are some commands that haven't changed between the two of them either.
+
+Let's move on to lesson 13.
+
+## Lesson 13: Install a Boot Manager
+
+### Learning objectives
+
+Welcome to lesson 13.
+
+This is the last of three lessons about the boot procedure.
+
+In this lesson you will learn how to work with the GRUB and GRUB2 boot loaders.
+
+We'll discuss how to install these boot loaders and how to change parameters while booting.
+
+#### Summary
+
+So in this lesson you have learned about GRUB.
+
+We have seen how you can install GRUB and how you can interact with GRUB, how you can make modifications to the GRUB configuration.
+
+Now let's move on to the last lesson in this course, which is about libraries.
 
 ## Lesson 14: Managing Shared Libraries
 
