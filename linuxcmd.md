@@ -4,7 +4,6 @@
 
 ## Lesson 1: Performing Basic Tasks from a Shell Environment
 
-<<<<<<< HEAD
 ### Learning objectives
 
 Let's get started with lesson one now.
@@ -15,8 +14,6 @@ This is important knowledge because as a Linux administrator you'll work a lot o
 
 We'll cover basic tools as well and working with the shell, which is the environment you'll be using to work with the commands.
 
-=======
->>>>>>> 3c6cc58c4cd783b3e5f380e3d33b2cd5d77fff5b
 #### 1.1 Understanding the File System Layout in the FHS
 
 So let's talk about file system hierarchy.
