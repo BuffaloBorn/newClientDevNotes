@@ -22,9 +22,21 @@ In your computer, you probably have a hard disk.
 
 Let's say this is the hard disk.
 
-If you install Linux on the hard disk, you are going to have a root directory on your hard disk.
+  __( harddisk )__
 
+If you install Linux on the hard disk, you are going to have a root directory on your hard disk.
+```
+( harddisk )
+      |-/ - (root directory)
+```
 And below the root directory, you will have many different directories.
+```
+( harddisk )
+      |-/ - (root directory)
+      |-/boot
+      |-/usr
+      |-/home
+```
 
 These directories can be on the hard disk itself or somewhere else:
 
@@ -35,39 +47,43 @@ These directories can be on the hard disk itself or somewhere else:
 
 On a Linux system, it is probably to connect different devices to standard or new created directories.
 
-This technqie is called mounting; this is a important aspect of Linux system what is happening with mounting.
+This technique is called mounting; this is a important aspect of Linux system what is happening with mounting.
 
-Imagine that your home directory is becaming very full, you decide to install a different hard disk. Tell your current ```/home``` directory to mount on the new hard disk filesystem. This allows you to extend your Linux operating system is organized.
+Imagine that your home directory is becoming very full, you decide to install a different hard disk. Tell your current ```/home``` directory to mount on the new hard disk file system. This allows us to extend how our Linux operating system is organized.
 
-To understand the detail layout of Linux system you need to know FHS - filesystem handling standard. It indicates that you filesystem should have a detail layout.
+To understand the detailed layout of Linux system you need to know about FHS - Filesystem Hierarchy Standard. It defines the directory structure and directory contents in Linux distributions.
 
-That means FHS creates a standard for any Linux distribution. So any Linux will have the same directories listed above.
+That means FHS creates a standard for all Linux distribution. So any flavor of Linux will have the similar directories defined.
 
 #### 1.2 Knowing the Location and Purpose of Important Files and Directories as Defined in the FHS
 
-Now let we log into this CentOS box so that we can talk about how the file system hierarchy is organized on a typical Linux machine.
+Now let we've logged into a CentOS box so now we can talk about how the file system hierarchy is organized on a typical Linux machine.
 
 As I just mentioned, it's not random at all, how Linux is organized.
 
 There's a standard, and if you want to know all about this hierarchy standard, you just type ```$ man hier```.  
 
+To view our current root directories layout we can issue the following commands:
+
 ```bash
 $ cd /
 $ ls
-
 ```    
-
 #### 1.3 Finding Files and Commands on Linux System
 
 This lesson is about finding stuff.
 
-Especially about finding files and commands and anything else that is useful on a Linux system.
+Especially about finding files and commands plus anything else that is useful on a Linux system.
 
-There's a couple of commands to help you do that.
+There's a couple of commands to help you do this.
 
 The most important command, well, it's not difficult to guess, is ```find```.
 
 If you use ```find```, there are many, many options, but let me just start by doing an example.
+
+```bash
+{need to go back issue these commands}
+```
 
 #### Command Summary
   * finding
@@ -87,6 +103,10 @@ Basically the thing that we are looking at right now that's the shell.
 
 In this shell you type commands such as ```ls``` for a listing of files or ```pwd``` for print working directory.
 
+```bash
+{need to go back issue these commands}
+```
+
 #### Command Summary
 
   * cal
@@ -98,11 +118,11 @@ In this shell you type commands such as ```ls``` for a listing of files or ```pw
 
 #### 1.5 Using and Modifying the Shell
 
-Now let's talk about some features of the shell, because the shell as a command interpreter environment has a lot of internal commands to make working with the shell possible.
+Now let's talk about some features of the shell, because the shell is a command interpreter environment has a lot of internal commands to make working with the shell possible.
 
 So the name of the default shell in Linux is ```bash```.
 
-You can type that as a command and if you do, you start with subshell.
+You can type that as a command and if you do, you'll start a subshell.
 
 You cannot really see that but if you type exit again, you leave the subshell, basically this is something that is
 
@@ -2370,7 +2390,7 @@ $ modinfo vfat
 $ lsmod | grep vfat
 ```
 
-If you load the manually, you must unload it manually as well.
+If you load it the manually, you must unload it manually as well.
 
 ```bash
 $ modprobe -r vfat
