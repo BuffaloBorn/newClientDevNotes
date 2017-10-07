@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Essential Ruby Libraries
 
 Ruby is more than just a language, it is a whole ecosystem. The power of the language is greatly multiplied by the thousands of gems freely available from the public gem server, but there are also some amazing tools that come already bundled with Ruby.
@@ -12,6 +13,8 @@ In this course, you'll learn how to use the standard libraries that come bundled
 
 You'll be amazed how much can be accomplished using only the standard Ruby libraries! Each library will be taught with simple examples and exercises that you can adapt for your own programming problems.
 
+=======
+>>>>>>> 8a9a2af4f483314e74a6e8c715b65acbc56f222b
 #### 1.1 Introduction
 
 Welcome to Essential Ruby Libraries! In this lesson I'll explain the power and importance of the Ruby Standard Library, and I'll explain what the course will cover.
