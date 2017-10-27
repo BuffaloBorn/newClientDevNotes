@@ -1,4 +1,4 @@
-## Available Gems in internal repository 
+## Available Gems in internal repository
 
 | Name                        | Version | Comments                    |
 |-----------------------------|---------|-----------------------------|
@@ -122,9 +122,9 @@
 |  392 | A Tour of State Machines           |           none              |
 |  269 | template-inheritance               |           none              |
 |  392 | a tour of state machines           |           none              |
-|      |                                    |           none              |
-|      |                                    |           none              |
-|      |                                    |           none              |
+|  362 | Exporting CSV and Excel            |       local version         |
+|  396 | Importing CSV and Excel            |      github versiom         |
+|  343 | Full-Text Search in PostgreSQL     |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
 |      |                                    |           none              |
