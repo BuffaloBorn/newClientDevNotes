@@ -79,7 +79,7 @@
 | autoprefixer-rails          | 2.3.0.0 |                             |
 | execjs                      | ?       |                             |
 | autoprefixer                | ?       |   issue w/ on client version|
-| active_record_strore        | ?       |                             |
+| active_record_strore        | ?     |       |                             |
 
 
 ## Requested Gems from Dev Ops
