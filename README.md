@@ -843,7 +843,7 @@ Tried to ma
 > rundll22 sysadmin.cpl EditEnvironmentVariables
 ```
 
-### Issues that occured after installing above gems
+### Issues that occurred after installing above gems
 
 #### current ExexJS runtime doesn't support ES5, Please install Node.js
 
@@ -855,11 +855,25 @@ Here some code that I've used to pin point the issue, I've tried to change the J
 >> ExecJS.runtime = ExecJS::Runtime::Node
 ```
 
-After locating the error within all the installed gems, it was discovered the autoprefixer.gem was looking for a particalur javacript feature and raised an error when it could not found it. Solution was not to include the gem in the project; need to fix the code or it a updated version of the gem.  
+After locating the error within all the installed gems, it was discovered the autoprefixer.gem was looking for a particular JavaScript feature and raised an error when it could not found it. Solution was not to include the gem in the project; need to fix the code or it a updated version of the gem.  
 
 ```ruby
 ExecJS.eval('typeOf(Array.prototype.map)')!= function
 ```
+## Useful Git commands
+
+### Pulling all of the branches at once from a remote repository
+
+##### It's a little bit complicated but we use this all the time especially when we want to go back into a project and just pull everything that GitHub has at once.
+
+```bash
+>> mkdir [project folder]
+>> cd [project folder]
+>> git clone --mirror https://[project folder].git .git
+>> git config --bool core.bare false
+>> git reset --hard
+```
+
 
 [Inline-CSS-Extractor](https://github.com/peterlazzarino/Inline-CSS-Extractor)
 ===============================================================================
