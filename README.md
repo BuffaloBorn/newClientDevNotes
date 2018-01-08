@@ -886,3 +886,6 @@ ExecJS.eval('typeOf(Array.prototype.map)')!= function
 
 <img src="./media/image3.png" width="624" height="259" />
 =========================================================
+
+
+[Conquering the Command Line](http://conqueringthecommandline.com/book)
